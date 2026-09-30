@@ -1,0 +1,6 @@
+{
+  "name": "{{NAME}}",
+  "template": "{{TEMPLATE}}",
+  "kit": "{{KIT}}",
+  "created": "{{DATE}}"
+}

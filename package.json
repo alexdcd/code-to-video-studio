@@ -1,0 +1,27 @@
+{
+  "name": "code-to-video-studio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Agent-first code-to-video studio by Mafia AI",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "setup": "node scripts/setup.mjs",
+    "new": "node scripts/new.mjs",
+    "dev": "node scripts/in-project.mjs dev",
+    "check": "node scripts/in-project.mjs check",
+    "render": "node scripts/in-project.mjs render",
+    "snapshot": "node scripts/in-project.mjs snapshot",
+    "contact-sheet": "node scripts/contact-sheet.mjs",
+    "kit:build": "node scripts/lib/kit-build.mjs",
+    "kit:copy": "node scripts/kit-copy.mjs",
+    "vendor": "node scripts/vendor.mjs",
+    "verify": "node scripts/verify-public.mjs"
+  },
+  "dependencies": {
+    "gsap": "3.15.0"
+  },
+  "devDependencies": {
+    "hyperframes": "0.8.81"
+  }
+}

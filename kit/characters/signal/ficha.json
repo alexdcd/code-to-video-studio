@@ -1,0 +1,6 @@
+{
+  "name": "signal",
+  "type": "character",
+  "description": "Minimal procedural character used to demonstrate the public character API.",
+  "license": "Apache-2.0"
+}

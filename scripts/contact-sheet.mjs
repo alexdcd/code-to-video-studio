@@ -1,0 +1,20 @@
+import fs from "node:fs";
+import path from "node:path";
+import { spawnSync } from "node:child_process";
+
+const [video,framesArg="36",colsArg="6"]=process.argv.slice(2);
+if (!video) throw new Error("Usage: npm run contact-sheet -- <video.mp4> [frames] [columns]");
+if (!fs.existsSync(video)) throw new Error(`Video not found: ${video}`);
+const frames=Number(framesArg), cols=Number(colsArg);
+const probe=spawnSync("ffprobe",["-v","error","-show_entries","format=duration","-of","csv=p=0",video],{encoding:"utf8"});
+if (probe.status!==0) throw new Error("ffprobe failed. Install ffmpeg first.");
+const duration=Number(probe.stdout.trim());
+const rows=Math.ceil(frames/cols);
+const fps=frames/duration;
+const width=Math.floor(2304/cols);
+const ext=path.extname(video);
+const out=video.slice(0,-ext.length)+"-contact-sheet.jpg";
+const filter=`fps=${fps},scale=${width}:-2,drawtext=text='%{pts\\:hms}':x=8:y=8:fontsize=18:fontcolor=white:box=1:boxcolor=black@0.65:boxborderw=4,tile=${cols}x${rows}:padding=4:color=0x090b12`;
+const run=spawnSync("ffmpeg",["-v","error","-y","-i",video,"-vf",filter,"-frames:v","1","-q:v","3",out],{stdio:"inherit"});
+if (run.status!==0) process.exit(run.status ?? 1);
+console.log(`Contact sheet: ${out}`);

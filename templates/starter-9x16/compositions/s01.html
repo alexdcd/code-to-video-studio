@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<body>
+<template>
+<style>
+  #s01{position:absolute;inset:0}
+  #s01-orbit{position:absolute;left:90px;right:90px;top:720px;height:760px}
+  #s01-orbit svg{width:100%;height:100%}
+  #s01-center{position:absolute;left:390px;top:970px;width:300px;text-align:center;font-size:34px;font-weight:800;letter-spacing:-.03em}
+</style>
+<div id="s01" data-composition-id="s01" data-width="1080" data-height="1920">
+  <div class="starter-scene">
+    <div class="starter-grid"></div>
+    <div class="starter-kicker">01 · Intent</div>
+    <div class="starter-title">START WITH<br><span class="starter-accent">A GOAL.</span></div>
+    <div class="starter-sub">Direction before decoration.</div>
+    <div id="s01-orbit">
+      <svg viewBox="0 0 900 760">
+        <circle id="s01-ring1" cx="450" cy="380" r="215" class="starter-line starter-glow"/>
+        <circle id="s01-ring2" cx="450" cy="380" r="310" class="starter-line" opacity=".35"/>
+        <circle id="s01-dot1" cx="665" cy="380" r="13" class="starter-dot"/>
+        <circle id="s01-dot2" cx="450" cy="70" r="9" class="starter-dot" opacity=".6"/>
+      </svg>
+      <div id="s01-center">BRIEF</div>
+    </div>
+    <div class="starter-footer">CODE TO VIDEO STUDIO</div>
+  </div>
+</div>
+<script>
+(() => {
+  const tl = gsap.timeline({paused:true});
+  MAFIA.fade(tl, "#s01 .starter-kicker", .1, .4);
+  tl.fromTo("#s01 .starter-title", {opacity:0,y:60,filter:"blur(16px)"},{opacity:1,y:0,filter:"blur(0px)",duration:.8,ease:"expo.out"},.2);
+  MAFIA.fade(tl, "#s01 .starter-sub", .65, .45);
+  MAFIA.draw(tl, "#s01-ring1,#s01-ring2", .75, 1.2, 0);
+  MAFIA.pop(tl, "#s01-dot1,#s01-dot2,#s01-center", 1.4, .45, .08);
+  tl.to("#s01-orbit svg",{rotation:18,transformOrigin:"50% 50%",duration:2.3,ease:"sine.inOut"},1.5);
+  window.__timelines.s01=tl;
+})();
+</script>
+</template>
+</body>
+</html>

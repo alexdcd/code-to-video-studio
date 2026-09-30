@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<body>
+<template>
+<style>
+  #s02{position:absolute;inset:0}
+  #s02-stage{position:absolute;inset:0}
+  #s02-svg{position:absolute;left:0;top:0;width:1080px;height:1920px}
+</style>
+<div id="s02" data-composition-id="s02" data-width="1080" data-height="1920">
+  <div class="starter-scene">
+    <div class="starter-grid"></div>
+    <div class="starter-kicker">02 · System</div>
+    <div class="starter-title">GIVE THE AGENT<br><span class="starter-accent">A PROCESS.</span></div>
+    <div id="s02-stage" class="starter-stage">
+      <svg id="s02-svg" viewBox="0 0 1080 1920"></svg>
+    </div>
+    <div class="starter-footer">BRIEF → BUILD → REVIEW</div>
+  </div>
+</div>
+<script>
+(() => {
+  const tl=gsap.timeline({paused:true});
+  const stage=document.getElementById("s02-stage");
+  const svg=document.getElementById("s02-svg");
+  const a=MAFIA.starter.node(stage,{x:110,y:850,title:"PLAN",text:"brief + storyboard"});
+  const b=MAFIA.starter.node(stage,{x:690,y:1050,title:"BUILD",text:"code + motion"});
+  const c=MAFIA.starter.node(stage,{x:110,y:1250,title:"CHECK",text:"snapshots + render"});
+  const p1=MAFIA.starter.connector(svg,[390,909],[690,1109]);
+  const p2=MAFIA.starter.connector(svg,[690,1168],[390,1309]);
+  tl.fromTo("#s02 .starter-title",{opacity:0,y:50},{opacity:1,y:0,duration:.7,ease:"expo.out"},.1);
+  MAFIA.draw(tl,[p1,p2],.75,1.15,0);
+  MAFIA.pop(tl,[a,b,c],.55,.5,.28);
+  window.__timelines.s02=tl;
+})();
+</script>
+</template>
+</body>
+</html>

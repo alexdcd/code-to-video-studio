@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" data-resolution="portrait">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1080, height=1920" />
+  <title>{{NAME}}</title>
+  <link rel="stylesheet" href="assets/kit/lib/mafia.css" />
+  <link rel="stylesheet" href="assets/kit/styles/starter/starter.css" />
+  <script src="assets/kit/lib/vendor/gsap/gsap.min.js"></script>
+  <script src="assets/kit/dist/mafia-kit.js"></script>
+  <style>
+    html,body{margin:0;background:#090b12}
+    #root,#scenes{position:absolute;inset:0;overflow:hidden}
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1080" data-height="1920">
+    <div id="scenes">
+      <div id="s01" data-composition-id="s01" data-composition-src="compositions/s01.html" data-start="0" data-duration="4" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="s02" data-composition-id="s02" data-composition-src="compositions/s02.html" data-start="4" data-duration="4" data-track-index="2" data-width="1080" data-height="1920"></div>
+      <div id="s03" data-composition-id="s03" data-composition-src="compositions/s03.html" data-start="8" data-duration="4" data-track-index="1" data-width="1080" data-height="1920"></div>
+    </div>
+  </div>
+  <script>
+    window.__timelines = window.__timelines || {};
+    window.__timelines.main = gsap.timeline({ paused: true });
+  </script>
+</body>
+</html>
