@@ -1,5 +1,9 @@
 # Code to Video Studio
 
+[![CI](https://github.com/alexdcd/code-to-video-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/alexdcd/code-to-video-studio/actions/workflows/ci.yml)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+[![Node 22+](https://img.shields.io/badge/node-22%2B-brightgreen.svg)](package.json)
+
 ### by Mafia AI
 
 **Turn a brief into a polished, programmable video with an AI coding agent.**
