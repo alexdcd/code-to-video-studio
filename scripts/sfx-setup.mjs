@@ -1,0 +1,12 @@
+import fs from "node:fs";
+import path from "node:path";
+import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
+const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
+const systemPython=process.platform==="win32" ? "python" : "python3";
+const r=spawnSync(systemPython,["-m","venv",".venv-sfx"],{cwd:ROOT,stdio:"inherit",shell:false});
+if (r.status!==0) process.exit(r.status ?? 1);
+const py=process.platform==="win32" ? path.join(ROOT,".venv-sfx","Scripts","python.exe") : path.join(ROOT,".venv-sfx","bin","python");
+if (!fs.existsSync(py)) throw new Error("Could not find the SFX virtualenv Python executable.");
+const pip=spawnSync(py,["-m","pip","install","-r","tools/sfx/requirements.txt"],{cwd:ROOT,stdio:"inherit",shell:false});
+process.exit(pip.status ?? 1);

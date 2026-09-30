@@ -4,7 +4,9 @@
   "private": true,
   "description": "Agent-first code-to-video studio by Mafia AI",
   "type": "module",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "setup": "node scripts/setup.mjs",
     "new": "node scripts/new.mjs",
@@ -16,10 +18,15 @@
     "kit:build": "node scripts/lib/kit-build.mjs",
     "kit:copy": "node scripts/kit-copy.mjs",
     "vendor": "node scripts/vendor.mjs",
-    "verify": "node scripts/verify-public.mjs"
+    "verify": "node scripts/verify-public.mjs",
+    "qa": "python3 scripts/lib/qa-video.py",
+    "sfx:candidates": "node scripts/sfx-candidates.mjs",
+    "sfx:clean": "bash tools/sfx/clean.sh",
+    "sfx:setup": "node scripts/sfx-setup.mjs"
   },
   "dependencies": {
-    "gsap": "3.15.0"
+    "gsap": "3.15.0",
+    "three": "0.186.1"
   },
   "devDependencies": {
     "hyperframes": "0.8.81"

@@ -7,9 +7,9 @@ const SELF=path.resolve(fileURLToPath(import.meta.url));
 
 const required=[
   "README.md","AGENTS.md","LICENSE","THIRD_PARTY_NOTICES.md",
-  "kit/VERSION","kit/lib/mafia.js","kit/lib/cartoon-motion.js",
+  "kit/VERSION","kit/lib/mafia.js","kit/lib/cartoon-motion.js","kit/lib/three-desenfoque.js","kit/lib/three-anotaciones.js",
   "kit/styles/starter/starter.css","kit/characters/signal/signal.js",
-  "templates/starter-9x16/index.html","proyectos/demo/index.html"
+  "templates/starter-9x16/index.html","proyectos/demo/index.html","scripts/lib/qa-video.py","tools/sfx/candidates.py","tools/sfx/clean.sh"
 ];
 
 let bad=false;
