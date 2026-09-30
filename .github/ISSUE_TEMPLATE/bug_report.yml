@@ -1,0 +1,38 @@
+name: Bug report
+description: Something is broken or behaves differently between preview, seek and render.
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for reporting a reproducible problem.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Describe the visible or technical failure.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction
+      description: Minimal steps, project/template and command.
+      placeholder: |
+        1. npm install
+        2. npm run setup
+        3. npm run ...
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: macOS 15 / Node 22 / Chrome ...
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Visual evidence / logs
+      description: For visual bugs, snapshots or short renders are much more useful than source code alone.

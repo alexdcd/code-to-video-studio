@@ -1,0 +1,24 @@
+name: Feature idea
+description: Propose a reusable improvement to the public studio.
+title: "[Idea] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Production problem
+      description: What recurring video-production problem would this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed primitive or workflow
+      description: Keep it as small and reusable as possible.
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Example use
+      description: What kind of videos would benefit from it?

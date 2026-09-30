@@ -1,10 +1,8 @@
-# Code to Video Studio
+# Code to Video Studio — Mafia AI
 
 [![CI](https://github.com/alexdcd/code-to-video-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/alexdcd/code-to-video-studio/actions/workflows/ci.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![Node 22+](https://img.shields.io/badge/node-22%2B-brightgreen.svg)](package.json)
-
-### by Mafia AI
 
 **Turn a brief into a polished, programmable video with an AI coding agent.**
 
@@ -313,6 +311,14 @@ Near-term areas worth exploring:
 - improved agent workflows for Claude Code, Codex and other coding agents
 
 The roadmap will follow real production needs rather than trying to become a giant all-purpose video framework.
+
+---
+
+## Made something with it?
+
+Open a showcase issue or send a PR adding your project to the community examples once that gallery exists. Real outputs are the best way to improve the studio.
+
+If the project is useful to you, a GitHub star helps other creators discover it.
 
 ---
 
