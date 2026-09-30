@@ -91,7 +91,7 @@ The system is especially useful for:
 - code-drawn diagrams
 - music-led motion pieces
 - recurring branded video formats
-- animated characters and reusable scene systems
+- animated characters and reusable scene systems\n- deterministic Three.js scenes with motion blur and projected annotations
 
 It is not trying to replace Premiere, After Effects or a full nonlinear editor. It is strongest when the video benefits from being **generated, versioned, repeated or controlled by code**.
 
@@ -125,7 +125,7 @@ When it is ready:
 ```bash
 npm run check -- my-video
 npm run render -- my-video
-npm run contact-sheet -- proyectos/my-video/renders/my-video.mp4
+npm run contact-sheet -- proyectos/my-video/renders/my-video.mp4\nnpm run qa -- proyectos/my-video/renders/my-video.mp4
 ```
 
 ---
@@ -185,13 +185,13 @@ scripts/
   new.sh                 create a project
   in-project.sh          run HyperFrames commands against a project
   kit-copy.sh            copy the current kit into a project
-  contact-sheet.sh       visual review helper
+  contact-sheet.mjs      visual review helper\n  lib/qa-video.py         measurable final-render QA
 
 docs/
   agent-workflow.md
   animation.md
   creating-styles.md
-  creating-characters.md
+  creating-characters.md\n  three.md\n  qa.md\n  sfx.md
 ```
 
 ---

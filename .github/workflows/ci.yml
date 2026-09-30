@@ -19,9 +19,13 @@ jobs:
           node-version: 22
       - name: Install dependencies
         run: npm install --ignore-scripts
-      - name: Check script syntax
+      - name: Check JS syntax
         run: |
           find scripts kit -type f \( -name '*.js' -o -name '*.mjs' \) -print0 | xargs -0 -n1 node --check
+      - name: Check Python and shell syntax
+        run: |
+          python3 -m py_compile scripts/lib/qa-video.py tools/sfx/candidates.py
+          bash -n scripts/qa.sh tools/sfx/clean.sh
       - name: Prepare studio
         run: npm run setup
       - name: Verify public distribution

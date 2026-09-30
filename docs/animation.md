@@ -36,7 +36,7 @@ Do not use `Math.random()` for visible rendered state.
 `MAFIA.anim` currently includes:
 
 - clamp / lerp / segment helpers
-- keyframe interpolation
+- keyframe interpolation\n- monotone `curva()` interpolation for measured motion without overshoot
 - damped spring
 - repeated ringing response
 - motion arcs
@@ -47,3 +47,20 @@ Do not use `Math.random()` for visible rendered state.
 - short reaction/take
 
 These primitives return state. They do not own your scene. That keeps compositions flexible and easy for agents to combine.
+
+## Reproducing measured motion
+
+When you are matching the *timing* of a movement from a reference, measure a few key values and use `MAFIA.anim.curva(t, keys)`.
+It uses monotone cubic interpolation so the curve passes through the measured keys without introducing a new overshoot.
+
+```js
+const angle = MAFIA.anim.curva(t, [
+  [0.0, 0],
+  [0.18, 8],
+  [0.42, 47],
+  [0.70, 82],
+  [0.95, 90],
+]);
+```
+
+Treat the measurements as evidence, not as a reason to ship the reference media itself.
