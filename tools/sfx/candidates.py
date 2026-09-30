@@ -18,7 +18,7 @@ import sys
 try:
     import numpy as np
 except ModuleNotFoundError:
-    raise SystemExit("Missing optional dependency: numpy. Run: python3 -m pip install -r tools/sfx/requirements.txt")
+    raise SystemExit("Missing optional dependency: numpy. Install numpy in the active Python environment before running this tool.")
 
 SR = 44100
 

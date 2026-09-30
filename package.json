@@ -20,8 +20,9 @@
     "vendor": "node scripts/vendor.mjs",
     "verify": "node scripts/verify-public.mjs",
     "qa": "python3 scripts/lib/qa-video.py",
-    "sfx:candidates": "python3 tools/sfx/candidates.py",
-    "sfx:clean": "bash tools/sfx/clean.sh"
+    "sfx:candidates": "node scripts/sfx-candidates.mjs",
+    "sfx:clean": "bash tools/sfx/clean.sh",
+    "sfx:setup": "node scripts/sfx-setup.mjs"
   },
   "dependencies": {
     "gsap": "3.15.0",

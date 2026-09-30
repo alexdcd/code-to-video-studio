@@ -16,3 +16,6 @@ proyectos/*/assets/kit/
 
 # Temporary public-export artifacts
 .public-dist/
+
+# Optional Python environment for SFX analysis
+.venv-sfx/
