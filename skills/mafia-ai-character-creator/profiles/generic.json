@@ -1,0 +1,99 @@
+{
+  "id": "generic",
+  "description": "Portable defaults for reusable animated characters. Generated art is the default route; procedural renderers remain first-class alternatives.",
+  "requiredViews": [
+    "front",
+    "q",
+    "side"
+  ],
+  "optionalViews": [
+    "qback",
+    "back"
+  ],
+  "defaultActions": [
+    "idle",
+    "think",
+    "point",
+    "walk"
+  ],
+  "defaultExpressions": [
+    "neutral",
+    "thinking",
+    "surprised",
+    "happy"
+  ],
+  "preferredRenderModes": [
+    "generated-art",
+    "raster-puppet",
+    "procedural-svg",
+    "procedural-canvas",
+    "rigged-svg",
+    "raster-sprites"
+  ],
+  "target": "standalone-web",
+  "generatedArt": {
+    "backgroundStrategy": "chroma",
+    "recommendedChroma": "#00FF00",
+    "defaultFps": 12,
+    "cellWidth": 512,
+    "cellHeight": 512,
+    "columns": 8,
+    "atlasFormat": "webp",
+    "anchor": "feet-center",
+    "normalization": "single-global-scale",
+    "videoGuidance": {
+      "mediumCharacterWidth": 512,
+      "closeupCellWidth": 768,
+      "note": "Use 512px cells by default for 1080p video; prefer 768-1024px cells for close-up protagonists."
+    }
+  },
+  "qa": {
+    "requireViews": true,
+    "requireMotionPreview": true,
+    "requireDeterminism": true,
+    "requireContinuity": true,
+    "requireVisualReview": true
+  },
+  "actionLayers": {
+    "presence": [
+      "idle",
+      "blink"
+    ],
+    "locomotion": [
+      "walk",
+      "run",
+      "turn",
+      "start",
+      "stop",
+      "jump"
+    ],
+    "communication": [
+      "talk",
+      "nod",
+      "shake",
+      "point",
+      "present",
+      "wave",
+      "shrug",
+      "think"
+    ],
+    "emotions": [
+      "surprised",
+      "joy",
+      "angry",
+      "sad"
+    ],
+    "interaction": [
+      "grab",
+      "hold",
+      "release",
+      "push",
+      "pull",
+      "sit",
+      "stand",
+      "fall",
+      "hit"
+    ]
+  },
+  "motionCatalog": "references/motion-catalog.md"
+}

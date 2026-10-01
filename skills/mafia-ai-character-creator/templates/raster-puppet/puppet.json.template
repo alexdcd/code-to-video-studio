@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 2,
+  "defaultView": "front",
+  "defaultExpression": "neutral",
+  "views": {
+    "front": {
+      "canvas": [512, 512],
+      "anchor": [256, 480],
+      "parts": [
+        {"id": "torso", "src": "parts/front-torso.webp", "parent": null, "x": 256, "y": 270, "pivot": [128, 40], "z": 10},
+        {"id": "head", "src": "parts/front-head.webp", "expressions": {"happy": "parts/front-head-happy.webp"}, "parent": "torso", "x": 0, "y": -25, "pivot": [128, 190], "z": 30},
+        {"id": "arm-left", "src": "parts/front-arm-left.webp", "parent": "torso", "x": -90, "y": 30, "pivot": [25, 25], "z": 5},
+        {"id": "arm-right", "src": "parts/front-arm-right.webp", "parent": "torso", "x": 90, "y": 30, "pivot": [25, 25], "z": 20}
+      ],
+      "poses": {
+        "idle": {},
+        "point": {"arm-right": {"rotation": -55}}
+      }
+    }
+  }
+}

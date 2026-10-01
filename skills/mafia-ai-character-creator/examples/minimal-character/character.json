@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "minimal-block",
+  "displayName": "Minimal Block",
+  "description": "Tiny dependency-free procedural SVG example.",
+  "status": "draft",
+  "renderMode": "procedural-svg",
+  "target": "standalone-web",
+  "entry": "renderer/character.js",
+  "moduleSystem": "esm",
+  "views": ["front", "q", "side", "qback", "back"],
+  "actions": ["idle", "think", "point", "walk"],
+  "expressions": ["neutral", "thinking", "surprised", "happy"],
+  "props": [],
+  "api": {"render": "renderCharacter", "capabilities": "getCharacterCapabilities"}
+}

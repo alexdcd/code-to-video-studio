@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Mafia AI Character Creator Profile",
+  "type": "object",
+  "required": ["id"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "description": {"type": "string"},
+    "requiredViews": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "optionalViews": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "defaultActions": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "actionLayers": {"type": "object", "additionalProperties": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}},
+    "motionCatalog": {"type": "string"},
+    "defaultExpressions": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "preferredRenderModes": {"type": "array", "items": {"enum": ["generated-art", "raster-puppet", "procedural-svg", "procedural-canvas", "rigged-svg", "raster-sprites"]}, "uniqueItems": true},
+    "target": {"type": "string"},
+    "generatedArt": {"type": "object"},
+    "qa": {"type": "object"}
+  },
+  "additionalProperties": true
+}

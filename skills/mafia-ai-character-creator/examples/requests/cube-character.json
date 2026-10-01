@@ -1,0 +1,7 @@
+{
+  "name": "Cube Character",
+  "notes": "Minimal geometric cube-headed character with straight limbs and simple eyes.",
+  "renderMode": "procedural-svg",
+  "actions": ["idle", "think", "point", "walk", "type"],
+  "expressions": ["neutral", "thinking", "surprised", "happy", "focused"]
+}

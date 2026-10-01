@@ -22,7 +22,8 @@
     "qa": "python3 scripts/lib/qa-video.py",
     "sfx:candidates": "node scripts/sfx-candidates.mjs",
     "sfx:clean": "bash tools/sfx/clean.sh",
-    "sfx:setup": "node scripts/sfx-setup.mjs"
+    "sfx:setup": "node scripts/sfx-setup.mjs",
+    "skills": "node scripts/skills.mjs"
   },
   "dependencies": {
     "gsap": "3.15.0",

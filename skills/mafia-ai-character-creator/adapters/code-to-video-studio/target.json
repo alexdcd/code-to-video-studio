@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "id": "code-to-video-studio",
+  "characterDir": "kit/characters",
+  "assetPrefix": "assets/kit/characters",
+  "runtime": "MAFIA",
+  "buildCommand": ["node", "scripts/lib/kit-build.mjs"]
+}

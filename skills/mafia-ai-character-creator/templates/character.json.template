@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "character-id",
+  "displayName": "Character Name",
+  "description": "Short description.",
+  "status": "draft",
+  "renderMode": "generated-art",
+  "target": "standalone-web",
+  "entry": "renderer/character.js",
+  "moduleSystem": "esm",
+  "views": ["front", "q", "side", "qback", "back"],
+  "actions": ["idle", "think", "point", "walk"],
+  "expressions": ["neutral", "thinking", "surprised", "happy"],
+  "props": [],
+  "api": {
+    "render": "renderCharacter",
+    "capabilities": "getCharacterCapabilities"
+  }
+}

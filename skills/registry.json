@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "skills": [
+    {
+      "id": "mafia-ai-character-creator",
+      "path": "mafia-ai-character-creator",
+      "entrypoint": "SKILL.md",
+      "description": "Create and QA reusable animated characters",
+      "tags": ["characters", "animation", "qa"]
+    }
+  ]
+}

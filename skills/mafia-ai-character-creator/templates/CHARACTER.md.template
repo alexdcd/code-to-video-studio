@@ -1,0 +1,29 @@
+# Character Name
+
+## Identity lock
+
+- silhouette/proportions:
+- head/face:
+- eyes/mouth:
+- limbs/hands/feet:
+- palette/material/line:
+- asymmetries/markings:
+- props/accessories:
+- allowed deformation:
+- forbidden drift:
+
+## Renderer
+
+- mode:
+- target:
+- entry:
+- coordinate system:
+- pivots/anchors:
+
+## Views
+
+Document how `front`, `q`, `side`, `qback`, and `back` are constructed.
+
+## Acting
+
+Document each supported semantic action and any timing assumptions.

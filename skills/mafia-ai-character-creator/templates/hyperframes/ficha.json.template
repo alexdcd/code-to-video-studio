@@ -1,0 +1,9 @@
+{
+  "nombre": "<slug>",
+  "tipo": "personaje",
+  "descripcion": "<description>",
+  "licencia": "<license>",
+  "uso": "const c = <runtime>.<namespace>.insertar(\"#layer\", \"instance\"); <runtime>.<namespace>.animar(tl, c, 0, 2, { action: \"idle\" });",
+  "parametros": {},
+  "demo": {"archivo": "demo.html", "id": "demo-<slug>", "duracion": 5, "t": 2.5, "formato": "16x9"}
+}

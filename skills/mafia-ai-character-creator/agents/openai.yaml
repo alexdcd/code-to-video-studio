@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mafia AI Character Creator"
+  short_description: "Create production-ready animated characters"
+  default_prompt: "Use $mafia-ai-character-creator to turn my references or character idea into a reusable animated character package. Prefer generated art for accessibility, but choose raster-puppet for recurring articulated characters and procedural or rigged rendering when the design clearly benefits from it. Keep the character on-model, deterministic, and fully QA'd."
