@@ -62,7 +62,9 @@ test("public and pro resources require an explicit license", () => {
 });
 
 test("unsafe distributable text catches secrets and machine paths", () => {
+  const fakeMacPath = ["", "Users", "alexdc", "Dev", "project"].join("/");
+  const fakeGithubToken = ["ghp", "1234567890123456789012345"].join("_");
   assert.deepEqual(unsafeTextFindings("normal /path/to/example"), []);
-  assert.ok(unsafeTextFindings("/Users/alexdc/Dev/project").includes("mac-user-path"));
-  assert.ok(unsafeTextFindings("token ghp_1234567890123456789012345").includes("github-token"));
+  assert.ok(unsafeTextFindings(fakeMacPath).includes("mac-user-path"));
+  assert.ok(unsafeTextFindings(`token ${fakeGithubToken}`).includes("github-token"));
 });
