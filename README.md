@@ -233,6 +233,10 @@ templates/
 proyectos/
   demo/                 small working example
 
+skills/
+  README.md              canonical skill registry and install/package commands
+  mafia-ai-character-creator/  reusable animated-character authoring skill
+
 scripts/
   new.mjs               create a project
   in-project.mjs        run HyperFrames commands against a project
@@ -250,6 +254,22 @@ docs/
   qa.md
   sfx.md
 ```
+
+---
+
+## Agent skills
+
+Portable Studio skills live in `skills/`. The registry and each skill's SHA-256 distribution manifest are the source of truth; Claude and Codex directories are install destinations.
+
+```bash
+npm run skills -- list
+npm run skills -- install mafia-ai-character-creator --target claude
+npm run skills -- install mafia-ai-character-creator --target codex
+npm run skills -- validate mafia-ai-character-creator
+npm run skills -- package mafia-ai-character-creator
+```
+
+See [`skills/README.md`](skills/README.md) for the registry and package workflow.
 
 ---
 

@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
@@ -7,6 +8,7 @@ const SELF=path.resolve(fileURLToPath(import.meta.url));
 
 const required=[
   "README.md","AGENTS.md","LICENSE","THIRD_PARTY_NOTICES.md",
+  "skills/README.md","skills/registry.json","skills/mafia-ai-character-creator/SKILL.md","skills/mafia-ai-character-creator/DISTRIBUTION-MANIFEST.json","scripts/skills.mjs","scripts/package_skill.py",
   "kit/VERSION","kit/lib/mafia.js","kit/lib/cartoon-motion.js","kit/lib/three-desenfoque.js","kit/lib/three-anotaciones.js",
   "kit/styles/starter/starter.css","kit/characters/signal/signal.js",
   "templates/starter-9x16/index.html","proyectos/demo/index.html","scripts/lib/qa-video.py","tools/sfx/candidates.py","tools/sfx/clean.sh"
@@ -53,5 +55,7 @@ function walk(dir) {
 }
 
 walk(ROOT);
+const skillCheck=spawnSync(process.execPath,[path.join(ROOT,"scripts/skills.mjs"),"validate","mafia-ai-character-creator"],{stdio:"inherit"});
+if (skillCheck.status!==0) bad=true;
 if (bad) process.exit(1);
 console.log("Public distribution checks passed.");

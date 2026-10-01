@@ -27,6 +27,13 @@ Turn a brief into a clear, visually reviewed video. Do not optimize for clever c
 - Project-specific art/code belongs in the project outside `assets/kit/`.
 - A style, character or scene belongs in the kit only when it is reusable across different videos.
 
+## Studio skills
+
+- `skills/` is the canonical source for portable agent skills.
+- `.claude/skills/`, `~/.claude/skills/` and `$CODEX_HOME/skills/` are installed destinations; do not edit duplicate copies.
+- Use `npm run skills -- list|install|validate|package` to discover and distribute skills.
+- Each skill's `DISTRIBUTION-MANIFEST.json` defines the exact files that may be installed or shared.
+
 ## Animation rules
 
 Rendered video must be deterministic and seek-safe.
