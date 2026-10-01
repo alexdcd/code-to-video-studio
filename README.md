@@ -4,103 +4,79 @@
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![Node 22+](https://img.shields.io/badge/node-22%2B-brightgreen.svg)](package.json)
 
-**Turn a brief into a polished, programmable video with an AI coding agent.**
+**Build videos with AI coding agents — without rebuilding the production system every time.**
 
-Code to Video Studio is an open source, agent-first workspace for creating animated videos with **code instead of a timeline editor**. It gives Claude Code, Codex and other coding agents a production system they can understand: brief, script, storyboard, reusable motion primitives, deterministic animation, visual checks and final render.
+Code to Video Studio is an open-source, agent-first workspace for turning a brief into a polished, programmable video. It gives Claude Code, Codex and other coding agents a production system they can understand and reuse: **brief → script → storyboard → deterministic scenes → visual QA → final render**.
 
-Built on **HyperFrames + GSAP**, with a small reusable motion kit designed for videos that need to be iterated, regenerated and reviewed like software.
+Built on **HyperFrames + GSAP**, with reusable motion primitives, optional Three.js helpers, measurable render QA and a structure designed to get better every time you make a video.
 
-> **The idea:** describe the video you want, let your coding agent build it inside a constrained production system, preview it, inspect key frames, fix what is wrong and render the final MP4.
+> The goal is not to make one impressive AI-generated demo. It is to build a video system that compounds.
 
-## See it in motion
+## See what it makes
 
 **33 seconds. No footage. No stock. Just code.**
 
-[![Code to Video Studio showcase](media/code-to-video-studio-preview.gif)](https://raw.githubusercontent.com/alexdcd/code-to-video-studio/main/media/code-to-video-studio-teaser-web.mp4)
+[![Code to Video Studio showcase](media/code-to-video-studio-preview.gif)](https://www.youtube.com/watch?v=v9jOQ9b87S0)
 
-[▶ Watch the full video with sound + voice](https://raw.githubusercontent.com/alexdcd/code-to-video-studio/main/media/code-to-video-studio-teaser-web.mp4)
+[▶ Watch on YouTube](https://www.youtube.com/watch?v=v9jOQ9b87S0) · [Open the MP4](https://raw.githubusercontent.com/alexdcd/code-to-video-studio/main/media/code-to-video-studio-teaser-web.mp4)
 
-## Why this exists
+---
 
-AI can already write impressive animation code. The harder problem is getting it to produce a **good video repeatedly**.
+## Why this repo exists
 
-Without a system, an agent tends to create a one-off HTML experiment: timings drift, scenes fight for attention, motion breaks when you seek, files become hard to reuse and every new video starts almost from zero.
+AI agents can already write surprisingly good animation code. That is no longer the hardest part.
 
-Code to Video Studio gives the agent a production grammar.
+The harder problem is getting them to make **good videos repeatedly**.
+
+Ask an agent to create a video from scratch and it will often produce a one-off experiment: a new structure, new timing conventions, stateful animation that breaks when seeking, duplicated helpers, inconsistent visual decisions and no reliable review loop. The next video starts almost from zero again.
+
+Code to Video Studio turns those repeated decisions into a reusable production system.
+
+It gives the agent:
+
+- a clear workflow before it writes scenes
+- deterministic, seek-safe animation rules
+- reusable motion, style and character layers
+- visual review instead of “the code runs, so it must be done”
+- final-render checks for problems such as black frames, long static sections, loudness and silence
+- a place to promote good ideas so the next video starts with more capability than the last
+
+**The repo is the memory and production grammar around the coding agent.**
+
+Without that layer, better models mostly make better one-offs. With it, each finished video can improve the system used to make the next one.
+
+---
+
+## What this is — and what it is not
+
+This is **not** another video model, a prompt collection or a replacement for Premiere / After Effects.
+
+It sits one layer above the rendering and animation tools:
 
 ```text
-BRIEF
-  ↓
-SCRIPT
-  ↓
-STORYBOARD
-  ↓
-SCENES + MOTION
-  ↓
-CHECK + SNAPSHOTS
-  ↓
-VISUAL REVIEW
-  ↓
-RENDER
+YOUR IDEA
+   ↓
+BRIEF + SCRIPT + STORYBOARD
+   ↓
+AI CODING AGENT
+   ↓
+CODE TO VIDEO STUDIO
+   ├─ project contract
+   ├─ reusable motion
+   ├─ styles / characters
+   ├─ deterministic animation
+   ├─ visual snapshots
+   ├─ render QA
+   └─ reusable production rules
+   ↓
+HYPERFRAMES + GSAP + THREE.JS
+   ↓
+FINAL VIDEO
 ```
 
-The repository grew out of several days of hands-on production, repeated renders, failed experiments, visual QA and refactoring while building real programmatic videos. The useful parts were turned into reusable rules and primitives instead of being left inside one finished project.
+The useful abstraction is not “generate a video”.
 
-This is not a prompt collection and not a single demo. It is a base for building your own **code-to-video workflow**.
-
----
-
-## What makes it different
-
-### Agent-first, not agent-added
-
-The project is structured so a coding agent can understand how to work before it writes a scene. `AGENTS.md` defines the workflow, timing rules, determinism constraints and visual review loop.
-
-### Deterministic animation
-
-Video rendering needs to survive seeking, snapshots and frame-by-frame rendering. The included `MAFIA` helpers avoid common stateful-animation traps and provide seeded randomness and time-based motion.
-
-### Reusable motion language
-
-Instead of rewriting the same animation logic on every video:
-
-```js
-MAFIA.anim.spring(...)
-MAFIA.anim.arc(...)
-MAFIA.anim.jump(...)
-MAFIA.anim.shake(...)
-MAFIA.anim.pulse(...)
-MAFIA.draw(...)
-MAFIA.pop(...)
-MAFIA.porCuadro(...)
-```
-
-### Visual QA is part of the workflow
-
-A video is not correct because the code runs. The workflow explicitly asks the agent to inspect key poses, snapshots and a contact sheet before calling the result finished.
-
-### Your style stays yours
-
-The public starter is intentionally neutral. Build your own styles, characters, scenes, typography and brand kits on top of the core instead of inheriting someone else's visual identity.
-
----
-
-## What can you build?
-
-The system is especially useful for:
-
-- short-form explainers
-- animated AI / technology content
-- data stories and visual essays
-- product explainers
-- kinetic typography
-- code-drawn diagrams
-- music-led motion pieces
-- recurring branded video formats
-- animated characters and reusable scene systems
-- deterministic Three.js scenes with motion blur and projected annotations
-
-It is not trying to replace Premiere, After Effects or a full nonlinear editor. It is strongest when the video benefits from being **generated, versioned, repeated or controlled by code**.
+It is **give an agent enough structure, reusable creative primitives and feedback loops to behave more like a production partner than a code generator.**
 
 ---
 
@@ -138,39 +114,107 @@ npm run qa -- proyectos/my-video/renders/my-video.mp4
 
 ---
 
-## The workflow
+## The production loop
 
-### 1. Brief
+The studio follows a deliberately simple loop:
 
-Define the outcome, audience, format, duration, voice, sound and non-negotiables.
+```text
+BRIEF
+  ↓
+SCRIPT
+  ↓
+STORYBOARD
+  ↓
+SCENES + MOTION
+  ↓
+CHECK + SNAPSHOTS
+  ↓
+VISUAL REVIEW
+  ↓
+RENDER + QA
+  ↓
+PROMOTE WHAT WORKED
+  ↺
+```
 
-### 2. Script
+That final step matters.
 
-Decide what the viewer needs to understand and in what order.
+If a motion primitive, character behavior, scene pattern, style rule or production helper proves useful across projects, it should move into the reusable layer instead of being copied into the next video.
 
-### 3. Storyboard
+**The target is a studio that becomes more capable through use.**
 
-Every scene gets:
+---
 
-- one primary event or change
-- visual readings in order
-- timing
-- reusable resources
-- important sound or motion beats
+## What you get today
 
-### 4. Build
+### Agent-first workflow
 
-Scenes live in isolated compositions and use deterministic timelines. Project-specific work stays outside the reusable kit.
+`AGENTS.md` tells the coding agent how to work before it starts improvising: project boundaries, timing rules, determinism constraints and the visual review loop.
 
-### 5. Check visually
+### Deterministic motion
 
-Run validation, inspect important moments, then create a contact sheet for the whole render. Motion and composition should be judged visually, not from source code alone.
+Rendered video must survive seeking, snapshots and frame-by-frame rendering. The included `MAFIA` helpers provide seeded randomness and time-derived motion instead of fragile frame-to-frame state.
 
-### 6. Promote what is reusable
+```js
+const r = MAFIA.rand(42);
 
-If a scene, character, helper or style works across projects, move it into the kit instead of copy-pasting it forever.
+const pose = MAFIA.anim.jump(t, 1.0, 1.7, 120);
+const wobble = MAFIA.anim.spring(t, 1.7);
+const [x, y] = MAFIA.anim.shake(t, 6, 24, 9);
+```
 
-That makes the studio improve every time you make a video.
+### Reusable motion language
+
+The core includes a deliberately small set of primitives for common animation behavior:
+
+```js
+MAFIA.anim.spring(...)
+MAFIA.anim.arc(...)
+MAFIA.anim.jump(...)
+MAFIA.anim.shake(...)
+MAFIA.anim.pulse(...)
+MAFIA.draw(...)
+MAFIA.pop(...)
+MAFIA.porCuadro(...)
+```
+
+### Visual QA
+
+A video is not considered correct just because the code runs.
+
+The workflow asks the agent to inspect key poses, transitions, snapshots and a contact sheet. The final render can also be checked for measurable problems such as long static sections, black frames, loudness, true peak and long silences.
+
+### Three.js support
+
+The public core includes deterministic Three.js motion helpers, motion blur and HTML/SVG annotations projected from 3D anchors for scenes that need more spatial depth.
+
+### SFX workflow
+
+The studio includes optional helpers for finding SFX candidates and cleaning audio assets before they enter a project.
+
+### Your visual identity stays separate
+
+The starter is intentionally neutral. Your own characters, typography, visual language, recurring scenes and brand assets can live on top of the reusable core without being coupled to it.
+
+---
+
+## What can you build?
+
+The system is especially useful for videos that benefit from being generated, repeated, versioned or controlled by code:
+
+- short-form explainers
+- animated AI / technology content
+- product explainers
+- visual essays and data stories
+- kinetic typography
+- code-drawn diagrams
+- music-led motion pieces
+- branded recurring formats
+- reusable animated characters
+- deterministic Three.js scenes
+- video formats that need many variations
+
+It is less useful when your project is mainly traditional footage editing or needs the full flexibility of a nonlinear editor.
 
 ---
 
@@ -178,7 +222,7 @@ That makes the studio improve every time you make a video.
 
 ```text
 kit/
-  lib/                  reusable MAFIA helpers + deterministic cartoon motion
+  lib/                  reusable MAFIA helpers + deterministic motion
   styles/               reusable visual systems
   characters/           reusable code-driven characters
 
@@ -190,11 +234,12 @@ proyectos/
   demo/                 small working example
 
 scripts/
-  new.mjs                create a project
-  in-project.mjs         run HyperFrames commands against a project
-  kit-copy.mjs           copy the current kit into a project
-  contact-sheet.mjs      visual review helper
-  lib/qa-video.py         measurable final-render QA
+  new.mjs               create a project
+  in-project.mjs        run HyperFrames commands against a project
+  kit-copy.mjs          copy the current kit into a project
+  contact-sheet.mjs     visual review helper
+  sfx-candidates.mjs    optional SFX discovery helper
+  lib/qa-video.py       measurable final-render QA
 
 docs/
   agent-workflow.md
@@ -210,21 +255,54 @@ docs/
 
 ## Why HyperFrames + GSAP?
 
-**HyperFrames** gives code a video-oriented runtime: compositions, preview, snapshots, validation and rendering.
+**HyperFrames** provides a video-oriented runtime: compositions, preview, snapshots, validation and rendering.
 
-**GSAP** gives the scene layer expressive timelines and mature animation primitives.
+**GSAP** provides expressive timelines and mature animation primitives.
 
-Code to Video Studio adds the missing production layer around them:
+**Three.js** is available when a scene benefits from 3D.
 
-- project structure
-- agent instructions
-- deterministic helpers
-- reusable motion
-- reusable styles and characters
-- review discipline
-- promotion of successful work back into the kit
+Code to Video Studio adds the production layer around them:
 
-The goal is not to hide the underlying tools. It is to make them easier for an AI agent and a human creator to use together.
+- how the agent should approach the job
+- how projects are structured
+- which rules keep animation render-safe
+- how reusable creative systems are organized
+- how visual output is checked
+- how successful work is promoted back into the studio
+
+The project is intentionally not trying to hide the underlying tools. It is trying to make them work together coherently for AI-assisted production.
+
+---
+
+## The current plan
+
+The direction of the project is deliberately narrower than “build an all-purpose video framework”.
+
+### 1. Keep the public core small and dependable
+
+The reusable engine, project contract, render-safe motion rules and QA should stay understandable enough that an agent can reason about them without loading a giant framework into context.
+
+### 2. Add creator capabilities as modular layers
+
+Characters, styles, diagrams, audio workflows and other creative systems should remain composable rather than turning the core into one opinionated aesthetic.
+
+### 3. Add specialized agent workflows as reusable skills
+
+Some jobs deserve their own repeatable workflow: creating a character kit, preparing sound, auditing a render or building a specific kind of scene. Those workflows should be distributable independently while still fitting the studio contract.
+
+### 4. Tighten the feedback loop
+
+The long-term advantage is not more animation helpers. It is better iteration: stronger snapshots, visual checks, measurable QA and clearer agent feedback so mistakes are caught before the final render.
+
+### 5. Promote only what survives real production
+
+Mafia AI's private projects are used as a testing ground. Generic pieces that prove useful across real videos can be cleaned up and promoted into the public core; brand-specific assets and one-off creative work stay private.
+
+### 6. Build a library of real examples
+
+The repo should increasingly show complete outputs and reusable patterns, not just APIs. A production tool is easier to understand when people can see what it actually makes.
+
+That means the roadmap will follow **real production bottlenecks**, not feature-count vanity.
 
 ---
 
@@ -233,39 +311,18 @@ The goal is not to hide the underlying tools. It is to make them easier for an A
 Programmatic video has different failure modes from ordinary web animation.
 
 - Never use unseeded `Math.random()` for rendered state.
-- Do not build animation state by accumulating frame-to-frame physics.
-- Important motion must be derived from time so seeking remains correct.
-- Keep scene IDs unique after compositions are assembled.
+- Do not use `Date.now()` or `performance.now()` for rendered state.
+- Do not accumulate animation physics frame by frame.
+- Important motion should be derived from time so seeking remains correct.
+- Keep IDs unique after compositions are assembled.
 - Review key poses and transitions visually.
-- One important reading at a time beats five simultaneous clever effects.
+- Prefer one important reading at a time over five simultaneous effects.
 
-The full contract lives in [AGENTS.md](AGENTS.md).
-
----
-
-## The MAFIA motion layer
-
-The project exposes a deliberately small global helper layer:
-
-```js
-const r = MAFIA.rand(42);
-
-const pose = MAFIA.anim.jump(t, 1.0, 1.7, 120);
-const wobble = MAFIA.anim.spring(t, 1.7);
-const [x, y] = MAFIA.anim.shake(t, 6, 24, 9);
-```
-
-It is designed around a simple constraint:
-
-> **Given the same time and seed, the frame should be reproducible.**
-
-That makes agent-generated motion much safer to snapshot, debug and render.
+The complete contract lives in [AGENTS.md](AGENTS.md).
 
 ---
 
 ## Build your own visual system
-
-The starter style is not the product's identity. It is an example of the contract.
 
 A reusable style can define:
 
@@ -275,7 +332,6 @@ A reusable style can define:
 - transitions
 - camera language
 - recurring visual motifs
-- helper functions
 - scene conventions
 
 A reusable character can define:
@@ -287,15 +343,15 @@ A reusable character can define:
 - deterministic actions
 - animation helpers
 
-The aim is to let creators build a **video system that compounds**, rather than prompting a new aesthetic from scratch every time.
+The aim is to build a **video system that compounds**, instead of prompting a new aesthetic from scratch every time.
 
 ---
 
-## Public core and creator layers
+## Public core, private identity
 
 This repository contains the open core and a neutral starter.
 
-Mafia AI's own production projects, brand assets and private creative libraries are intentionally separate. That separation is useful even if you are not Mafia AI: keep your reusable engine independent from the assets that make your work recognizably yours.
+Mafia AI's production projects, brand assets and private creative libraries remain separate. That separation is intentional and useful for anyone adopting the studio: keep the reusable engine independent from the assets that make your work recognizably yours.
 
 ---
 
@@ -303,32 +359,17 @@ Mafia AI's own production projects, brand assets and private creative libraries 
 
 **Early public release.**
 
-The core comes from a working private production system, but this public distribution is intentionally smaller and cleaner. Expect the public API and starter kit to evolve as more real videos are produced with it.
+The core comes from a working private production system, but the public distribution is intentionally smaller and cleaner. Expect the APIs and starter layer to evolve as more real videos are produced and the reusable pieces become clearer.
 
 Issues and focused pull requests are welcome.
 
 ---
 
-## Roadmap
-
-Near-term areas worth exploring:
-
-- better starter scenes and examples
-- reusable chart / diagram primitives
-- character kits
-- audio-aware timing helpers
-- easier project creation
-- more automated visual QA
-- community styles without coupling them to the core
-- improved agent workflows for Claude Code, Codex and other coding agents
-
-The roadmap will follow real production needs rather than trying to become a giant all-purpose video framework.
-
----
-
 ## Made something with it?
 
-Open a showcase issue or send a PR adding your project to the community examples once that gallery exists. Real outputs are the best way to improve the studio.
+Show the output.
+
+Open an issue with what you built, what worked and what the studio made difficult. Real production examples are more valuable to the project than speculative feature lists.
 
 If the project is useful to you, a GitHub star helps other creators discover it.
 
@@ -336,9 +377,9 @@ If the project is useful to you, a GitHub star helps other creators discover it.
 
 ## Contributing
 
-If you create a reusable fix, helper, scene primitive or genuinely general workflow improvement, contributions are welcome.
+Reusable fixes, motion primitives, scene systems and genuinely general workflow improvements are welcome.
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) first. Keep the core generic: brand-specific assets and one-off project code are better kept in your own layer.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) first. Keep the core generic: brand-specific assets and one-off project code belong in your own creator layer.
 
 ---
 
@@ -354,6 +395,4 @@ Third-party dependencies keep their respective licenses.
 
 ## Built by Mafia AI
 
-Code to Video Studio is maintained by **Mafia AI** as part of an ongoing experiment in using AI agents as creative production partners, not just code generators.
-
-If you build something interesting with it, open an issue or share the result. The most useful ideas for the project will come from seeing what people actually make.
+Code to Video Studio is maintained by **Mafia AI** as an ongoing experiment in using AI agents as creative production partners, not just code generators.
