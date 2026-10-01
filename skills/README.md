@@ -4,7 +4,7 @@ This directory is the canonical source for portable skills maintained by Code to
 
 ## Available skills
 
-The [registry](registry.json) lists each skill's ID, entrypoint, description, and tags. A skill's version lives in its own `VERSION` file and its `DISTRIBUTION-MANIFEST.json` lists every distributable file with its SHA-256 and byte size.
+The [registry](registry.json) lists each skill's ID, entrypoint, description, tags, and distribution tier (`public`, `pro`, `private`, or `local`). A skill's version lives in its own `VERSION` file and its `DISTRIBUTION-MANIFEST.json` lists every distributable file with its SHA-256 and byte size. Skills are classified independently: keeping one skill private does not make the whole `skills/` directory private.
 
 ```bash
 npm run skills -- list
@@ -17,3 +17,5 @@ npm run skills -- package mafia-ai-character-creator
 Use `--target claude-local` to install into this checkout's ignored `.claude/skills/` directory. Install verifies the source manifest and refuses to overwrite an installed directory that has untracked or modified files unless `--force` is passed. A previously installed, intact version can be updated safely.
 
 `package` writes a ZIP under `dist/skills/` by default. Only files named by the distribution manifest, plus the manifest itself, enter the archive. Maintainers can refresh a package manifest with `npm run skills -- manifest update <id>` after editing its files, then validate and package it.
+
+See [`docs/architecture/distribution.md`](../docs/architecture/distribution.md) for the Studio-wide public / Pro / private / local model.

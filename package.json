@@ -23,7 +23,11 @@
     "sfx:candidates": "node scripts/sfx-candidates.mjs",
     "sfx:clean": "bash tools/sfx/clean.sh",
     "sfx:setup": "node scripts/sfx-setup.mjs",
-    "skills": "node scripts/skills.mjs"
+    "skills": "node scripts/skills.mjs",
+    "distribution:check": "node tools/distribution/cli.mjs check",
+    "distribution:plan": "node tools/distribution/cli.mjs plan",
+    "distribution:explain": "node tools/distribution/cli.mjs explain",
+    "distribution:test": "node --test tools/distribution/tests/*.test.mjs"
   },
   "dependencies": {
     "gsap": "3.15.0",

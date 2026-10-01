@@ -6,7 +6,12 @@
       "path": "mafia-ai-character-creator",
       "entrypoint": "SKILL.md",
       "description": "Create and QA reusable animated characters",
-      "tags": ["characters", "animation", "qa"]
+      "tags": [
+        "characters",
+        "animation",
+        "qa"
+      ],
+      "distribution": "public"
     }
   ]
 }
