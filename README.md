@@ -1,16 +1,20 @@
 # Code to Video Studio — Mafia AI
 
-[![CI](https://github.com/alexdcd/code-to-video-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/alexdcd/code-to-video-studio/actions/workflows/ci.yml)
-[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
-[![Node 22+](https://img.shields.io/badge/node-22%2B-brightgreen.svg)](package.json)
+<p align="center">
+  <a href="https://github.com/alexdcd/code-to-video-studio/actions/workflows/ci.yml"><img src="https://github.com/alexdcd/code-to-video-studio/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="License: Apache-2.0"></a>
+  <a href="package.json"><img src="https://img.shields.io/badge/node-22%2B-brightgreen.svg" alt="Node 22+"></a>
+</p>
 
 **Build videos with AI coding agents — without rebuilding the production system every time.**
 
-Code to Video Studio is an open-source, agent-first workspace for turning a brief into a polished, programmable video. It gives Claude Code, Codex and other coding agents a production system they can understand and reuse: **brief → script → storyboard → deterministic scenes → visual QA → final render**.
+Build high-quality videos with Claude Code, Codex or your preferred coding agent.
 
-Built on **HyperFrames + GSAP**, with reusable motion primitives, optional Three.js helpers, measurable render QA and a structure designed to get better every time you make a video.
+Code to Video Studio gives your AI a reusable production base for **story, motion, characters, styles, visual QA and rendering**. Its rules, primitives and feedback loops help improve **quality, consistency, iteration speed and context efficiency**, while reducing repeated setup and rediscovered fixes.
 
-> The goal is not to make one impressive AI-generated demo. It is to build a video system that compounds.
+**Better output. Less repeated context. More consistency. Fewer dependencies.**
+
+The studio is moving toward a **local-first, modular production stack** for animation, SFX, voice and music. External APIs remain optional integrations.
 
 ## See what it makes
 
@@ -24,26 +28,7 @@ Built on **HyperFrames + GSAP**, with reusable motion primitives, optional Three
 
 ## Why this repo exists
 
-AI agents can already write surprisingly good animation code. That is no longer the hardest part.
-
-The harder problem is getting them to make **good videos repeatedly**.
-
-Ask an agent to create a video from scratch and it will often produce a one-off experiment: a new structure, new timing conventions, stateful animation that breaks when seeking, duplicated helpers, inconsistent visual decisions and no reliable review loop. The next video starts almost from zero again.
-
-Code to Video Studio turns those repeated decisions into a reusable production system.
-
-It gives the agent:
-
-- a clear workflow before it writes scenes
-- deterministic, seek-safe animation rules
-- reusable motion, style and character layers
-- visual review instead of “the code runs, so it must be done”
-- final-render checks for problems such as black frames, long static sections, loudness and silence
-- a place to promote good ideas so the next video starts with more capability than the last
-
-**The repo is the memory and production grammar around the coding agent.**
-
-Without that layer, better models mostly make better one-offs. With it, each finished video can improve the system used to make the next one.
+An agent can write a scene, but reliable video production also needs repeatable timing, reusable creative building blocks and visual review. This repo keeps that production layer close to the work, so agents spend less time rebuilding the workflow and each finished video can improve the next.
 
 ---
 
