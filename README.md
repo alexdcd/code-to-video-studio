@@ -1,6 +1,8 @@
-<h1 align="center">
-  <img src="media/code-to-video-studio-banner.png" alt="Mafia Code to Video Studio — Build high-quality videos with AI — easier, faster and cheaper." width="100%">
-</h1>
+# Code to Video Studio — Mafia AI
+
+<p align="center">
+  <img src="media/code-to-video-studio-hero.webp" alt="Mafia Code to Video Studio — Build high-quality videos with AI, easier, faster and cheaper" width="100%">
+</p>
 
 <p align="center">
   <a href="https://github.com/alexdcd/code-to-video-studio/actions/workflows/ci.yml"><img src="https://github.com/alexdcd/code-to-video-studio/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
@@ -8,13 +10,17 @@
   <a href="package.json"><img src="https://img.shields.io/badge/node-22%2B-brightgreen.svg" alt="Node 22+"></a>
 </p>
 
+**Build high-quality videos with AI — easier, faster and cheaper.**
+
 Build high-quality videos with Claude Code, Codex or your preferred coding agent.
 
-Code to Video Studio gives your AI a reusable production base for **story, motion, characters, styles, visual QA and rendering**. Its rules, primitives and feedback loops help improve **quality, consistency, iteration speed and context efficiency**, while reducing repeated setup and rediscovered fixes.
+Code to Video Studio gives your AI a reusable production base for **story, motion, characters, styles, visual QA and rendering**. Instead of starting from a blank folder, it starts with the rules and primitives that matter for **quality, consistency, iteration speed and context efficiency**.
+
+That means fewer tokens wasted rediscovering the same timing rules, rewriting the same animation helpers or fixing the same render problems.
 
 **Better output. Less repeated context. More consistency. Fewer dependencies.**
 
-The studio is moving toward a **local-first, modular production stack** for animation, SFX, voice and music. External APIs remain optional integrations.
+The project is moving toward a **local-first, modular production stack** where animation, SFX, voice and music workflows can live inside the studio and external APIs are optional, not required.
 
 ## See what it makes
 
@@ -28,7 +34,26 @@ The studio is moving toward a **local-first, modular production stack** for anim
 
 ## Why this repo exists
 
-An agent can write a scene, but reliable video production also needs repeatable timing, reusable creative building blocks and visual review. This repo keeps that production layer close to the work, so agents spend less time rebuilding the workflow and each finished video can improve the next.
+AI agents can already write surprisingly good animation code. The harder problem is turning that ability into a **repeatable production advantage**.
+
+A blank project makes the agent rediscover decisions you already paid for: structure, timing, motion rules, visual language, rendering constraints, review criteria and fixes from previous videos. That costs context, tokens and iterations — and still produces inconsistent one-offs.
+
+Code to Video Studio stores those decisions in the repo instead of leaving them trapped in prompt history.
+
+It gives the agent:
+
+- a production workflow before it writes scenes
+- deterministic, seek-safe animation rules
+- reusable motion, style and character layers
+- less repeated prompting and less duplicated implementation work
+- visual review instead of “the code runs, so it must be done”
+- measurable final-render checks
+- a path toward local-first SFX, voice and music workflows without hard API lock-in
+- a place to promote what worked so the next video starts with more capability than the last
+
+**The repo is the production memory and creative grammar around the coding agent.**
+
+Better models will keep arriving. The point of this project is to make each of them inherit a better studio instead of giving each one another blank canvas.
 
 ---
 
@@ -287,9 +312,9 @@ The direction of the project is deliberately narrower than “build an all-purpo
 
 The reusable engine, project contract, render-safe motion rules and QA should stay understandable enough that an agent can reason about them without loading a giant framework into context.
 
-### 2. Add creator capabilities as modular layers
+### 2. Build creator capabilities as modular, local-first layers
 
-Characters, styles, diagrams, audio workflows and other creative systems should remain composable rather than turning the core into one opinionated aesthetic.
+Characters, styles, diagrams, SFX, voice and music workflows should stay composable rather than turning the core into one opinionated stack. Where practical, they should be able to run locally or with creator-owned tools so paid external APIs remain optional integrations, not architectural dependencies.
 
 ### 3. Add specialized agent workflows as reusable skills
 

@@ -26,6 +26,10 @@ jobs:
         run: |
           python3 -m py_compile scripts/lib/qa-video.py tools/sfx/candidates.py
           bash -n scripts/qa.sh tools/sfx/clean.sh
+      - name: Validate distribution model
+        run: |
+          npm run distribution:test
+          npm run distribution:check
       - name: Prepare studio
         run: npm run setup
       - name: Verify public distribution

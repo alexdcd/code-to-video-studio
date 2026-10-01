@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "defaultTracked": "public",
+  "pathRules": [
+    {
+      "path": "node_modules/",
+      "distribution": "local",
+      "reason": "installed dependencies are machine-local"
+    },
+    {
+      "path": "dist/",
+      "distribution": "local",
+      "reason": "generated package artifacts are not source"
+    }
+  ]
+}
