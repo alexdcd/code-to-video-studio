@@ -16,11 +16,9 @@ Built on **HyperFrames + GSAP**, with a small reusable motion kit designed for v
 
 **33 seconds. No footage. No stock. Just code.**
 
+[![Code to Video Studio showcase](media/code-to-video-studio-preview.gif)](media/code-to-video-studio-teaser.mp4)
+
 [▶ Watch the full showcase with sound](media/code-to-video-studio-teaser.mp4)
-
-This teaser was produced with the **Code to Video Studio workflow and core**, plus Mafia AI's private production layer. The open repository contains the reusable engine and production system; project-specific characters, brand assets and creative libraries are intentionally kept separate.
-
----
 
 ## Why this exists
 
