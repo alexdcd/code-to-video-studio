@@ -1,16 +1,26 @@
 # Code to Video Studio — Mafia AI
 
+<p align="center">
+  <img src="media/code-to-video-studio-hero.webp" alt="Code to Video Studio — build high-quality videos with your AI" width="100%">
+</p>
+
 [![CI](https://github.com/alexdcd/code-to-video-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/alexdcd/code-to-video-studio/actions/workflows/ci.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![Node 22+](https://img.shields.io/badge/node-22%2B-brightgreen.svg)](package.json)
 
-**Build videos with AI coding agents — without rebuilding the production system every time.**
+**Your AI already knows how to code. Give it a video studio.**
 
-Code to Video Studio is an open-source, agent-first workspace for turning a brief into a polished, programmable video. It gives Claude Code, Codex and other coding agents a production system they can understand and reuse: **brief → script → storyboard → deterministic scenes → visual QA → final render**.
+Build high-quality videos with Claude Code, Codex or your preferred coding agent **without teaching it the same production rules from scratch on every project**.
 
-Built on **HyperFrames + GSAP**, with reusable motion primitives, optional Three.js helpers, measurable render QA and a structure designed to get better every time you make a video.
+Code to Video Studio gives your AI a reusable production base for **story, motion, characters, styles, visual QA and rendering**. Instead of starting from a blank folder, it starts with the rules, primitives and feedback loops needed to push four things that matter in real production: **quality, consistency, iteration speed and context efficiency**.
 
-> The goal is not to make one impressive AI-generated demo. It is to build a video system that compounds.
+That also means fewer tokens wasted rediscovering the same timing rules, rewriting the same animation helpers or fixing the same render problems. Production knowledge lives in the repo, where the next agent session can reuse it.
+
+**Better output. Less repeated context. More consistency. Fewer dependencies.**
+
+The public core is built on **HyperFrames + GSAP**, with deterministic animation, reusable creative primitives, Three.js helpers and measurable render QA. The project is moving toward a **local-first, modular production stack** where animation, SFX, voice and music workflows can live inside the studio and external APIs are optional integrations rather than a requirement.
+
+> One repo that becomes the production memory around your AI — so every video starts ahead of the previous one.
 
 ## See what it makes
 
@@ -24,26 +34,26 @@ Built on **HyperFrames + GSAP**, with reusable motion primitives, optional Three
 
 ## Why this repo exists
 
-AI agents can already write surprisingly good animation code. That is no longer the hardest part.
+AI agents can already write surprisingly good animation code. The harder problem is turning that ability into a **repeatable production advantage**.
 
-The harder problem is getting them to make **good videos repeatedly**.
+A blank project makes the agent rediscover decisions you already paid for: structure, timing, motion rules, visual language, rendering constraints, review criteria and fixes from previous videos. That costs context, tokens and iterations — and still produces inconsistent one-offs.
 
-Ask an agent to create a video from scratch and it will often produce a one-off experiment: a new structure, new timing conventions, stateful animation that breaks when seeking, duplicated helpers, inconsistent visual decisions and no reliable review loop. The next video starts almost from zero again.
-
-Code to Video Studio turns those repeated decisions into a reusable production system.
+Code to Video Studio stores those decisions in the repo instead of leaving them trapped in prompt history.
 
 It gives the agent:
 
-- a clear workflow before it writes scenes
+- a production workflow before it writes scenes
 - deterministic, seek-safe animation rules
 - reusable motion, style and character layers
+- less repeated prompting and less duplicated implementation work
 - visual review instead of “the code runs, so it must be done”
-- final-render checks for problems such as black frames, long static sections, loudness and silence
-- a place to promote good ideas so the next video starts with more capability than the last
+- measurable final-render checks
+- a path toward local-first SFX, voice and music workflows without hard API lock-in
+- a place to promote what worked so the next video starts with more capability than the last
 
-**The repo is the memory and production grammar around the coding agent.**
+**The repo is the production memory and creative grammar around the coding agent.**
 
-Without that layer, better models mostly make better one-offs. With it, each finished video can improve the system used to make the next one.
+Better models will keep arriving. The point of this project is to make each of them inherit a better studio instead of giving each one another blank canvas.
 
 ---
 
@@ -302,9 +312,9 @@ The direction of the project is deliberately narrower than “build an all-purpo
 
 The reusable engine, project contract, render-safe motion rules and QA should stay understandable enough that an agent can reason about them without loading a giant framework into context.
 
-### 2. Add creator capabilities as modular layers
+### 2. Build creator capabilities as modular, local-first layers
 
-Characters, styles, diagrams, audio workflows and other creative systems should remain composable rather than turning the core into one opinionated aesthetic.
+Characters, styles, diagrams, SFX, voice and music workflows should stay composable rather than turning the core into one opinionated stack. Where practical, they should be able to run locally or with creator-owned tools so paid external APIs remain optional integrations, not architectural dependencies.
 
 ### 3. Add specialized agent workflows as reusable skills
 
