@@ -1,26 +1,26 @@
 # Code to Video Studio — Mafia AI
 
 <p align="center">
-  <img src="media/code-to-video-studio-hero.webp" alt="Code to Video Studio — build high-quality videos with your AI" width="100%">
+  <img src="media/code-to-video-studio-hero.webp" alt="Mafia Code to Video Studio — Build high-quality videos with AI, easier, faster and cheaper" width="100%">
 </p>
 
-[![CI](https://github.com/alexdcd/code-to-video-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/alexdcd/code-to-video-studio/actions/workflows/ci.yml)
-[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
-[![Node 22+](https://img.shields.io/badge/node-22%2B-brightgreen.svg)](package.json)
+<p align="center">
+  <a href="https://github.com/alexdcd/code-to-video-studio/actions/workflows/ci.yml"><img src="https://github.com/alexdcd/code-to-video-studio/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="License: Apache-2.0"></a>
+  <a href="package.json"><img src="https://img.shields.io/badge/node-22%2B-brightgreen.svg" alt="Node 22+"></a>
+</p>
 
-**Your AI already knows how to code. Give it a video studio.**
+**Build high-quality videos with AI — easier, faster and cheaper.**
 
-Build high-quality videos with Claude Code, Codex or your preferred coding agent **without teaching it the same production rules from scratch on every project**.
+Build high-quality videos with Claude Code, Codex or your preferred coding agent.
 
-Code to Video Studio gives your AI a reusable production base for **story, motion, characters, styles, visual QA and rendering**. Instead of starting from a blank folder, it starts with the rules, primitives and feedback loops needed to push four things that matter in real production: **quality, consistency, iteration speed and context efficiency**.
+Code to Video Studio gives your AI a reusable production base for **story, motion, characters, styles, visual QA and rendering**. Instead of starting from a blank folder, it starts with the rules and primitives that matter for **quality, consistency, iteration speed and context efficiency**.
 
-That also means fewer tokens wasted rediscovering the same timing rules, rewriting the same animation helpers or fixing the same render problems. Production knowledge lives in the repo, where the next agent session can reuse it.
+That means fewer tokens wasted rediscovering the same timing rules, rewriting the same animation helpers or fixing the same render problems.
 
 **Better output. Less repeated context. More consistency. Fewer dependencies.**
 
-The public core is built on **HyperFrames + GSAP**, with deterministic animation, reusable creative primitives, Three.js helpers and measurable render QA. The project is moving toward a **local-first, modular production stack** where animation, SFX, voice and music workflows can live inside the studio and external APIs are optional integrations rather than a requirement.
-
-> One repo that becomes the production memory around your AI — so every video starts ahead of the previous one.
+The project is moving toward a **local-first, modular production stack** where animation, SFX, voice and music workflows can live inside the studio and external APIs are optional, not required.
 
 ## See what it makes
 
