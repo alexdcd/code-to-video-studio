@@ -1,12 +1,12 @@
-# Code to Video Studio — Mafia AI
+<h1 align="center">
+  <img src="media/code-to-video-studio-banner.png" alt="Mafia Code to Video Studio — Build high-quality videos with AI — easier, faster and cheaper." width="100%">
+</h1>
 
 <p align="center">
   <a href="https://github.com/alexdcd/code-to-video-studio/actions/workflows/ci.yml"><img src="https://github.com/alexdcd/code-to-video-studio/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="License: Apache-2.0"></a>
   <a href="package.json"><img src="https://img.shields.io/badge/node-22%2B-brightgreen.svg" alt="Node 22+"></a>
 </p>
-
-**Build videos with AI coding agents — without rebuilding the production system every time.**
 
 Build high-quality videos with Claude Code, Codex or your preferred coding agent.
 
