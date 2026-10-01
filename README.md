@@ -16,9 +16,9 @@ Built on **HyperFrames + GSAP**, with a small reusable motion kit designed for v
 
 **33 seconds. No footage. No stock. Just code.**
 
-[![Code to Video Studio showcase](media/code-to-video-studio-preview.gif)](media/code-to-video-studio-teaser.mp4)
+[![Code to Video Studio showcase](media/code-to-video-studio-preview.gif)](https://raw.githubusercontent.com/alexdcd/code-to-video-studio/main/media/code-to-video-studio-teaser-web.mp4)
 
-[▶ Watch the full showcase with sound](media/code-to-video-studio-teaser.mp4)
+[▶ Watch the full video with sound + voice](https://raw.githubusercontent.com/alexdcd/code-to-video-studio/main/media/code-to-video-studio-teaser-web.mp4)
 
 ## Why this exists
 
