@@ -358,6 +358,30 @@
       }
     },
 
+    /* ------------------------------------------------------------------
+       Lottie (guía: kit/lib/LOTTIE.md)
+       ------------------------------------------------------------------ */
+    /** Monta una animación Lottie que HyperFrames coloca en cada cuadro (adaptador nativo).
+        Empieza en el inicio de la composición que contiene al contenedor; no la reproduzcas tú.
+        opts: {datos (JSON ya cargado) | ruta (relativa al proyecto), bucle=false, encaje="xMidYMid meet"} */
+    lottie(contenedor, opts = {}) {
+      const L = window.lottie;
+      if (!L) throw new Error("MAFIA.lottie: carga assets/kit/lib/vendor/lottie/lottie_svg.min.js en index.html, antes del kit");
+      const el = typeof contenedor === "string" ? document.querySelector(contenedor) : contenedor;
+      if (!el) throw new Error(`MAFIA.lottie: no existe el contenedor ${contenedor}`);
+      if (!opts.datos === !opts.ruta) throw new Error("MAFIA.lottie: indica datos o ruta (uno de los dos)");
+      return L.loadAnimation({
+        container: el,
+        renderer: "svg",
+        loop: !!opts.bucle,
+        autoplay: false,
+        // lottie-web modifica el JSON que recibe: una copia por animación permite reutilizar los datos.
+        animationData: opts.datos ? JSON.parse(JSON.stringify(opts.datos)) : undefined,
+        path: opts.ruta,
+        rendererSettings: { preserveAspectRatio: opts.encaje || "xMidYMid meet" },
+      });
+    },
+
     /** Registro de escenas del kit (kit/escenas/<nombre>/escena.js añade aquí su función). */
     escenas: {},
   };

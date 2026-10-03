@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "repository": "https://github.com/anthropics/skills",
+  "commit": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4",
+  "license": "Apache-2.0",
+  "files": {
+    "references/algorithmic-art.md": "skills/algorithmic-art/SKILL.md",
+    "LICENSE.txt": "skills/algorithmic-art/LICENSE.txt"
+  },
+  "excluded": {
+    "skills/algorithmic-art/templates/viewer.html": "visor interactivo con la marca de Anthropic; en vídeo no hay interfaz",
+    "skills/algorithmic-art/templates/generator_template.js": "plantilla p5.js con draw() acumulativo; aquí el fotograma es función de t"
+  },
+  "adaptation": "SKILL.md"
+}

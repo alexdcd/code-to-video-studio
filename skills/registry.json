@@ -11,21 +11,31 @@
         "animation",
         "qa"
       ],
-      "distribution": "public",
-      "product": {
-        "name": "Creador de personajes",
-        "category": "characters",
-        "surface": "guided",
-        "entitlement": "free",
-        "capabilities": [
-          {
-            "id": "prepare-character-run",
-            "name": "Preparar un personaje",
-            "description": "Crea en el proyecto una carpeta de trabajo con brief, vistas, acciones y pasos de QA.",
-            "input": ["name", "description", "notes"]
-          }
-        ]
-      }
+      "distribution": "public"
+    },
+    {
+      "id": "gsap-video",
+      "path": "gsap-video",
+      "entrypoint": "SKILL.md",
+      "description": "Official GreenSock GSAP skills adapted to deterministic frame-by-frame video rendering",
+      "tags": [
+        "animation",
+        "gsap",
+        "third-party"
+      ],
+      "distribution": "public"
+    },
+    {
+      "id": "algorithmic-art-video",
+      "path": "algorithmic-art-video",
+      "entrypoint": "SKILL.md",
+      "description": "Anthropic's algorithmic-art method adapted to seeded, time-driven canvas for video",
+      "tags": [
+        "generative-art",
+        "canvas",
+        "third-party"
+      ],
+      "distribution": "public"
     }
   ]
 }

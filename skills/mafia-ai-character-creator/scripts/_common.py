@@ -4,10 +4,9 @@ import hashlib
 import json
 import re
 from pathlib import Path
-from typing import TYPE_CHECKING, Iterable
+from typing import Iterable
 
-if TYPE_CHECKING:
-    from PIL import Image, ImageChops, ImageStat
+from PIL import Image, ImageChops, ImageStat
 
 IMAGE_SUFFIXES = {'.png', '.webp', '.jpg', '.jpeg'}
 DEFAULT_VIEWS = ['front', 'q', 'side']
@@ -45,13 +44,11 @@ def image_files(root: Path, recursive: bool = False) -> list[Path]:
 
 
 def open_rgba(path: Path) -> Image.Image:
-    from PIL import Image
     with Image.open(path) as im:
         return im.convert('RGBA')
 
 
 def _opaque_background_mask(rgba: Image.Image, threshold: int) -> Image.Image:
-    from PIL import Image, ImageChops
     w, h = rgba.size
     px = rgba.load()
     corners = [px[0, 0][:3], px[w - 1, 0][:3], px[0, h - 1][:3], px[w - 1, h - 1][:3]]
@@ -75,7 +72,6 @@ def foreground_mask(image: Image.Image, threshold: int = 18) -> Image.Image:
 
 
 def bbox_and_stats(image: Image.Image) -> dict:
-    from PIL import Image, ImageChops
     mask = foreground_mask(image)
     bbox = mask.getbbox()
     w, h = image.size
@@ -104,7 +100,6 @@ def bbox_and_stats(image: Image.Image) -> dict:
 
 
 def pixel_difference(a: Image.Image, b: Image.Image) -> dict:
-    from PIL import Image, ImageChops, ImageStat
     if a.size != b.size:
         return {'sameSize': False, 'differentPixels': None, 'maxChannelDelta': None, 'meanDelta': None}
     diff = ImageChops.difference(a.convert('RGBA'), b.convert('RGBA'))

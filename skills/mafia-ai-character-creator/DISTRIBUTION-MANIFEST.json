@@ -190,8 +190,8 @@
     },
     {
       "path": "scripts/_common.py",
-      "sha256": "7d50c7c06efbcde2239efedd159955c808a097266e578f8d50f062391ceab48e",
-      "bytes": 4708
+      "sha256": "01b4883ee4ed2242caf55238a7de347f977127d1cc7ba9195d3bd3123ffa3974",
+      "bytes": 4520
     },
     {
       "path": "scripts/build_puppet_manifest.py",

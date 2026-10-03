@@ -61,6 +61,10 @@ The manifest applies to its directory subtree. Use it to promote one character/s
 
 Each entry in `skills/registry.json` declares its `distribution` tier. A public skill can be transferred as a manifest-governed package without making every skill public.
 
+Skills are also delivered as cumulative packs (`npm run skills -- package --tier public|pro|private`): one ZIP with a `PACK.json` and each skill's manifest-governed files. A Pro offer is the `pro` pack; how it reaches subscribers is a store/release concern, not something this repository implements.
+
+Skills adapted from third parties keep the upstream files unmodified and pin their source in `UPSTREAM.json`. Their tier follows the same rule as everything else: a permissive upstream licence makes a skill *eligible*, not automatically public.
+
 ## Projects
 
 Projects are private by default because they commonly contain prompts, voices, generated art, music, client material, local paths and one-off creative decisions. A project should only become a public example through an explicit, reviewed export; never by a broad directory sync rule.

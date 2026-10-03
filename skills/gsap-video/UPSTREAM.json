@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "repository": "https://github.com/greensock/gsap-skills",
+  "commit": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+  "license": "MIT",
+  "files": {
+    "references/gsap-core.md": "skills/gsap-core/SKILL.md",
+    "references/gsap-timeline.md": "skills/gsap-timeline/SKILL.md",
+    "references/gsap-plugins.md": "skills/gsap-plugins/SKILL.md",
+    "references/gsap-utils.md": "skills/gsap-utils/SKILL.md",
+    "LICENSE.txt": "LICENSE"
+  },
+  "excluded": {
+    "skills/gsap-scrolltrigger": "scroll: no existe en vídeo",
+    "skills/gsap-react": "el estudio no usa React",
+    "skills/gsap-frameworks": "Vue/Svelte/Nuxt: el estudio no usa frameworks",
+    "skills/gsap-performance": "consejos de web interactiva (will-change, quickTo, ScrollTrigger); lo útil está en gsap-core"
+  },
+  "adaptation": "SKILL.md"
+}

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "name": "gsap-video",
+  "version": "1.0.0",
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "51b04b06556662dd817e8f4aa6d06bc7139dc73739e1319a7233cfde3e147b90",
+      "bytes": 1066
+    },
+    {
+      "path": "NOTICE.md",
+      "sha256": "71c888664e624e5f6acbff4f3a0952155b9817b389d42d0f27b1d5bdbf42356a",
+      "bytes": 441
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "7792491ec7579e47e460671af69a62609d96dddfa0b4a72914490a3fff93783f",
+      "bytes": 3902
+    },
+    {
+      "path": "UPSTREAM.json",
+      "sha256": "3754d9f970c8c2a645139863dde342a92df5919ffd3e9c34db2fcc7cd6bcf00d",
+      "bytes": 836
+    },
+    {
+      "path": "VERSION",
+      "sha256": "59854984853104df5c353e2f681a15fc7924742f9a2e468c29af248dce45ce03",
+      "bytes": 6
+    },
+    {
+      "path": "references/gsap-core.md",
+      "sha256": "3887b47e050ab5afbe2a9a820f23d39fa02ab785e06a343be44c6f91d84d12b3",
+      "bytes": 14792
+    },
+    {
+      "path": "references/gsap-plugins.md",
+      "sha256": "5838b856c74c07fbc9fa99b6dfd1eee34ea554c3e530c30e0d58014b707d70a4",
+      "bytes": 21579
+    },
+    {
+      "path": "references/gsap-timeline.md",
+      "sha256": "1a8b0f39cc4be3ed3d834b89672e4ae2f151b901dc3450bebf10bbc45379fe02",
+      "bytes": 4394
+    },
+    {
+      "path": "references/gsap-utils.md",
+      "sha256": "1927bcc4ea95b38203404ad5ea1d060b15c4a886c65ae53e885ff1793aabe0ba",
+      "bytes": 12093
+    }
+  ]
+}
