@@ -201,7 +201,7 @@ function printPlan(result, target, json) {
     console.log(`Distribution plan: ${target}`);
     console.log(`  eligible ${included.length} · excluded ${excluded.length}`);
     console.log(`  tiers: public ${result.counts.public} · pro ${result.counts.pro} · private ${result.counts.private} · local ${result.counts.local}`);
-    if (result.errors.length) console.log(`  NOTE: classification currently has ${result.errors.length} error(s); run npm run distribution:check.`);
+    if (result.errors.length) console.log(`  NOTE: classification currently has ${result.errors.length} error(s); run pnpm run distribution:check.`);
   }
 }
 

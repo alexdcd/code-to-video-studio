@@ -11,7 +11,21 @@
         "animation",
         "qa"
       ],
-      "distribution": "public"
+      "distribution": "public",
+      "product": {
+        "name": "Creador de personajes",
+        "category": "characters",
+        "surface": "guided",
+        "entitlement": "free",
+        "capabilities": [
+          {
+            "id": "prepare-character-run",
+            "name": "Preparar un personaje",
+            "description": "Crea en el proyecto una carpeta de trabajo con brief, vistas, acciones y pasos de QA.",
+            "input": ["name", "description", "notes"]
+          }
+        ]
+      }
     },
     {
       "id": "gsap-video",

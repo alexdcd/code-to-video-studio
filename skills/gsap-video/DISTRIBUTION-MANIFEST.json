@@ -15,8 +15,8 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "7792491ec7579e47e460671af69a62609d96dddfa0b4a72914490a3fff93783f",
-      "bytes": 3902
+      "sha256": "691309dd9fef8d1f81e0542eb6d379be09f84c372219fb88e4ef45a316a73183",
+      "bytes": 3903
     },
     {
       "path": "UPSTREAM.json",
@@ -35,8 +35,8 @@
     },
     {
       "path": "references/gsap-plugins.md",
-      "sha256": "5838b856c74c07fbc9fa99b6dfd1eee34ea554c3e530c30e0d58014b707d70a4",
-      "bytes": 21579
+      "sha256": "9450e083e299a6745605f44ec80636e88216c2120339eeba2f850fa56d6cd6eb",
+      "bytes": 21580
     },
     {
       "path": "references/gsap-timeline.md",

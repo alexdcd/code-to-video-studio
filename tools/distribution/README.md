@@ -24,10 +24,10 @@ Creative resources are private unless promoted explicitly. Skills declare their 
 Run:
 
 ```bash
-npm run distribution:check
-npm run distribution:plan -- --target public
-npm run distribution:explain -- <repo-path>
-npm run distribution:test
+pnpm run distribution:check
+pnpm run distribution:plan --target public
+pnpm run distribution:explain <repo-path>
+pnpm run distribution:test
 ```
 
 The checker also verifies that public-sync sources resolve to the `public` tier and scans public/Pro text files for obvious secrets or machine-specific authoring paths.

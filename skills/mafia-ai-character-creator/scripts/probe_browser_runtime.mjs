@@ -3,7 +3,7 @@
 // The page hook must return metadata containing `resolved` with action/view/expression.
 import fs from 'node:fs'; import path from 'node:path'; import crypto from 'node:crypto';
 let chromium;
-try { ({ chromium } = await import('playwright')); } catch { console.error('Playwright is optional. Install with: npm install --prefix browser-tools'); process.exit(2); }
+try { ({ chromium } = await import('playwright')); } catch { console.error('Playwright is optional. Install with: pnpm install --prefix browser-tools'); process.exit(2); }
 const args=Object.fromEntries(process.argv.slice(2).map(x=>{const [k,...rest]=x.replace(/^--/,'').split('=');return [k,rest.join('=')||true]}));
 if(!args.url||!args.manifest||!args.out){console.error('usage: probe_browser_runtime.mjs --url=<url> --manifest=character.json --out=qa/runtime-probe.json [--hook=__characterQA.renderAt]');process.exit(2);}
 const m=JSON.parse(fs.readFileSync(args.manifest,'utf8'));const hook=args.hook||'__characterQA.renderAt';const browser=await chromium.launch({headless:true});const page=await browser.newPage({viewport:{width:1024,height:1024}});await page.goto(args.url,{waitUntil:'load'});

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Control de calidad medible de un MP4 renderizado (solo ffmpeg + biblioteca estándar).
 
-Uso: npm run qa -- <video.mp4> [--lufs -14] [--congelado 0.35] [--max-congelado 0.6] [--estricto]
+Uso: pnpm run qa <video.mp4> [--lufs -14] [--congelado 0.35] [--max-congelado 0.6] [--estricto]
 
 Comprueba lo que un vistazo no ve y `hyperframes check` no mide en el render final:
   · tramos casi congelados (diferencia de luma entre fotogramas a 10 fps por debajo del umbral);

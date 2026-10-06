@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Ordena grabaciones de efectos antes de escucharlas: duración activa, ataque, brillo y reparto de energía.
 
-Uso: npm run sfx -- candidatos <audio> [<audio> ...]
+Uso: pnpm run sfx candidatos <audio> [<audio> ...]
 
 Rechazos orientativos (se ajustan con las opciones; salen de la experiencia con whooshes repetidos bajo música suave):
   · retumbo: más del 50 % de la energía por debajo de 150 Hz → suena a «boom» cada vez que se repite;
