@@ -7,7 +7,7 @@ const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
 const [template,name]=process.argv.slice(2);
 if (!template || !name) {
   const names=fs.readdirSync(path.join(ROOT,"templates")).filter(x=>!x.startsWith("_"));
-  throw new Error(`Usage: npm run new -- <template> <name>\nTemplates: ${names.join(", ")}`);
+  throw new Error(`Usage: pnpm run new <template> <name>\nTemplates: ${names.join(", ")}`);
 }
 if (!/^[a-z0-9][a-z0-9-]*$/.test(name)) throw new Error("Project name must use lowercase letters, numbers and hyphens.");
 const templateDir=path.join(ROOT,"templates",template);
@@ -40,4 +40,4 @@ function walk(dir) {
 walk(dest);
 copyKit(path.relative(ROOT,dest));
 console.log(`Created proyectos/${name} from ${template}`);
-console.log(`Next: npm run dev -- ${name}`);
+console.log(`Next: pnpm run dev ${name}`);

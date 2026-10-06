@@ -10,7 +10,7 @@ let dir=path.join(ROOT,"proyectos",project);
 if (!fs.existsSync(path.join(dir,"index.html"))) dir=path.resolve(ROOT,project);
 if (!fs.existsSync(path.join(dir,"index.html"))) throw new Error(`Project not found: ${project}`);
 const bin=path.join(ROOT,"node_modules/.bin",process.platform==="win32"?"hyperframes.cmd":"hyperframes");
-if (!fs.existsSync(bin)) throw new Error("HyperFrames not installed. Run npm install.");
+if (!fs.existsSync(bin)) throw new Error("HyperFrames not installed. Run pnpm install.");
 const args = action==="dev" ? ["preview",...rest]
   : action==="render" ? ["render","--output",`renders/${path.basename(dir)}.mp4`,...rest]
   : [action,...rest];

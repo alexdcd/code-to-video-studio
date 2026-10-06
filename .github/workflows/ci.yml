@@ -18,7 +18,10 @@ jobs:
         with:
           node-version: 22
       - name: Install dependencies
-        run: npm install --ignore-scripts
+        run: |
+          corepack enable
+          pnpm --version
+          pnpm install --frozen-lockfile
       - name: Check JS syntax
         run: |
           find scripts kit -type f \( -name '*.js' -o -name '*.mjs' \) -print0 | xargs -0 -n1 node --check
@@ -28,11 +31,11 @@ jobs:
           bash -n scripts/qa.sh tools/sfx/clean.sh
       - name: Validate distribution model
         run: |
-          npm run distribution:test
-          npm run distribution:check
+          pnpm run distribution:test
+          pnpm run distribution:check
       - name: Prepare studio
-        run: npm run setup
+        run: pnpm run setup
       - name: Verify public distribution
-        run: npm run verify
+        run: pnpm run verify
       - name: Validate demo
-        run: npm run check -- demo
+        run: pnpm run check demo

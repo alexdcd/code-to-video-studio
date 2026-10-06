@@ -102,11 +102,11 @@ Requirements:
 git clone https://github.com/alexdcd/code-to-video-studio.git
 cd code-to-video-studio
 
-npm install
-npm run setup
+pnpm install
+pnpm run setup
 
-npm run new -- starter-9x16 my-video
-npm run dev -- my-video
+pnpm run new starter-9x16 my-video
+pnpm run dev my-video
 ```
 
 Then open the repository with Claude Code, Codex or your preferred coding agent and try:
@@ -116,10 +116,10 @@ Then open the repository with Claude Code, Codex or your preferred coding agent 
 When it is ready:
 
 ```bash
-npm run check -- my-video
-npm run render -- my-video
-npm run contact-sheet -- proyectos/my-video/renders/my-video.mp4
-npm run qa -- proyectos/my-video/renders/my-video.mp4
+pnpm run check my-video
+pnpm run render my-video
+pnpm run contact-sheet proyectos/my-video/renders/my-video.mp4
+pnpm run qa proyectos/my-video/renders/my-video.mp4
 ```
 
 ---
@@ -272,11 +272,11 @@ docs/
 Portable Studio skills live in `skills/`. The registry and each skill's SHA-256 distribution manifest are the source of truth; Claude and Codex directories are install destinations.
 
 ```bash
-npm run skills -- list
-npm run skills -- install mafia-ai-character-creator --target claude
-npm run skills -- install mafia-ai-character-creator --target codex
-npm run skills -- validate mafia-ai-character-creator
-npm run skills -- package mafia-ai-character-creator
+pnpm run skills list
+pnpm run skills install mafia-ai-character-creator --target claude
+pnpm run skills install mafia-ai-character-creator --target codex
+pnpm run skills validate mafia-ai-character-creator
+pnpm run skills package mafia-ai-character-creator
 ```
 
 See [`skills/README.md`](skills/README.md) for the registry and package workflow.

@@ -27,10 +27,10 @@ Do not contribute:
 ## Before opening a PR
 
 ```bash
-npm install
-npm run setup
-npm run verify
-npm run check -- demo
+pnpm install
+pnpm run setup
+pnpm run verify
+pnpm run check demo
 ```
 
 If your change affects visuals, include before/after snapshots or a short render and explain what you inspected.

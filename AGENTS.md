@@ -13,7 +13,7 @@ Turn a brief into a clear, visually reviewed video. Do not optimize for clever c
 3. Write `STORYBOARD.md`: one primary event/change per scene, with visual readings in order.
 4. Check the existing kit before creating a new primitive.
 5. Build scenes in `compositions/`.
-6. Run `npm run check -- <project>`.
+6. Run `pnpm run check <project>`.
 7. Take snapshots at important poses/transitions.
 8. Render and create a contact sheet.
 9. Only after visual review, consider the video finished.
@@ -31,7 +31,7 @@ Turn a brief into a clear, visually reviewed video. Do not optimize for clever c
 
 - `skills/` is the canonical source for portable agent skills.
 - `.claude/skills/`, `~/.claude/skills/` and `$CODEX_HOME/skills/` are installed destinations; do not edit duplicate copies.
-- Use `npm run skills -- list|install|validate|package` to discover and distribute skills.
+- Use `pnpm run skills list|install|validate|package` to discover and distribute skills.
 - Each skill's `DISTRIBUTION-MANIFEST.json` defines the exact files that may be installed or shared.
 
 ## Animation rules
@@ -64,10 +64,10 @@ Rendered video must be deterministic and seek-safe.
 Use the root-pinned HyperFrames version through the root scripts:
 
 ```bash
-npm run dev -- my-video
-npm run check -- my-video
-npm run snapshot -- my-video -- --at 2.4
-npm run render -- my-video
+pnpm run dev my-video
+pnpm run check my-video
+pnpm run snapshot my-video --at 2.4
+pnpm run render my-video
 ```
 
 Do not add a second HyperFrames version inside individual projects.
@@ -102,6 +102,6 @@ Before finalizing:
 - inspect every transition boundary
 - inspect the final frame
 - render the whole piece
-- create a contact sheet and look for dead time, clutter, unreadable text and accidental overlaps\n- run `npm run qa -- <video.mp4>` to flag long static sections, black frames, loudness, true peak and long silences
+- create a contact sheet and look for dead time, clutter, unreadable text and accidental overlaps\n- run `pnpm run qa <video.mp4>` to flag long static sections, black frames, loudness, true peak and long silences
 
 The code passing validation is necessary, not sufficient.
