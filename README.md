@@ -95,6 +95,7 @@ It is **give an agent enough structure, reusable creative primitives and feedbac
 Requirements:
 
 - Node.js 22+
+- pnpm 11.28.0 (pinned via `packageManager`; available through Corepack or a pnpm installation)
 - ffmpeg
 - a coding agent is strongly recommended
 
