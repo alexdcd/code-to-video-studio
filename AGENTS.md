@@ -15,7 +15,7 @@ Turn a brief into a clear, visually reviewed video. Do not optimize for clever c
 5. Build scenes in `compositions/`.
 6. Run `pnpm run check <project>`.
 7. Take snapshots at important poses/transitions.
-8. Render and create a contact sheet.
+8. Render with the root command. Renders are numbered and never overwrite prior versions; the command also creates a social copy and a VERSIONES.txt ledger. See docs/rendering.md, then create a contact sheet.
 9. Only after visual review, consider the video finished.
 10. If something is genuinely reusable, promote it into the kit rather than copy-pasting it into the next project.
 

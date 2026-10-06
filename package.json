@@ -28,7 +28,8 @@
     "distribution:check": "node tools/distribution/cli.mjs check",
     "distribution:plan": "node tools/distribution/cli.mjs plan",
     "distribution:explain": "node tools/distribution/cli.mjs explain",
-    "distribution:test": "node --test tools/distribution/tests/*.test.mjs"
+    "distribution:test": "node --test tools/distribution/tests/*.test.mjs",
+    "web:encode": "bash scripts/web-encode.sh"
   },
   "dependencies": {
     "gsap": "3.15.0",
