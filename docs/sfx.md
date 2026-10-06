@@ -10,7 +10,7 @@ This measures active duration, attack, spectral centroid and low/high-frequency 
 python3 -m venv .venv-sfx
 .venv-sfx/bin/pip install -r tools/sfx/requirements.txt
 
-npm run sfx:candidates -- recordings/*.wav
+pnpm run sfx:candidates recordings/*.wav
 ```
 
 The defaults flag overly boomy, hiss-heavy or long transition effects. They are starting points, not universal aesthetic rules.
@@ -20,7 +20,7 @@ The defaults flag overly boomy, hiss-heavy or long transition effects. They are 
 On macOS/Linux:
 
 ```bash
-npm run sfx:clean -- raw.wav clean.wav
+pnpm run sfx:clean raw.wav clean.wav
 ```
 
 The helper applies high-pass / low-pass filtering and short fades to avoid clicks. It requires ffmpeg/ffprobe.

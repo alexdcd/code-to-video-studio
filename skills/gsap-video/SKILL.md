@@ -43,7 +43,7 @@ Si una referencia contradice algo de arriba, gana lo de arriba sin discutirlo.
 
 El kit trae y registra (`kit/lib/mafia.js`): **SplitText, MorphSVG, DrawSVG, MotionPath, CustomEase, ScrambleText
 y TextPlugin**, cargados desde `assets/kit/lib/vendor/gsap/` (nunca desde una CDN). Para otro plugin del paquete
-`gsap` (Flip, CustomWiggle, CustomBounce, Physics2D…), añádelo a `scripts/vendor.sh` y ejecuta `npm run vendor`.
+`gsap` (Flip, CustomWiggle, CustomBounce, Physics2D…), añádelo a `scripts/vendor.sh` y ejecuta `pnpm run vendor`.
 
 Antes de escribir a mano un efecto con nombre, mira `kit/CATALOGO.md` y `/hyperframes-registry`: muchos ya existen
 (`MAFIA.frase`, `MAFIA.escribir`, `MAFIA.draw`, `MAFIA.contador`, `MAFIA.corte`…).

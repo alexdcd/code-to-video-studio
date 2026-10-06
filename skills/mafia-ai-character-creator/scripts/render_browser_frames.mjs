@@ -4,7 +4,7 @@
 // The helper can screenshot a DOM selector after applying state, which works for sprite/DOM runtimes.
 import fs from 'node:fs'; import path from 'node:path'; import crypto from 'node:crypto';
 let chromium;
-try { ({ chromium } = await import('playwright')); } catch { console.error('Playwright is optional. Install with: npm install --prefix browser-tools'); process.exit(2); }
+try { ({ chromium } = await import('playwright')); } catch { console.error('Playwright is optional. Install with: pnpm install --prefix browser-tools'); process.exit(2); }
 const args=Object.fromEntries(process.argv.slice(2).map(x=>{const [k,...rest]=x.replace(/^--/,'').split('=');return [k,rest.join('=')||true]}));
 if(!args.url||!args.times||!args.out){console.error('usage: render_browser_frames.mjs --url=<url> --times=0,0.5,1 --out=<dir> [--mode=forward|reverse|fresh] [--hook=__characterQA.renderAt] [--selector=#qa-stage] [--state={...}] [--evidence-out=report.json]');process.exit(2);}
 const times=String(args.times).split(',').map(Number);const mode=args.mode||'forward';const ordered=mode==='reverse'?[...times].reverse():times;const state=args.state?JSON.parse(args.state):{};const hook=args.hook||'__characterQA.renderAt';const selector=args.selector||'#qa-stage';fs.mkdirSync(args.out,{recursive:true});

@@ -61,7 +61,7 @@ The manifest applies to its directory subtree. Use it to promote one character/s
 
 Each entry in `skills/registry.json` declares its `distribution` tier. A public skill can be transferred as a manifest-governed package without making every skill public.
 
-Skills are also delivered as cumulative packs (`npm run skills -- package --tier public|pro|private`): one ZIP with a `PACK.json` and each skill's manifest-governed files. A Pro offer is the `pro` pack; how it reaches subscribers is a store/release concern, not something this repository implements.
+Skills are also delivered as cumulative packs (`pnpm run skills package --tier public|pro|private`): one ZIP with a `PACK.json` and each skill's manifest-governed files. A Pro offer is the `pro` pack; how it reaches subscribers is a store/release concern, not something this repository implements.
 
 Skills adapted from third parties keep the upstream files unmodified and pin their source in `UPSTREAM.json`. Their tier follows the same rule as everything else: a permissive upstream licence makes a skill *eligible*, not automatically public.
 
@@ -84,10 +84,10 @@ or an explicit override. Adapters may be public while their installed models rem
 The canonical Studio validates classification with:
 
 ```bash
-npm run distribution:check
-npm run distribution:plan -- --target public
-npm run distribution:plan -- --target pro
-npm run distribution:explain -- kit/personajes/my-character/asset.webp
+pnpm run distribution:check
+pnpm run distribution:plan --target public
+pnpm run distribution:plan --target pro
+pnpm run distribution:explain kit/personajes/my-character/asset.webp
 ```
 
 `distribution:plan` reports **eligibility**, not an automatic copy operation. The current public transfer mechanism remains the explicit allowlist in `tools/public-sync/`; the distribution checker verifies that anything mapped to the public repository is actually classified `public`.

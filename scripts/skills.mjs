@@ -45,7 +45,7 @@ function walkFiles(root) {
 
 function skillEntry(id) {
   const entry = REGISTRY.skills.find(skill => skill.id === id);
-  if (!entry) fail(`Unknown skill '${id}'. Run 'npm run skills -- list'.`);
+  if (!entry) fail(`Unknown skill '${id}'. Run 'pnpm run skills list'.`);
   const rel = safeRelative(entry.path, "registry path");
   const skillsRoot = path.resolve(ROOT, "skills");
   const skillRoot = path.resolve(skillsRoot, rel);
@@ -191,7 +191,7 @@ function upstreamSync(id, apply) {
       return;
     }
     if (!apply) {
-      console.log(`Run 'npm run skills -- upstream update ${id}' to copy the ${changed.length} changed file(s).`);
+      console.log(`Run 'pnpm run skills upstream update ${id}' to copy the ${changed.length} changed file(s).`);
       return;
     }
     for (const [source, local] of changed) fs.copyFileSync(source, path.join(root, safeRelative(local)));
@@ -329,7 +329,7 @@ function main() {
 
   if (command === "upstream") {
     const [action, id] = positional;
-    if (!["check", "update"].includes(action) || !id) fail("Usage: npm run skills -- upstream <check|update> <skill-id>");
+    if (!["check", "update"].includes(action) || !id) fail("Usage: pnpm run skills upstream <check|update> <skill-id>");
     upstreamSync(id, action === "update");
     return;
   }
@@ -367,7 +367,7 @@ function main() {
   }
 
   const id = positional[0];
-  if (!id) fail(`Usage: npm run skills -- <list|validate|install|package|manifest update|upstream check|upstream update> [skill-id] (or --tier public|pro|private instead of an id)`);
+  if (!id) fail(`Usage: pnpm run skills <list|validate|install|package|manifest update|upstream check|upstream update> [skill-id] (or --tier public|pro|private instead of an id)`);
   const { root } = skillEntry(id);
   const inspected = inspectDistribution(root, { expectedName: id });
 

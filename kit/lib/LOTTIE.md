@@ -59,7 +59,7 @@ fotogramas idénticos, desfase correcto dentro de una subcomposición que empiez
 
 ## Licencias
 
-El Studio usa lottie-web 5.13.x, con licencia MIT. npm run vendor copia el runtime y su LICENSE.md a
+El Studio usa lottie-web 5.13.x, con licencia MIT. pnpm run vendor copia el runtime y su LICENSE.md a
 kit/lib/vendor/lottie/, de modo que el aviso acompaña a la librería al copiar el kit a un proyecto.
 
 Cada `.json` de terceros entra con su licencia y procedencia anotadas (URL, autor, licencia) en un `LICENCIA.md`

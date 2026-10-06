@@ -6,8 +6,8 @@
 
 ## How was it verified?
 
-- [ ] `npm run verify`
-- [ ] `npm run check -- demo`
+- [ ] `pnpm run verify`
+- [ ] `pnpm run check demo`
 - [ ] Visual changes were inspected with snapshots/render
 - [ ] No private, copyrighted or unlicensed assets were added
 

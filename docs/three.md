@@ -1,6 +1,6 @@
 # Three.js
 
-Code to Video Studio vendors Three.js locally during `npm run setup` and exposes it through the starter import map:
+Code to Video Studio vendors Three.js locally during `pnpm run setup` and exposes it through the starter import map:
 
 ```js
 import * as THREE from "three";

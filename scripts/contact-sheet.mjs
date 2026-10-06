@@ -3,7 +3,7 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 
 const [video,framesArg="36",colsArg="6"]=process.argv.slice(2);
-if (!video) throw new Error("Usage: npm run contact-sheet -- <video.mp4> [frames] [columns]");
+if (!video) throw new Error("Usage: pnpm run contact-sheet <video.mp4> [frames] [columns]");
 if (!fs.existsSync(video)) throw new Error(`Video not found: ${video}`);
 const frames=Number(framesArg), cols=Number(colsArg);
 const probe=spawnSync("ffprobe",["-v","error","-show_entries","format=duration","-of","csv=p=0",video],{encoding:"utf8"});

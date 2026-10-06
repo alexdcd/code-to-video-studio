@@ -172,7 +172,7 @@ python -m pip install -r requirements-dev.txt
 Optional browser QA/probing:
 
 ```bash
-npm install --prefix browser-tools
+pnpm install --prefix browser-tools
 ```
 
 Image generation is provider-neutral. The host can use its native image model, another image tool, or art supplied by the user.
@@ -241,7 +241,7 @@ If `character.json` declares views/actions that are not actually present in `pup
 The runtime contract can no longer validate itself. Probe the real browser runtime first:
 
 ```bash
-npm install --prefix browser-tools
+pnpm install --prefix browser-tools
 python -m http.server 8000 --directory character
 
 node scripts/probe_browser_runtime.mjs \
