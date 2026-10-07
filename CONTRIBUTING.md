@@ -38,3 +38,7 @@ If your change affects visuals, include before/after snapshots or a short render
 ## Design principle
 
 A reusable abstraction must earn its place. Prefer a small primitive that solves a real production problem over a large framework added “for later”.
+
+## License
+
+By submitting a contribution, you agree that it may be distributed under the project's GNU AGPL v3.0-only license. Contributors retain copyright in their contributions. Releasing future versions under a different license would require separate permission from other copyright holders.
