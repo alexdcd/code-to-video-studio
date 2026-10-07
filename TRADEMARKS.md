@@ -1,6 +1,6 @@
 # Trademarks
 
-The Apache License 2.0 applies to the software in this repository. It does **not** grant rights to project or brand identity.
+The GNU Affero General Public License v3.0 applies to original software in this repository that has no separate license notice. It does **not** grant rights to project or brand identity.
 
 **Mafia AI**, **La Mafia IA**, their logos, names and distinctive brand assets are not licensed for use as your own brand or endorsement.
 

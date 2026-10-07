@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://github.com/alexdcd/code-to-video-studio/actions/workflows/ci.yml"><img src="https://github.com/alexdcd/code-to-video-studio/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="License: Apache-2.0"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-AGPL--3.0-blue.svg" alt="License: AGPL-3.0"></a>
   <a href="package.json"><img src="https://img.shields.io/badge/node-22%2B-brightgreen.svg" alt="Node 22+"></a>
 </p>
 
@@ -444,7 +444,11 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) first. Keep the core generic: bra
 
 ## License
 
-Code in this repository is released under the [Apache License 2.0](LICENSE).
+Original Code to Video Studio material without its own license notice is released under the [GNU Affero General Public License v3.0 only](LICENSE).
+
+Third-party material and packages with separate license notices retain their stated terms. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and package-level license files.
+
+Copies of earlier versions distributed under Apache License 2.0 remain available under that license.
 
 **Mafia AI**, **La Mafia IA**, their names, logos and brand identity are not granted under the software license. See [TRADEMARKS.md](TRADEMARKS.md).
 
