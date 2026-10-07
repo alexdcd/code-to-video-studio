@@ -4,7 +4,7 @@ This repository is a production system for programmatic video. Read this file be
 
 ## Goal
 
-Turn a brief into a clear, visually reviewed video. Do not optimize for clever code. Optimize for what the viewer understands, in order.
+Turn a brief into a clear, visually reviewed video. Make production controllable, repeatable and deterministic, and use the best-suited tool, model, skill or reusable resource for each job. Judge changes by whether they improve control and deliver better quality at lower cost. Do not optimize for clever code; optimize for what the viewer understands, in order.
 
 ## Workflow
 

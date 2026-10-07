@@ -20,6 +20,11 @@ That means fewer tokens wasted rediscovering the same timing rules, rewriting th
 
 **Better output. Less repeated context. More consistency. Fewer dependencies.**
 
+It has two goals that go together:
+
+1. **Control production**: make it repeatable and deterministic, with styles, characters, sound and rules you own instead of re-prompting them every time.
+2. **Use the right tool for each job**: choose the most capable and best-suited tool, model or skill for every step, and keep the resources that make the next video better and cheaper to produce.
+
 The project is moving toward a **local-first, modular production stack** where animation, SFX, voice and music workflows can live inside the studio and external APIs are optional, not required.
 
 ## See what it makes
@@ -54,6 +59,19 @@ It gives the agent:
 **The repo is the production memory and creative grammar around the coding agent.**
 
 Better models will keep arriving. The point of this project is to make each of them inherit a better studio instead of giving each one another blank canvas.
+
+### The right tool for each job
+
+No single model or API is the best choice for every job.
+
+- Use code where timing and synchronization must be exact.
+- Use specialized models — local or hosted, general or fine-tuned — when they clearly outperform a generic model for a task such as voice, music, sound or images.
+- Package proven workflows as skills that explain how to use each tool well.
+- Keep curated voices, sounds, styles, characters and references that improve over time instead of regenerating them for each video.
+
+Quality comes from matching each job to a capable tool and using it well. Costs come down when production stops paying for poor fits and repeated generations.
+
+When reviewing a change, ask: **does it make production more controllable, and does it put a better-suited tool or resource behind the work for higher quality at a lower cost?**
 
 ---
 
@@ -315,6 +333,8 @@ The project is intentionally not trying to hide the underlying tools. It is tryi
 
 ## The current plan
 
+Every point in this plan serves both goals: making production more controllable and repeatable, and choosing the right tool and reusable resources for each job.
+
 The direction of the project is deliberately narrower than “build an all-purpose video framework”.
 
 ### 1. Keep the public core small and dependable
@@ -323,7 +343,7 @@ The reusable engine, project contract, render-safe motion rules and QA should st
 
 ### 2. Build creator capabilities as modular, local-first layers
 
-Characters, styles, diagrams, SFX, voice and music workflows should stay composable rather than turning the core into one opinionated stack. Where practical, they should be able to run locally or with creator-owned tools so paid external APIs remain optional integrations, not architectural dependencies.
+Characters, styles, diagrams, SFX, voice and music workflows should stay composable rather than turning the core into one opinionated stack. Where practical, they should be able to run locally or with creator-owned tools so paid external APIs remain optional integrations, not architectural dependencies. Each layer should use the tool, model or skill that does its job best, judged by real output rather than hype, and preserve useful resources it produces for reuse.
 
 ### 3. Add specialized agent workflows as reusable skills
 
