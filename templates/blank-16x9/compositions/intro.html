@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #intro-root { position: absolute; inset: 0; display: flex; align-items: center; background: #0c111b; color: #f5f7fa; font-family: system-ui, sans-serif; }
+        #intro-copy { display: flex; flex-direction: column; align-items: flex-start; padding: 120px 160px; }
+        #intro-eyebrow { margin-bottom: 32px; color: #96a7c4; font-size: 22px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+        #intro-title { max-width: 1440px; margin: 0; font-size: 116px; line-height: 1.03; font-weight: 650; letter-spacing: -.055em; }
+        #intro-description { max-width: 1050px; margin: 36px 0 0; color: #bac5d6; font-size: 38px; line-height: 1.4; }
+        #intro-rule { width: 126px; height: 7px; margin-top: 54px; background: #69d5c4; }
+      </style>
+      <div id="intro-root" data-composition-id="intro" data-width="1920" data-height="1080">
+        <div id="intro-copy" class="clip">
+          <div id="intro-eyebrow">{{NAME}}</div>
+          <h1 id="intro-title">Your idea starts here</h1>
+          <p id="intro-description">Make the first scene your own, then build the story one clear moment at a time.</p>
+          <div id="intro-rule"></div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#intro-title", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" });
+          window.__timelines["intro"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "id": "blank-16x9",
+  "type": "template",
+  "distribution": "public",
+  "license": "MIT",
+  "source": "original",
+  "notes": "Minimal 16:9 HyperFrames starter. Neutral typography and colors; all content lives in ordinary project HTML and CSS."
+}

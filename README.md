@@ -107,6 +107,7 @@ pnpm install
 pnpm run setup
 
 pnpm run new starter-9x16 my-video
+# Or use blank-16x9 in place of the command above.
 pnpm run dev my-video
 ```
 
@@ -119,8 +120,9 @@ When it is ready:
 ```bash
 pnpm run check my-video
 pnpm run render my-video
-pnpm run contact-sheet proyectos/my-video/renders/my-video.mp4
-pnpm run qa proyectos/my-video/renders/my-video.mp4
+pnpm run contact-sheet proyectos/my-video/renders/my-video-v01.mp4
+pnpm run qa proyectos/my-video/renders/my-video-v01.mp4
+pnpm run web:encode proyectos/my-video/renders/my-video-v01.mp4
 ```
 
 ---
@@ -240,6 +242,7 @@ kit/
 templates/
   _common/              project contract: brief, script, storyboard, agent notes
   starter-9x16/         neutral vertical starter
+  blank-16x9/           neutral landscape starter
 
 proyectos/
   demo/                 small working example
@@ -251,6 +254,9 @@ skills/
 scripts/
   new.mjs               create a project
   in-project.mjs        run HyperFrames commands against a project
+  lib/render-pipeline.mjs shared versioned master and social render pipeline
+  render-version-ledger.mjs secure render history ledger
+  web-encode.sh          quality-focused H.264 web export
   kit-copy.mjs          copy the current kit into a project
   contact-sheet.mjs     visual review helper
   sfx-candidates.mjs    optional SFX discovery helper
@@ -263,6 +269,8 @@ docs/
   creating-characters.md
   three.md
   qa.md
+  rendering.md
+  encoding-web.md
   sfx.md
 ```
 

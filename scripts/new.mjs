@@ -15,7 +15,7 @@ if (!fs.existsSync(templateDir) || template.startsWith("_")) throw new Error(`Un
 const dest=path.join(ROOT,"proyectos",name);
 if (fs.existsSync(dest)) throw new Error(`Project already exists: proyectos/${name}`);
 fs.mkdirSync(dest,{recursive:true});
-fs.cpSync(templateDir,dest,{recursive:true});
+fs.cpSync(templateDir,dest,{recursive:true,filter:source=>path.resolve(source)!==path.join(templateDir,"resource.json")});
 
 const common=path.join(ROOT,"templates/_common");
 for (const file of fs.readdirSync(common)) {
