@@ -14,7 +14,7 @@
 
 Build high-quality videos with Claude Code, Codex or your preferred coding agent.
 
-Code to Video Studio gives your AI a reusable production base for **story, motion, characters, styles, visual QA and rendering**. Instead of starting from a blank folder, it starts with the rules and primitives that matter for **quality, consistency, iteration speed and context efficiency**.
+Code to Video Studio gives your AI a complete production system: a dependable engine from brief to final render, backed by specialized tools, models and workflows for every stage in between. It lets the agent develop the idea, build its visual language, produce and review the video, and match each task with the capability best suited to it.
 
 That means fewer tokens wasted rediscovering the same timing rules, rewriting the same animation helpers or fixing the same render problems.
 
