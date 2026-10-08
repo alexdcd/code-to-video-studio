@@ -103,3 +103,55 @@ export function unsafeTextFindings(text) {
   for (const [kind, regex] of checks) if (regex.test(text)) findings.push(kind);
   return findings;
 }
+
+function sharedSkillIds(sharedPackages = []) {
+  const ids = new Set();
+  for (const descriptor of sharedPackages) {
+    const match = /^skills\/([^/]+)$/.exec(descriptor?.private || "");
+    if (match) ids.add(match[1]);
+  }
+  return ids;
+}
+
+export function filterSharedSkillsRegistry(registry, sharedPackages = []) {
+  if (!registry || typeof registry !== "object" || !Array.isArray(registry.skills)) {
+    throw new Error("skills/registry.json: skills must be an array");
+  }
+  const sharedIds = sharedSkillIds(sharedPackages);
+  return { ...registry, skills: registry.skills.filter(skill => sharedIds.has(skill?.id)) };
+}
+
+export function mergeSkillsRegistries(privateRegistry, publicRegistry) {
+  if (!privateRegistry || typeof privateRegistry !== "object" || !Array.isArray(privateRegistry.skills)) {
+    throw new Error("Private skills registry must contain a skills array");
+  }
+  if (!publicRegistry || typeof publicRegistry !== "object" || !Array.isArray(publicRegistry.skills)) {
+    throw new Error("Public skills registry must contain a skills array");
+  }
+  const publicIds = new Set(publicRegistry.skills.map(skill => skill?.id).filter(Boolean));
+  const privateOnly = privateRegistry.skills.filter(skill => !publicIds.has(skill?.id));
+  return { ...privateRegistry, ...publicRegistry, skills: [...publicRegistry.skills, ...privateOnly] };
+}
+
+export function validateSharedSkillsRegistry(registry, sharedPackages = []) {
+  const errors = [];
+  if (!registry || typeof registry !== "object" || !Array.isArray(registry.skills)) {
+    return ["skills must be an array"];
+  }
+  const sharedIds = sharedSkillIds(sharedPackages);
+  const registeredIds = new Set();
+  for (const skill of registry.skills) {
+    if (!skill?.id) {
+      errors.push("every published skill needs an id");
+      continue;
+    }
+    registeredIds.add(skill.id);
+    if (!sharedIds.has(skill.id)) errors.push(`${skill.id}: published skill has no shared package`);
+  }
+  for (const descriptor of sharedPackages) {
+    const match = /^skills\/([^/]+)$/.exec(descriptor?.private || "");
+    if (!match) continue;
+    if (!registeredIds.has(match[1])) errors.push(`${match[1]}: shared skill package has no registry entry`);
+  }
+  return errors;
+}

@@ -15,17 +15,19 @@ Adaptado de las ideas de frozen-time.sh / loudness.sh de echris6/motion-video-ki
 ver docs/upstream/motion-video-kit.md.
 """
 import argparse
+import json
 import re
 import shutil
 import subprocess
 import sys
 
+import video_metrics as metrics
+
 FPS_MUESTREO = 10
 
 
 def ffmpeg(args):
-    r = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", *args], capture_output=True, text=True)
-    return r.stderr
+    return metrics.run_ffmpeg(args)
 
 
 def sonda(ruta):
@@ -42,52 +44,19 @@ def sonda(ruta):
 
 
 def intervalos(tiempos, paso, minimo):
-    """Agrupa muestras consecutivas en (inicio, fin) y descarta las más cortas que `minimo` segundos."""
-    grupos, ini, prev = [], None, None
-    for t in tiempos:
-        if ini is None:
-            ini = prev = t
-        elif t - prev <= paso * 1.01:
-            prev = t
-        else:
-            grupos.append((ini, prev))
-            ini = prev = t
-    if ini is not None:
-        grupos.append((ini, prev))
-    return [(a, b + paso) for a, b in grupos if (b + paso - a) >= minimo - 1e-9]
+    return metrics.intervals(tiempos, paso, minimo)
 
 
 def congelados(ruta, umbral):
-    filtro = (f"fps={FPS_MUESTREO},scale=320:-1,format=gray,tblend=all_mode=difference,"
-              "signalstats,metadata=print:key=lavfi.signalstats.YAVG")
-    txt = ffmpeg(["-i", ruta, "-vf", filtro, "-an", "-f", "null", "-"])
-    valores = [float(v) for v in re.findall(r"YAVG=([0-9.]+)", txt)]
-    paso = 1 / FPS_MUESTREO
-    # la primera muestra no tiene fotograma anterior con el que restar
-    tiempos = [i * paso for i, v in enumerate(valores) if i > 0 and v < umbral]
-    return intervalos(tiempos, paso, 2 * paso), len(valores) * paso
+    return metrics.frozen_spans(ruta, umbral)
 
 
 def negros(ruta):
-    txt = ffmpeg(["-i", ruta, "-vf", "blackdetect=d=0.1:pix_th=0.10", "-an", "-f", "null", "-"])
-    return [(float(a), float(b)) for a, b in re.findall(r"black_start:([0-9.]+) black_end:([0-9.]+)", txt)]
+    return metrics.black_spans(ruta)
 
 
 def audio(ruta):
-    txt = ffmpeg(["-i", ruta, "-af", "ebur128=peak=true", "-vn", "-f", "null", "-"])
-    resumen = txt[txt.rfind("Summary:"):]
-    def num(patron):
-        m = re.search(patron, resumen)
-        return float(m.group(1)) if m else None
-    cortos = {}
-    for t, s in re.findall(r"t:\s*([0-9.]+)\s.*?S:\s*(-?[0-9.]+)", txt):
-        seg = int(float(t))
-        if float(s) > -70:
-            cortos[seg] = float(s)
-    sil = ffmpeg(["-i", ruta, "-af", "silencedetect=noise=-50dB:d=0.5", "-vn", "-f", "null", "-"])
-    silencios = [(float(a), float(b)) for a, b in re.findall(r"silence_start: ([0-9.]+).*?silence_end: ([0-9.]+)", sil, re.S)]
-    return {"I": num(r"I:\s+(-?[0-9.]+) LUFS"), "LRA": num(r"LRA:\s+([0-9.]+) LU"),
-            "TP": num(r"Peak:\s+(-?[0-9.]+) dBFS"), "cortos": cortos, "silencios": silencios}
+    return metrics.qa_audio_legacy(ruta)
 
 
 def rango(a, b):
@@ -101,54 +70,99 @@ def main():
     ap.add_argument("--congelado", type=float, default=0.35, help="umbral de diferencia de luma (0.35)")
     ap.add_argument("--max-congelado", type=float, default=0.6, help="máximo de segundos quietos seguidos antes de avisar (0.6)")
     ap.add_argument("--estricto", action="store_true", help="código de salida 1 si hay avisos")
+    ap.add_argument("--json", action="store_true", help="emit a machine-readable JSON report")
     a = ap.parse_args()
     if not shutil.which("ffmpeg") or not shutil.which("ffprobe"):
         sys.exit("Falta ffmpeg/ffprobe")
     dur, tiene_audio, wh = sonda(a.video)
     avisos = 0
-    print(f"{a.video} · {dur:.1f} s · {'x'.join(wh[:2])} · {'con audio' if tiene_audio else 'sin audio'}\n")
+    if not a.json:
+        print(f"{a.video} · {dur:.1f} s · {'x'.join(wh[:2])} · {'con audio' if tiene_audio else 'sin audio'}\n")
 
-    print("IMAGEN")
+    warnings = []
+    image_report = {}
+    if not a.json:
+        print("IMAGEN")
     quietos, _ = congelados(a.video, a.congelado)
     total = sum(b - a_ for a_, b in quietos)
     largos = [(i, f) for i, f in quietos if f - i > a.max_congelado + 1e-9]
-    print(f"  · quieto (diferencia < {a.congelado}): {total:.1f} s de {dur:.1f} s en {len(quietos)} tramos")
-    for i, f in quietos:
-        marca = "⚠" if (i, f) in largos else " "
-        print(f"    {marca} {rango(i, f)}")
+    image_report = {
+        "frozenThreshold": a.congelado,
+        "frozenSeconds": round(total, 3),
+        "frozenSpans": [{"startSeconds": round(i, 3), "endSeconds": round(f, 3)} for i, f in quietos],
+        "longFrozenSpans": [{"startSeconds": round(i, 3), "endSeconds": round(f, 3)} for i, f in largos],
+    }
+    if not a.json:
+        print(f"  · quieto (diferencia < {a.congelado}): {total:.1f} s de {dur:.1f} s en {len(quietos)} tramos")
+        for i, f in quietos:
+            marca = "⚠" if (i, f) in largos else " "
+            print(f"    {marca} {rango(i, f)}")
     if largos:
         avisos += 1
-        print(f"  ⚠ {len(largos)} tramo(s) más largos que {a.max_congelado} s: mira si es una lectura intencional "
-              "o falta movimiento (un empuje lento del 3–5 % basta para mantenerlo vivo)")
+        warnings.append("Long frozen spans need a frame review.")
+        if not a.json:
+            print(f"  ⚠ {len(largos)} tramo(s) más largos que {a.max_congelado} s: mira si es una lectura intencional "
+                  "o falta movimiento (un empuje lento del 3–5 % basta para mantenerlo vivo)")
     neg = negros(a.video)
+    image_report["blackSpans"] = [{"startSeconds": round(i, 3), "endSeconds": round(f, 3)} for i, f in neg]
     if neg:
-        print(f"  ℹ fotogramas negros: {', '.join(rango(i, f) for i, f in neg)}")
+        if not a.json:
+            print(f"  ℹ fotogramas negros: {', '.join(rango(i, f) for i, f in neg)}")
     else:
-        print("  ✓ sin tramos negros")
+        if not a.json:
+            print("  ✓ sin tramos negros")
 
-    print("\nAUDIO")
+    if not a.json:
+        print("\nAUDIO")
     if not tiene_audio:
-        print("  ℹ sin pista de audio")
+        if not a.json:
+            print("  ℹ sin pista de audio")
+        audio_report = None
     else:
         m = audio(a.video)
         ok_lufs = m["I"] is not None and abs(m["I"] - a.lufs) <= 1.5
-        print(f"  {'✓' if ok_lufs else '⚠'} integrada {m['I']} LUFS (objetivo {a.lufs} ± 1.5)")
+        if not a.json:
+            print(f"  {'✓' if ok_lufs else '⚠'} integrada {m['I']} LUFS (objetivo {a.lufs} ± 1.5)")
         avisos += 0 if ok_lufs else 1
         ok_tp = m["TP"] is not None and m["TP"] <= -1.0
-        print(f"  {'✓' if ok_tp else '⚠'} pico real {m['TP']} dBFS (máximo −1.0)")
+        if not a.json:
+            print(f"  {'✓' if ok_tp else '⚠'} pico real {m['TP']} dBFS (máximo −1.0)")
         avisos += 0 if ok_tp else 1
         plana = m["LRA"] is not None and m["LRA"] < 1.0
-        print(f"  {'ℹ' if plana else '✓'} rango {m['LRA']} LU" + (" · mezcla plana: sin dinámica entre escenas (puede ser intencional)" if plana else ""))
+        if not a.json:
+            print(f"  {'ℹ' if plana else '✓'} rango {m['LRA']} LU" + (" · mezcla plana: sin dinámica entre escenas (puede ser intencional)" if plana else ""))
         if m["cortos"]:
             vs = list(m["cortos"].values())
-            print(f"  ℹ corto plazo por segundo: mín {min(vs):.1f} · máx {max(vs):.1f} LUFS")
+            if not a.json:
+                print(f"  ℹ corto plazo por segundo: mín {min(vs):.1f} · máx {max(vs):.1f} LUFS")
         if m["silencios"]:
-            print(f"  ⚠ silencios (< −50 dB, ≥ 0.5 s): {', '.join(rango(i, f) for i, f in m['silencios'])}")
+            warnings.append("Long audio silences need a listening review.")
+            if not a.json:
+                print(f"  ⚠ silencios (< −50 dB, ≥ 0.5 s): {', '.join(rango(i, f) for i, f in m['silencios'])}")
             avisos += 1
         else:
-            print("  ✓ sin silencios largos")
+            if not a.json:
+                print("  ✓ sin silencios largos")
+        audio_report = {
+            "integratedLufs": m["I"],
+            "loudnessRangeLu": m["LRA"],
+            "truePeakDbfs": m["TP"],
+            "loudnessBySecond": {str(k): round(v, 3) for k, v in m["cortos"].items()},
+            "silences": [{"startSeconds": round(i, 3), "endSeconds": round(f, 3)} for i, f in m["silencios"]],
+            "checks": {"loudnessWithinTarget": ok_lufs, "truePeakAtOrBelowMinus1Dbfs": ok_tp},
+        }
 
-    print(f"\n{'Sin avisos' if not avisos else f'{avisos} aviso(s)'}. Son medidas, no gusto: escucha y mira los momentos señalados.")
+    if a.json:
+        print(json.dumps({
+            "schemaVersion": 1,
+            "video": {"path": a.video, "durationSeconds": round(dur, 3), "width": wh[0], "height": wh[1], "hasAudio": tiene_audio},
+            "image": image_report,
+            "audio": audio_report,
+            "warningCount": avisos,
+            "warnings": warnings,
+        }, ensure_ascii=False, sort_keys=True))
+    else:
+        print(f"\n{'Sin avisos' if not avisos else f'{avisos} aviso(s)'}. Son medidas, no gusto: escucha y mira los momentos señalados.")
     return 1 if (avisos and a.estricto) else 0
 
 

@@ -4,8 +4,11 @@ import {
   matchingRule,
   normalizeRepoPath,
   resolveTier,
+  filterSharedSkillsRegistry,
+  mergeSkillsRegistries,
   tierIncluded,
   unsafeTextFindings,
+  validateSharedSkillsRegistry,
   validateResourceManifest,
 } from "../lib.mjs";
 
@@ -67,4 +70,42 @@ test("unsafe distributable text catches secrets and machine paths", () => {
   assert.deepEqual(unsafeTextFindings("normal /path/to/example"), []);
   assert.ok(unsafeTextFindings(fakeMacPath).includes("mac-user-path"));
   assert.ok(unsafeTextFindings(`token ${fakeGithubToken}`).includes("github-token"));
+});
+
+test("public skills registry contains only entries whose packages are shared", () => {
+  const registry = { schemaVersion: 1, skills: [{ id: "shared" }, { id: "private-only" }] };
+  const packages = [{ private: "skills/shared", public: "skills/shared" }];
+
+  assert.deepEqual(filterSharedSkillsRegistry(registry, packages), {
+    schemaVersion: 1,
+    skills: [{ id: "shared" }],
+  });
+});
+
+test("importing a public skills registry preserves private-only entries", () => {
+  const privateRegistry = { schemaVersion: 1, skills: [{ id: "shared", description: "old" }, { id: "private-only" }] };
+  const publicRegistry = { schemaVersion: 1, skills: [{ id: "shared", description: "updated" }] };
+
+  assert.deepEqual(mergeSkillsRegistries(privateRegistry, publicRegistry), {
+    schemaVersion: 1,
+    skills: [{ id: "shared", description: "updated" }, { id: "private-only" }],
+  });
+});
+
+test("distribution check rejects an unshared entry in the public registry", () => {
+  const registry = { skills: [{ id: "shared" }, { id: "unshared" }] };
+  const packages = [{ private: "skills/shared" }];
+
+  assert.deepEqual(validateSharedSkillsRegistry(registry, packages), [
+    "unshared: published skill has no shared package",
+  ]);
+});
+
+test("distribution check rejects a shared package without a registry entry", () => {
+  const registry = { skills: [{ id: "shared" }] };
+  const packages = [{ private: "skills/shared" }, { private: "skills/missing" }];
+
+  assert.deepEqual(validateSharedSkillsRegistry(registry, packages), [
+    "missing: shared skill package has no registry entry",
+  ]);
 });

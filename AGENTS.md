@@ -48,6 +48,8 @@ Rendered video must be deterministic and seek-safe.
 - If several `fromTo` tweens touch the same property, later ones should usually set `immediateRender: false`.
 - Keep IDs unique in the fully assembled document.
 - Do not apply CSS `transform` to an element GSAP also transforms.
+- Use Rough.js only through `MAFIA.boceto` with an integer `semilla` ≥ 1; never call `rough.*` directly, use `fillStyle: "dots"` or `rough.newSeed()` (see `kit/lib/BOCETO.md`).
+- Use physics only through `MAFIA.fisica`: it simulates once with a fixed step and is queried by time; never use `Matter.Runner` or `Engine.update` in a frame callback (see `kit/lib/FISICA.md`).
 - A motion that looks correct in source code is not validated until key poses have been inspected.
 
 ## Direction rules
