@@ -21,6 +21,10 @@ Every reusable capability or resource belongs to one of four tiers:
 - **private** — tracked production material for the canonical Studio only.
 - **local** — machine-local state such as model weights, caches, virtual environments, credentials and rendered intermediates. Local material must not be tracked.
 
+Internal design and decision records live in `docs/architecture/` and are private. User guides live in
+`docs/<capability>.md`, are public and ship in the same PR as the capability, never earlier or as empty
+placeholders. This shared distribution guide is an explicit exception.
+
 The tiers are cumulative for products: Pro may contain `public + pro`; the private Studio may use `public + pro + private`. `local` is never a distributable tier.
 
 ## Safe defaults

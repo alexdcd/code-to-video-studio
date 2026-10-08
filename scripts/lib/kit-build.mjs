@@ -23,6 +23,9 @@ export function buildKit() {
   const sources=[
     path.join(KIT,"lib/mafia.js"),
     path.join(KIT,"lib/cartoon-motion.js"),
+    path.join(KIT,"lib/boceto.js"),
+    path.join(KIT,"lib/fisica.js"),
+    path.join(KIT,"lib/fx.js"),
     ...list("styles",/\.js$/),
     ...list("characters",/\.js$/)
   ];

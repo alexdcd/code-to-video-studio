@@ -37,6 +37,16 @@ export function vendor() {
   fs.copyFileSync(lottieRuntime,path.join(lottieDest,"lottie_svg.min.js"));
   fs.copyFileSync(lottieLicense,path.join(lottieDest,"LICENSE.md"));
 
-  console.log("Vendored local GSAP + Three.js + Lottie runtimes from node_modules.");
+  // Rough.js (MAFIA.boceto) and Matter.js (MAFIA.fisica): optional runtimes, loaded only by projects that use them.
+  for (const [pkg, runtime, dir] of [["roughjs", "bundled/rough.js", "rough"], ["matter-js", "build/matter.min.js", "matter"]]) {
+    const source=path.join(ROOT,"node_modules",pkg);
+    if (!fs.existsSync(path.join(source,runtime)) || !fs.existsSync(path.join(source,"LICENSE"))) throw new Error(`${pkg} not installed. Run pnpm install first.`);
+    const dest=path.join(vendorRoot,dir);
+    fs.mkdirSync(dest,{recursive:true});
+    fs.copyFileSync(path.join(source,runtime),path.join(dest,path.basename(runtime)));
+    fs.copyFileSync(path.join(source,"LICENSE"),path.join(dest,"LICENSE"));
+  }
+
+  console.log("Vendored local GSAP + Three.js + Lottie + Rough.js + Matter.js runtimes from node_modules.");
 }
 if (process.argv[1] && path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) vendor();

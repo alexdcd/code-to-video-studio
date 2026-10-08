@@ -338,13 +338,18 @@
         grande: { f: 0.7, fd: 0.6, s: 1.06, sd: 0.7, b: 1.45 },
         glitch: { f: 0.35, fd: 0.3, s: 1.03, sd: 0.35, b: 1.3 },
       }[tipo] || { f: 0.3, fd: 0.24, s: 1.025, sd: 0.3, b: 1.6 };
-      if (flash) tl.fromTo(flash, { opacity: P.f }, { opacity: 0, duration: P.fd, ease: "power2.out", immediateRender: false }, t);
+      const flashOpacity = opts.flashOpacity ?? P.f;
+      const flashDuration = opts.flashDuration ?? P.fd;
+      const scale = opts.scale ?? P.s;
+      const scaleDuration = opts.scaleDuration ?? P.sd;
+      const brightness = opts.brightness ?? P.b;
+      if (flash) tl.fromTo(flash, { opacity: flashOpacity }, { opacity: 0, duration: flashDuration, ease: "power2.out", immediateRender: false }, t);
       if (!objetivo) return;
       if (tipo === "glitch" || tipo === "grande") {
         const g = M.filtroGlitch();
         const r = M.rand((opts.semilla || 11) + Math.round(t * 100));
-        const dur = tipo === "glitch" ? 0.34 : 0.22;
-        tl.set(objetivo, { filter: `url(#mafia-glitch) brightness(${P.b})` }, t);
+        const dur = opts.effectDuration ?? (tipo === "glitch" ? 0.34 : 0.22);
+        tl.set(objetivo, { filter: `url(#mafia-glitch) brightness(${brightness})` }, t);
         tl.to(objetivo, { filter: "url(#mafia-glitch) brightness(1)", duration: dur, ease: "power2.out" }, t);
         tl.set(objetivo, { filter: "none" }, t + dur + 0.01);
         const px = tipo === "glitch" ? 22 : 12;
@@ -352,9 +357,9 @@
         tl.fromTo(g.offGB, { attr: { dx: px } }, { attr: { dx: 0 }, duration: dur, ease: "power2.out", immediateRender: false }, t);
         tl.fromTo(g.disp, { attr: { scale: tipo === "glitch" ? 140 : 40 } }, { attr: { scale: 0 }, duration: dur, ease: "steps(5)", immediateRender: false }, t);
         for (let k = 0; k < 5; k++) tl.set(g.turb, { attr: { seed: 1 + Math.floor(r() * 90) } }, t + k * (dur / 5));
-        tl.fromTo(objetivo, { scale: P.s, x: tipo === "glitch" ? -18 : 0 }, { scale: 1, x: 0, duration: P.sd, ease: "expo.out", immediateRender: false }, t);
+        tl.fromTo(objetivo, { scale, x: tipo === "glitch" ? -18 : 0 }, { scale: 1, x: 0, duration: scaleDuration, ease: "expo.out", immediateRender: false }, t);
       } else {
-        tl.fromTo(objetivo, { scale: P.s, filter: `brightness(${P.b}) saturate(1.3)` }, { scale: 1, filter: "brightness(1) saturate(1)", duration: P.sd, ease: "expo.out", immediateRender: false }, t);
+        tl.fromTo(objetivo, { scale, filter: `brightness(${brightness}) saturate(1.3)` }, { scale: 1, filter: "brightness(1) saturate(1)", duration: scaleDuration, ease: "expo.out", immediateRender: false }, t);
       }
     },
 

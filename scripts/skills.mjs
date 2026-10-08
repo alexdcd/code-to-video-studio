@@ -352,6 +352,11 @@ function main() {
     }
   }
 
+  if (command === "validate" && positional.length === 0 && flags.size === 0) {
+    for (const item of REGISTRY.skills) validateSkill(item.id);
+    return;
+  }
+
   if (command === "manifest" && positional[0] === "update") {
     const id = positional[1];
     const { root } = skillEntry(id);

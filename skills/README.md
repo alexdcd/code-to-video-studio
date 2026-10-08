@@ -6,6 +6,14 @@ This directory is the canonical source for portable skills maintained by Code to
 
 The [registry](registry.json) lists each skill's ID, entrypoint, description, tags, and distribution tier (`public`, `pro`, `private`, or `local`). A skill's version lives in its own `VERSION` file and its `DISTRIBUTION-MANIFEST.json` lists every distributable file with its SHA-256 and byte size. Skills are classified independently: keeping one skill private does not make the whole `skills/` directory private.
 
+`reference-analyst` measures and visually inspects a requested video reference, then records evidence and usage rules in `ANALYSIS.md`.
+
+`creative-review` compares a storyboard or rendered video against its brief, reference fidelity, style rules, and technical evidence; a human or fresh reviewer owns the final decision.
+
+`style-from-reference` turns selected, inspected reference ingredients into a reusable HyperFrames style with original examples, explicit usage limits, and a fidelity test.
+
+These three Production Intelligence skills are public-tier but ship to the public edition together with the `analyze`, `review` and `status` commands they rely on; until then they are available only in the canonical Studio, and the public registry lists only the skills it actually contains.
+
 ```bash
 pnpm run skills list
 pnpm run skills validate mafia-ai-character-creator

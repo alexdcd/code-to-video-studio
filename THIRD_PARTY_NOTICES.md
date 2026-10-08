@@ -68,5 +68,6 @@ SOFTWARE.
 
 ## Runtime dependencies
 
-Code to Video Studio installs HyperFrames, GSAP and Three.js from npm. They are not relicensed by this repository.
+Code to Video Studio installs HyperFrames, GSAP, Three.js, lottie-web, Rough.js (MIT) and Matter.js (MIT) from npm.
+Rough.js and Matter.js are vendored with their LICENSE files under `kit/lib/vendor/` by `pnpm run vendor`. They are not relicensed by this repository.
 Review the license shipped with each dependency for the terms that apply to it.

@@ -9,7 +9,7 @@ const SELF=path.resolve(fileURLToPath(import.meta.url));
 const required=[
   "README.md","AGENTS.md","LICENSE","THIRD_PARTY_NOTICES.md",
   "skills/README.md","skills/registry.json","skills/mafia-ai-character-creator/SKILL.md","skills/mafia-ai-character-creator/DISTRIBUTION-MANIFEST.json","scripts/skills.mjs","scripts/package_skill.py",
-  "kit/VERSION","kit/lib/mafia.js","kit/lib/cartoon-motion.js","kit/lib/three-desenfoque.js","kit/lib/three-anotaciones.js",
+  "kit/VERSION","kit/lib/mafia.js","kit/lib/cartoon-motion.js","kit/lib/three-desenfoque.js","kit/lib/three-anotaciones.js","kit/lib/boceto.js","kit/lib/fisica.js","kit/lib/fx.js",
   "kit/styles/starter/starter.css","kit/characters/signal/signal.js",
   "templates/starter-9x16/index.html","proyectos/demo/index.html","scripts/lib/qa-video.py","tools/sfx/candidates.py","tools/sfx/clean.sh"
 ];

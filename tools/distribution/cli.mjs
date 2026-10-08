@@ -6,10 +6,12 @@ import { fileURLToPath } from "node:url";
 import {
   TIERS,
   assertTier,
+  filterSharedSkillsRegistry,
   normalizeRepoPath,
   resolveTier,
   tierIncluded,
   unsafeTextFindings,
+  validateSharedSkillsRegistry,
   validateResourceManifest,
 } from "./lib.mjs";
 
@@ -136,6 +138,14 @@ function publicSyncChecks(classified, skillTiers, errors) {
     } else {
       const rows = classified.filter(candidate => candidate.path === source || candidate.path.startsWith(`${source}/`));
       if (!rows.length || rows.some(row => row.tier !== "public")) errors.push(`public-sync package must resolve entirely to public: ${source}`);
+    }
+  }
+
+  const registryPath = path.join(ROOT, "skills", "registry.json");
+  if (fs.existsSync(registryPath)) {
+    const registryForPublic = filterSharedSkillsRegistry(readJson(registryPath), sync.sharedPackages || []);
+    for (const issue of validateSharedSkillsRegistry(registryForPublic, sync.sharedPackages || [])) {
+      errors.push(`skills/registry.json: ${issue}`);
     }
   }
 
