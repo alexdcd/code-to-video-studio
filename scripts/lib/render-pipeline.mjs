@@ -134,6 +134,8 @@ export function renderProject({ projectDir, hyperframesBin, hyperframesArgs = []
 
     const redesStatus = run("ffmpeg", [
       "-hide_banner", "-loglevel", "error", "-n", "-i", reservation.master,
+      // Do not inherit source/project titles, comments, creators or chapters in social exports.
+      "-map_metadata", "-1", "-map_chapters", "-1",
       "-c:v", "libx264", "-preset", "slow", "-crf", String(redesCrf),
       "-maxrate", "16M", "-bufsize", "32M", "-pix_fmt", "yuv420p", "-profile:v", "high",
       "-movflags", "+faststart", "-c:a", "aac", "-b:a", "192k", reservation.redes,

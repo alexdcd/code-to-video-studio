@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "name": "short-to-long-video",
+  "version": "1.0.0",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "fc3e1f22671f2ce8c6ea438142dd5577c15e2fa06b5c1f0c2209bedd1c23167d",
+      "bytes": 2577
+    },
+    {
+      "path": "VERSION",
+      "sha256": "59854984853104df5c353e2f681a15fc7924742f9a2e468c29af248dce45ce03",
+      "bytes": 6
+    }
+  ]
+}

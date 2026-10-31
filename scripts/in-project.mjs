@@ -3,13 +3,12 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { renderProject } from "./lib/render-pipeline.mjs";
+import { resolveProjectPath } from "./lib/project-paths.mjs";
 
 const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
 const [action,project,...rest]=process.argv.slice(2);
 if (!action || !project) throw new Error("Usage: node scripts/in-project.mjs <dev|check|render|snapshot> <project> [...args]");
-let dir=path.join(ROOT,"proyectos",project);
-if (!fs.existsSync(path.join(dir,"index.html"))) dir=path.resolve(ROOT,project);
-if (!fs.existsSync(path.join(dir,"index.html"))) throw new Error("Project not found: "+project);
+const dir=resolveProjectPath(project,{studioRoot:ROOT});
 const bin=path.join(ROOT,"node_modules/.bin",process.platform==="win32"?"hyperframes.cmd":"hyperframes");
 if (!fs.existsSync(bin)) throw new Error("HyperFrames not installed. Run pnpm install.");
 

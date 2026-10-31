@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "name": "reference-analyst",
+  "version": "1.0.0",
+  "files": [
+    {
+      "path": "NOTICE.md",
+      "sha256": "d158f9faed7a68cbf313a1d9cb729fd3aee5daa74cb99f77fb0ddb92ee8ceb5c",
+      "bytes": 317
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "f8d0cc36f4b864b73bc50361eabc5986ed37652a20ff1d1b0d063f7468096e40",
+      "bytes": 2678
+    },
+    {
+      "path": "VERSION",
+      "sha256": "59854984853104df5c353e2f681a15fc7924742f9a2e468c29af248dce45ce03",
+      "bytes": 6
+    }
+  ]
+}

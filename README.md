@@ -294,6 +294,18 @@ docs/
 
 ---
 
+## Production intelligence
+
+The optional analysis and review tools help agents make decisions from evidence already on disk:
+
+- `pnpm run analyze ... --mode reference` measures and prepares visual evidence for a user-selected local reference.
+- `pnpm run review <project>` creates technical and frame-based review evidence for the latest numbered render.
+- `pnpm run status <project> --json` derives the project's next step from its actual files.
+- `pnpm run variant <project> <id>` creates a separate language or format edition without copying renders, secrets, or caches.
+- `pnpm run voice:phrases` and `pnpm run voice:map` align supplied transcripts to local audio; they do not generate narration.
+
+See [`docs/production-intelligence.md`](docs/production-intelligence.md), [`docs/project-variants.md`](docs/project-variants.md), and [`docs/voice-timing.md`](docs/voice-timing.md). These tools are optional and add no models or provider SDKs to setup.
+
 ## Agent skills
 
 Portable Studio skills live in `skills/`. The registry and each skill's SHA-256 distribution manifest are the source of truth; Claude and Codex directories are install destinations.

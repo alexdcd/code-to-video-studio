@@ -11,7 +11,7 @@ Turn a brief into a clear, visually reviewed video. Make production controllable
 1. Read the project's `BRIEF.md`.
 2. Write or refine `SCRIPT.md`.
 3. Write `STORYBOARD.md`: one primary event/change per scene, with visual readings in order.
-4. Check the existing kit before creating a new primitive.
+4. Check `kit/CAPABILITIES.md` and the existing kit before creating a new primitive or adding a dependency.
 5. Build scenes in `compositions/`.
 6. Run `pnpm run check <project>`.
 7. Take snapshots at important poses/transitions.
@@ -60,6 +60,15 @@ Rendered video must be deterministic and seek-safe.
 - Cause and reaction should not compete for attention at the exact same instant unless the effect is intentional.
 - Text should explain only what the image cannot communicate efficiently.
 - Keep the number of simultaneous moving elements purposeful.
+
+## Production intelligence
+
+- Analyze a reference only when the user or brief requests it. Use `pnpm run analyze <video> --mode reference --name <slug>`, then inspect the contact sheet and shot strips before planning. The tool does not download a reference or install a transcription model.
+- Use `pnpm run review <project> --stage storyboard` for a plan review and `pnpm run review <project>` for frame-based render evidence. A tool report does not replace visual judgment; write concrete findings from the supplied frames.
+- Use `pnpm run status <project> [--json]` to derive progress from project files. Missing data stays unknown. Record approvals only when explicitly requested with `--approve`.
+- Use `pnpm run variant <source> <id> [--language BCP-47]` for an independent edition. Variants are siblings; they omit renders, caches, secrets, and model files, and they do not translate a script or generate a new voice.
+- Decide subtitle coverage in `STORYBOARD.md`. Hide subtitles where the image or on-screen text already communicates the narration; use `MAFIA.subs` with explicit intervals where the narration adds information.
+- After changing narration, use `pnpm run voice:phrases` or `pnpm run voice:map` only when their local transcripts and timing evidence are available. Review generated anchors and listen to the narration before using the result.
 
 ## HyperFrames
 

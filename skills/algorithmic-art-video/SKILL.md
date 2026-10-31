@@ -51,6 +51,6 @@ acumula entre fotogramas) no sirve para vídeo. Esta hoja es la única adaptaci�
 
 1. `assets/arte/<nombre>-filosofia.md`: la filosofía y la semilla conceptual.
 2. La composición con el algoritmo y el objeto de parámetros.
-3. Fotogramas de revisión de las semillas candidatas (`--quality draft` + `ffmpeg -ss`) antes del render final.
+3. Fotogramas de revisión de las semillas candidatas (`hyperframes snapshot --at <t>` con cada semilla, o `pnpm run poses`) antes del render final; no un render borrador completo.
 
 Si el resultado define un aspecto repetible, propón convertirlo en estilo (`kit/estilos/README.md`).

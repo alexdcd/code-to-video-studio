@@ -45,6 +45,7 @@ trap cleanup EXIT
 
 echo "Codificando MP4 H.264 · libx264 veryslow · CRF ${crf} · calidad constante, tamaño adaptativo"
 ffmpeg -hide_banner -loglevel error -n -i "$input" \
+  -map_metadata -1 -map_chapters -1 \
   -map 0:v:0 -map "0:a:0?" -c:v libx264 -preset veryslow -crf "$crf" \
   -pix_fmt yuv420p -profile:v high -movflags +faststart \
   "${audio_args[@]}" "$temp_output"

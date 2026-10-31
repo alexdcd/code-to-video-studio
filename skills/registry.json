@@ -54,6 +54,54 @@
         "third-party"
       ],
       "distribution": "public"
+    },
+    {
+      "id": "reference-analyst",
+      "path": "reference-analyst",
+      "entrypoint": "SKILL.md",
+      "description": "Analyze a user-selected video reference with measured data, inspected frames, and original use rules.",
+      "tags": [
+        "reference-analysis",
+        "visual-research",
+        "video"
+      ],
+      "distribution": "public"
+    },
+    {
+      "id": "creative-review",
+      "path": "creative-review",
+      "entrypoint": "SKILL.md",
+      "description": "Review storyboards and renders against the brief using visual evidence and concrete findings.",
+      "tags": [
+        "creative-review",
+        "visual-qa",
+        "video"
+      ],
+      "distribution": "public"
+    },
+    {
+      "id": "evidence-backed-explainer-script",
+      "path": "evidence-backed-explainer-script",
+      "entrypoint": "SKILL.md",
+      "description": "Research and write clear explainer scripts with traceable evidence and planned visual proof.",
+      "tags": [
+        "scriptwriting",
+        "research",
+        "explainer"
+      ],
+      "distribution": "public"
+    },
+    {
+      "id": "short-to-long-video",
+      "path": "short-to-long-video",
+      "entrypoint": "SKILL.md",
+      "description": "Expand a short video into a longer piece by adding verified context, new scenes, and deliberate reuse.",
+      "tags": [
+        "scriptwriting",
+        "adaptation",
+        "storytelling"
+      ],
+      "distribution": "public"
     }
   ]
 }
