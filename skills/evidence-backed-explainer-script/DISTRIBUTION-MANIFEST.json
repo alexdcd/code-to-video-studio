@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "name": "evidence-backed-explainer-script",
+  "version": "1.0.0",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "c9f6991080d4a9105147970439c1849e33a7528a63a504a3efac594125913708",
+      "bytes": 2545
+    },
+    {
+      "path": "VERSION",
+      "sha256": "59854984853104df5c353e2f681a15fc7924742f9a2e468c29af248dce45ce03",
+      "bytes": 6
+    }
+  ]
+}
