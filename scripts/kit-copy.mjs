@@ -9,7 +9,8 @@ const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
 export function copyKit(projectPath) {
   const project=path.resolve(ROOT,projectPath);
   if (!fs.existsSync(path.join(project,"index.html"))) throw new Error(`No index.html in ${projectPath}`);
-  if (!fs.existsSync(path.join(ROOT,"kit/lib/vendor/gsap/gsap.min.js"))) vendor();
+  if (!fs.existsSync(path.join(ROOT,"kit/lib/vendor/gsap/gsap.min.js"))
+      || !fs.existsSync(path.join(ROOT,"kit/lib/vendor/gsap/MorphSVGPlugin.min.js"))) vendor();
   const {version}=buildKit();
   const dest=path.join(project,"assets/kit");
   fs.rmSync(dest,{recursive:true,force:true});

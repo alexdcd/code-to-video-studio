@@ -190,11 +190,18 @@ def cut_events(path: str | Path, threshold: float) -> list[float]:
     return sorted({timestamp for timestamp in times if timestamp > 1e-6})
 
 
-def merge_cut_bursts(times: list[float], burst_seconds: float = 0.5) -> list[float]:
-    """Collapse rapid detector bursts to their first reported boundary."""
+def merge_adjacent_cut_events(times: list[float], frame_rate: float) -> list[float]:
+    """Merge detector events on consecutive frames into one (a flash can report entering and leaving).
+
+    Cuts closer than that are real shots: a fast montage has shots of two to four frames, so no
+    longer window is applied. The gap is judged in frames because a fixed number of seconds means
+    a different thing at 25 and at 60 fps.
+    """
+    if frame_rate <= 0:
+        raise ValueError("frame_rate must be positive")
     merged: list[float] = []
     for timestamp in times:
-        if not merged or timestamp - merged[-1] >= burst_seconds:
+        if not merged or (timestamp - merged[-1]) * frame_rate >= 1.5:
             merged.append(timestamp)
     return merged
 
@@ -268,10 +275,11 @@ def analyze_video(path: str | Path, thresholds: tuple[float, ...] = (0.30, 0.15,
     probe = probe_video(path)
     duration = float(probe.get("durationSeconds") or 0)
     motion = motion_samples(path)
+    frame_rate = float(probe.get("frameRate") or 25.0)
     cuts = {}
     cut_events_by_threshold = {}
     for threshold in thresholds:
-        events = merge_cut_bursts(cut_events(path, threshold))
+        events = merge_adjacent_cut_events(cut_events(path, threshold), frame_rate)
         cut_events_by_threshold[f"{threshold:.2f}"] = events
         cuts[f"{threshold:.2f}"] = cut_profile(duration, events, motion)
 
@@ -300,10 +308,10 @@ def analyze_video(path: str | Path, thresholds: tuple[float, ...] = (0.30, 0.15,
         audio["onsetMethod"] = "ebur128 momentary rise of at least 4 LU, separated by 250 ms"
 
     return {
-        "schemaVersion": 1,
+        "schemaVersion": 2,
         "probe": probe,
         "cuts": {
-            "burstMergeSeconds": 0.5,
+            "burstMergeFrames": 1,
             "thresholds": cuts,
             "calibratedDefault": 0.15,
         },

@@ -229,7 +229,7 @@ test("fx pixelar renderiza píxeles seek-safe y restaura el estado real del canv
   });
   await new Promise((resolve, reject) => {
     servidor.once("error", reject);
-    servidor.listen(0, "0.0.0.0", resolve);
+    servidor.listen(0, "127.0.0.1", resolve);
   });
   let browser;
   try {

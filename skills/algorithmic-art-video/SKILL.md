@@ -42,8 +42,8 @@ acumula entre fotogramas) no sirve para vídeo. Esta hoja es la única adaptaci�
   con tablas generadas desde esa semilla.
 - **Parámetros arriba**, en un objeto (`semilla`, cantidades, escalas, paleta…). Las variaciones son renders con otra
   `semilla`, no una interfaz: elige 3–4 semillas, saca un fotograma de cada una y que el usuario decida.
-- **Música y golpes:** los acentos visuales salen de los tiempos del STORYBOARD o de `golpes.js`
-  (`herramientas/musica/motor/reloj.py`), no de analizar el audio en directo.
+- **Música y golpes:** los acentos visuales salen de los tiempos del STORYBOARD o de un mapa de beats proporcionado
+  para el proyecto; no analices el audio en directo desde una composición.
 - **Rendimiento:** canvas secundario para el halo/bloom y `Float32Array` para los datos. Si `check` agota el tiempo,
   baja la resolución del canvas de efectos, no la del principal.
 
@@ -51,6 +51,6 @@ acumula entre fotogramas) no sirve para vídeo. Esta hoja es la única adaptaci�
 
 1. `assets/arte/<nombre>-filosofia.md`: la filosofía y la semilla conceptual.
 2. La composición con el algoritmo y el objeto de parámetros.
-3. Fotogramas de revisión de las semillas candidatas (`--quality draft` + `ffmpeg -ss`) antes del render final.
+3. Fotogramas de revisión de las semillas candidatas (`pnpm run snapshot <project> --at <t>`) antes del render final; no un render borrador completo.
 
-Si el resultado define un aspecto repetible, propón convertirlo en estilo (`kit/estilos/README.md`).
+Si el resultado define un aspecto repetible, propón convertirlo en estilo siguiendo [`docs/creating-styles.md`](../../../docs/creating-styles.md).

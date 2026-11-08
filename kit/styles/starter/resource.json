@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "id": "starter",
+  "type": "technical-template-support",
+  "distribution": "public",
+  "license": "AGPL-3.0-only",
+  "source": "original neutral project foundation",
+  "notes": "Technical helpers used by starter-9x16. Not listed as a creative style."
+}

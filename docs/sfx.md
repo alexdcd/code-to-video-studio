@@ -2,14 +2,12 @@
 
 The public studio includes two small, generic SFX utilities extracted from the production workflow.
 
-## 1. Rank candidate recordings
+## 1. Set up and rank candidate recordings
 
 This measures active duration, attack, spectral centroid and low/high-frequency energy.
 
 ```bash
-python3 -m venv .venv-sfx
-.venv-sfx/bin/pip install -r tools/sfx/requirements.txt
-
+pnpm run sfx:setup
 pnpm run sfx:candidates recordings/*.wav
 ```
 
@@ -17,13 +15,11 @@ The defaults flag overly boomy, hiss-heavy or long transition effects. They are 
 
 ## 2. Clean a selected effect
 
-On macOS/Linux:
-
 ```bash
 pnpm run sfx:clean raw.wav clean.wav
 ```
 
-The helper applies high-pass / low-pass filtering and short fades to avoid clicks. It requires ffmpeg/ffprobe.
+The helper applies high-pass / low-pass filtering and short fades to avoid clicks. It requires ffmpeg/ffprobe and runs through a cross-platform Node wrapper.
 
 A useful production rule is to attach sound to **visible actions**, not to empty time. Repeated instances of the same gesture should also stay perceptually coherent.
 

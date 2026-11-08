@@ -90,7 +90,8 @@ function reserveVersion(renders, projectName) {
 }
 
 function run(command, args, cwd) {
-  const result = spawnSync(command, args, { cwd, stdio: "inherit", shell: false });
+  const [executable, ...prefixArgs] = Array.isArray(command) ? command : [command];
+  const result = spawnSync(executable, [...prefixArgs, ...args], { cwd, stdio: "inherit", shell: false });
   if (result.error) throw new Error(`No se pudo ejecutar ${command}: ${result.error.message}`);
   return result.status ?? 1;
 }
@@ -122,7 +123,9 @@ export function renderProject({ projectDir, hyperframesBin, hyperframesArgs = []
     if (ffmpegCheck.error || ffmpegCheck.status !== 0) {
       throw new Error("Falta ffmpeg o no se puede ejecutar.");
     }
-    if (!hyperframesBin || !path.isAbsolute(hyperframesBin)) {
+    if (!hyperframesBin || (Array.isArray(hyperframesBin)
+      ? !hyperframesBin.length || hyperframesBin.some(value => typeof value !== "string") || !path.isAbsolute(hyperframesBin[0])
+      : !path.isAbsolute(hyperframesBin))) {
       throw new Error("No se encontró el ejecutable de HyperFrames.");
     }
 
@@ -134,6 +137,8 @@ export function renderProject({ projectDir, hyperframesBin, hyperframesArgs = []
 
     const redesStatus = run("ffmpeg", [
       "-hide_banner", "-loglevel", "error", "-n", "-i", reservation.master,
+      // Do not inherit source/project titles, comments, creators or chapters in social exports.
+      "-map_metadata", "-1", "-map_chapters", "-1",
       "-c:v", "libx264", "-preset", "slow", "-crf", String(redesCrf),
       "-maxrate", "16M", "-bufsize", "32M", "-pix_fmt", "yuv420p", "-profile:v", "high",
       "-movflags", "+faststart", "-c:a", "aac", "-b:a", "192k", reservation.redes,
@@ -157,7 +162,7 @@ function main() {
     process.exitCode = 2;
     return;
   }
-  const hyperframesBin = path.join(ROOT, "node_modules/.bin", process.platform === "win32" ? "hyperframes.cmd" : "hyperframes");
+  const hyperframesBin = [process.execPath, path.join(ROOT, "node_modules", "hyperframes", "bin", "hyperframes.mjs")];
   try {
     const result = renderProject({ projectDir, note, hyperframesBin, hyperframesArgs });
     process.exitCode = result.status;

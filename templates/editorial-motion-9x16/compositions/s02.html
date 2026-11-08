@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <div id="s02" data-composition-id="s02" data-width="1080" data-height="1920" class="em-escena em-escena--vertical em-escena--noche">
+        <span id="s02-titulo" class="em-etiqueta" style="position:absolute;left:92px;top:210px">De ruido a forma</span>
+        <div id="s02-antes" style="position:absolute;left:92px;top:300px;width:896px;height:470px">
+          <span id="s02-antes-label" class="em-comparativa-titulo" style="position:absolute;left:0;top:0;color:#FFC83D">ANTES · DISPERSA</span>
+          <span id="s02-antes-copia" class="em-comparativa-copia" style="position:absolute;left:0;top:54px;width:760px;color:#FFF1D6">Muchos elementos compiten por atención.</span>
+          <div class="em-scatter-dot" style="left:40px;top:290px;width:72px;height:72px;background:#FF6B5C"></div>
+          <div class="em-scatter-dot" style="left:250px;top:210px;width:44px;height:44px;background:#3B7BFF"></div>
+          <div class="em-scatter-dot" style="left:410px;top:330px;width:96px;height:96px;background:#2EDBA8"></div>
+          <div class="em-scatter-dot" style="left:150px;top:400px;width:54px;height:54px;background:#FFC83D"></div>
+          <div class="em-scatter-dot" style="left:660px;top:230px;width:40px;height:40px;background:#FF6B5C"></div>
+          <div class="em-scatter-dot" style="left:760px;top:390px;width:58px;height:58px;background:#3B7BFF"></div>
+        </div>
+        <div class="em-linea" style="left:92px;top:830px;width:896px;height:2px;background:#FFF1D6;opacity:.28"></div>
+        <div id="s02-despues" style="position:absolute;left:92px;top:890px;width:896px;height:540px">
+          <span id="s02-despues-label" class="em-comparativa-titulo" style="position:absolute;left:0;top:0;color:#2EDBA8">DESPUÉS · LEGIBLE</span>
+          <span id="s02-despues-copia" class="em-comparativa-copia" style="position:absolute;left:0;top:54px;width:760px;color:#FFF1D6">Una forma concentra la mirada.</span>
+          <svg id="s02-grafico" class="em-forma" style="position:absolute;left:40px;top:190px;width:320px;height:320px" viewBox="0 0 260 260" aria-hidden="true">
+            <path id="s02-forma" d="M 130 18 C 180 18 230 68 230 130 C 230 180 180 230 130 230 C 80 230 30 180 30 130 C 30 80 80 30 130 18 Z" fill="#FF6B5C"></path>
+          </svg>
+          <span id="s02-anotacion" class="em-etiqueta" style="position:absolute;left:440px;top:330px;color:#FFC83D">UNA LECTURA</span>
+          <div class="em-linea" style="left:385px;top:352px;width:42px;background:#FFC83D"></div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const tl = gsap.timeline({ paused: true });
+          const EM = MAFIA.editorialMotion;
+          EM.entrar(tl, "#s02-titulo", 0.12, { dur: 0.36, y: 16 });
+          EM.entrar(tl, "#s02-antes-label, #s02-antes-copia", 0.32, { dur: 0.38, x: -24, stagger: 0.08 });
+          EM.entrar(tl, "#s02-antes .em-scatter-dot", 0.65, { dur: 0.3, y: 12, stagger: 0.05 });
+          EM.entrar(tl, "#s02-despues-label, #s02-despues-copia", 0.7, { dur: 0.38, x: 24, stagger: 0.08 });
+          EM.entrar(tl, "#s02-grafico", 0.78, { dur: 0.48, y: 18 });
+          EM.morph(tl, "#s02-forma", "M 130 22 C 166 66 206 104 238 130 C 206 156 166 194 130 238 C 94 194 54 156 22 130 C 54 104 94 66 130 22 Z", 1.06, { dur: 0.72 });
+          tl.to("#s02-forma", { fill: "#2EDBA8", duration: 0.34, ease: "power2.inOut" }, 1.25);
+          EM.entrar(tl, "#s02-anotacion", 1.55, { dur: 0.34, x: 16 });
+          window.__timelines["s02"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

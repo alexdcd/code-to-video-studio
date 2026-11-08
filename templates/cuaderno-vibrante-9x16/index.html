@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es" data-resolution="portrait">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1080,height=1920" />
+  <title>{{NAME}}</title>
+  <link rel="stylesheet" href="assets/kit/lib/mafia.css" />
+  <link rel="stylesheet" href="assets/kit/styles/cuaderno-vibrante/cuaderno-vibrante.css" />
+  <script src="assets/kit/lib/vendor/gsap/gsap.min.js"></script>
+  <script src="assets/kit/dist/mafia-kit.js"></script>
+  <style>
+    html, body { margin: 0; background: #f4efe3; }
+    #root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+    #cuaderno { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1080" data-height="1920" data-fps="30">
+    <canvas id="cuaderno" class="cv-canvas" width="1080" height="1920" data-layout-allow-overflow></canvas>
+    <audio id="cuaderno-bed" class="clip" data-start="0" data-duration="12" data-track-index="20" data-volume="1" src="assets/kit/styles/cuaderno-vibrante/audio/cuaderno-procedural-bed.wav"></audio>
+  </div>
+  <script>
+  (() => {
+    const canvas = document.getElementById("cuaderno");
+    const ctx = canvas.getContext("2d");
+    const C = MAFIA.cuadernoVibrante({ ctx, semilla: 31 });
+    const P = C.PALETA;
+    const tl = gsap.timeline({ paused: true });
+    const easeOut = (x) => 1 - Math.pow(1 - Math.max(0, Math.min(1, x)), 3);
+
+    function escenaUno(t) {
+      C.fondo(ctx, P.papel);
+      const camera = C.camara(t, { focoX: 540, focoY: 980, zoomInicial: 1.015, zoomFinal: 1.055, sacudidas: [[0.3, 1.2]] });
+      ctx.save(); C.aplicarCamara(ctx, camera);
+      C.linea(ctx, 180, 610, 895, 610, { color: P.coral, width: 12, progress: easeOut(t / 0.75), seed: 10 });
+      C.elipse(ctx, 540, 865, 205, 205, { fill: P.amarillo, seed: 12 });
+      C.poligono(ctx, [[540,680],[720,860],[540,1040],[360,860]], { fill: P.papelClaro, seed: 14, width: 9 });
+      C.texto(ctx, "UNA IDEA", 540, 1310, 112, P.tinta, { weight: 800, seed: 15 });
+      C.texto(ctx, "TOMA FORMA", 540, 1430, 80, P.coral, { weight: 800, seed: 16 });
+      C.subtitulo(ctx, ["Dibujar", "para", "pensar"], { y: 1660, size: 48, active: Math.floor(t * 1.1) % 3 });
+      ctx.restore();
+    }
+
+    function escenaDos(t) {
+      C.fondo(ctx, P.papelClaro);
+      const camera = C.camara(t, { focoX: 540 + Math.sin(t * 0.8) * 42, focoY: 940, zoomInicial: 1.025, zoomFinal: 1.06, sacudidas: [[0.15, 0.5]] });
+      ctx.save(); C.aplicarCamara(ctx, camera);
+      C.texto(ctx, "ORDENAR AYUDA", 540, 350, 67, P.tinta, { weight: 800, seed: 22 });
+      C.texto(ctx, "A LEER", 540, 435, 67, P.azul, { weight: 800, seed: 23 });
+      const p = easeOut(t / 1.1);
+      C.linea(ctx, 220, 1110, 860, 1110, { color: P.tinta, width: 8, progress: p, seed: 24 });
+      const drift = Math.sin(t * 1.25) * 14;
+      C.elipse(ctx, 300 + (1 - p) * -220, 870 + drift, 100, 100, { fill: P.coral, seed: 25 });
+      C.poligono(ctx, [[540,770],[640,870],[540,970],[440,870]], { fill: P.amarillo, seed: 26 });
+      const greenX = 780 + (1 - p) * 180;
+      C.poligono(ctx, [[greenX,770],[greenX + 100,770],[greenX + 100,970],[greenX,970]], { fill: P.verde, seed: 27 });
+      C.subtitulo(ctx, ["La", "forma", "ordena"], { y: 1660, size: 48, active: Math.floor(t * 1.15) % 3 });
+      ctx.restore();
+    }
+
+    function escenaTres(t) {
+      C.fondo(ctx, P.papel);
+      const camera = C.camara(t, { focoX: 540, focoY: 1020, zoomInicial: 1.02, zoomFinal: 1.09, sacudidas: [[0.2, 0.7]] });
+      ctx.save(); C.aplicarCamara(ctx, camera);
+      C.elipse(ctx, 540, 850, 280, 280, { fill: P.azul, seed: 32 });
+      C.poligono(ctx, [[540,635],[700,850],[540,1065],[380,850]], { fill: P.papelClaro, seed: 33, width: 9 });
+      C.linea(ctx, 240, 1200, 840, 1200, { color: P.coral, width: 15, progress: easeOut(t / 0.9), seed: 34 });
+      C.texto(ctx, "UN TRAZO", 540, 1395, 86, P.tinta, { weight: 800, seed: 35 });
+      C.texto(ctx, "ABRE CAMINO", 540, 1495, 72, P.coral, { weight: 800, seed: 36 });
+      C.subtitulo(ctx, ["Una", "forma", "más", "clara"], { y: 1690, size: 46, active: Math.floor(t * 1.05) % 4 });
+      ctx.restore();
+    }
+
+    MAFIA.porCuadro(tl, 0, 12, (progress) => {
+      const t = progress * 12;
+      C.setFrame(t);
+      if (t < 4) escenaUno(t);
+      else if (t < 8) escenaDos(t - 4);
+      else escenaTres(t - 8);
+      if (t >= 3.7 && t <= 4.3) C.transicion(ctx, "barrido", (t - 3.7) / 0.6, { color: P.tinta, seed: 41 });
+      if (t >= 7.7 && t <= 8.3) C.transicion(ctx, "brocha", (t - 7.7) / 0.6, { color: P.papelClaro, seed: 43 });
+    });
+    window.__timelines = window.__timelines || {};
+    window.__timelines.main = tl;
+  })();
+  </script>
+</body>
+</html>

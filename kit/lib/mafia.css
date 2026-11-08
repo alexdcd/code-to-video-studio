@@ -29,3 +29,19 @@
 .mf-frase { display: flex; flex-direction: column; gap: 0.08em; }
 .mf-linea { display: block; white-space: nowrap; }
 .mf-pal { display: inline-block; will-change: transform, filter, opacity; }
+
+/* ---------- subtítulos de frase completa (MAFIA.subs.montar con modo: "frase") ----------
+   Todas las palabras atenuadas y solo la hablada en negrita con el acento. El ancho de la negrita se reserva con ::before
+   para que ninguna palabra se mueva al activarse. Color, tamaño, fuente y, si hace falta, una caja de fondo (--sub-fondo, --sub-relleno, --sub-radio) por variables --sub-* en el contenedor o en :root.
+   Zona de subtítulos: contenedor con la clase «sub-zona» (altura 0; las frases se apilan hacia arriba desde --sub-bottom). */
+.sub-zona { position: absolute; left: 90px; right: 90px; bottom: var(--sub-bottom, 330px); height: 0; }
+.sub-frase {
+  position: absolute; left: 0; right: 0; bottom: 0; width: fit-content; max-width: 100%; margin: 0 auto; text-align: center; text-wrap: balance;
+  background: var(--sub-fondo, transparent); padding: var(--sub-relleno, 0); border-radius: var(--sub-radio, 0);
+  font-family: var(--sub-fuente, "Inter", system-ui, sans-serif); font-size: var(--sub-tam, 46px); font-weight: 500; line-height: 1.22;
+  color: var(--sub-tenue, rgba(255, 255, 255, 0.55));
+  text-shadow: var(--sub-sombra, 0 2px 14px rgba(0, 0, 0, 0.7), 0 0 28px rgba(0, 0, 0, 0.5));
+}
+.sub-frase .sub-pal { display: inline-block; white-space: nowrap; text-align: center; }
+.sub-frase .sub-pal::before { content: attr(data-t); display: block; height: 0; overflow: hidden; visibility: hidden; font-weight: 700; }
+.sub-frase .sub-pal[data-activa="1"] { font-weight: 700; color: var(--sub-acento, #FFC83D); }

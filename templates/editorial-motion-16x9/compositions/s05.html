@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="es">
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <div id="s05" data-composition-id="s05" data-width="1920" data-height="1080" class="em-escena em-escena--crema">
+        <div id="s05-cierre-contenido" class="em-cierre-contenido">
+          <span id="s05-etiqueta" class="em-etiqueta" style="position:absolute;left:290px;top:202px">UNA BUENA EXPLICACIÓN</span>
+          <div id="s05-titular" class="em-cierre-titular" style="position:absolute;left:280px;top:332px;width:1160px">
+            <span>EL MOVIMIENTO</span>
+            <span>TAMBIÉN <span style="color:#3B7BFF">EXPLICA</span></span>
+          </div>
+          <span id="s05-resumen" class="em-cierre-resumen" style="position:absolute;left:296px;top:650px">
+            FORMA <span style="color:#0F1A3D">·</span> RITMO <span style="color:#0F1A3D">·</span> PROFUNDIDAD
+          </span>
+          <div class="em-figura em-figura--circulo" style="left:1490px;top:320px;width:156px;height:156px;background:#FFC83D"></div>
+          <div class="em-figura em-figura--rombo" style="left:1580px;top:476px;width:120px;height:120px;background:#FF6B5C"></div>
+          <div class="em-figura em-figura--cuadrado" style="left:1420px;top:510px;width:90px;height:90px;background:#2EDBA8;border-radius:20px"></div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const tl = gsap.timeline({ paused: true });
+          const EM = MAFIA.editorialMotion;
+          tl.fromTo("#s05-cierre-contenido", { scale: 0.08 }, { scale: 1, duration: 1.12, ease: "power3.out" }, 0);
+          EM.entrar(tl, "#s05-etiqueta", 1.26, { dur: 0.3, y: 14 });
+          EM.entrar(tl, "#s05-titular", 1.45, { dur: 0.38, y: 18 });
+          EM.entrar(tl, "#s05-resumen", 1.95, { dur: 0.32, y: 12 });
+          window.__timelines["s05"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,214 @@
+/* Editorial Motion: geometría plana, tipografía fuerte y capas limpias. */
+@import url("../../fonts/inter.css");
+.em-escena {
+  --em-noche: #0F1A3D;
+  --em-crema: #FFF1D6;
+  --em-azul: #3B7BFF;
+  --em-coral: #FF6B5C;
+  --em-amarillo: #FFC83D;
+  --em-menta: #2EDBA8;
+  --em-tinta: var(--em-noche);
+  --em-fondo: var(--em-crema);
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--em-fondo);
+  color: var(--em-tinta);
+  font-family: "Inter", system-ui, sans-serif;
+  font-synthesis: none;
+}
+.em-escena *,
+.em-escena *::before,
+.em-escena *::after { box-sizing: border-box; }
+.em-escena--noche {
+  --em-fondo: var(--em-noche);
+  --em-tinta: var(--em-crema);
+  background:
+    radial-gradient(ellipse at 83% 14%, rgba(59, 123, 255, 0.18), transparent 40%),
+    var(--em-noche);
+}
+.em-escena--crema { --em-fondo: var(--em-crema); }
+.em-escena--crema .em-etiqueta { color: var(--em-noche); }
+.em-escena--transicion { background: transparent; color: var(--em-crema); }
+
+.em-etiqueta {
+  display: block;
+  color: var(--em-azul);
+  font: 700 18px/1 "Inter", system-ui, sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.em-escena--noche .em-etiqueta { color: var(--em-amarillo); }
+.em-titular {
+  display: block;
+  max-width: 1100px;
+  text-wrap: balance;
+  font: 900 126px/0.94 "Inter", system-ui, sans-serif;
+  letter-spacing: -0.065em;
+}
+.em-titular em {
+  color: var(--em-amarillo);
+  font-style: normal;
+}
+.em-bajada {
+  display: block;
+  max-width: 760px;
+  color: rgba(15, 26, 61, 0.76);
+  font: 500 30px/1.35 "Inter", system-ui, sans-serif;
+}
+.em-escena--noche .em-bajada { color: rgba(255, 241, 214, 0.78); }
+.em-dato {
+  display: block;
+  color: var(--em-azul);
+  font: 900 290px/0.82 "Inter", system-ui, sans-serif;
+  letter-spacing: -0.09em;
+}
+.em-dato-etiqueta {
+  display: block;
+  color: var(--em-noche);
+  font: 800 24px/1.1 "Inter", system-ui, sans-serif;
+  letter-spacing: 0.1em;
+}
+.em-copia {
+  display: block;
+  color: rgba(15, 26, 61, 0.76);
+  font: 500 26px/1.35 "Inter", system-ui, sans-serif;
+}
+.em-panel {
+  position: absolute;
+  border-radius: 32px;
+  background: rgba(255, 241, 214, 0.08);
+}
+.em-panel--claro {
+  background: rgba(255, 241, 214, 0.96);
+  color: var(--em-noche);
+}
+.em-panel--azul { background: var(--em-azul); color: var(--em-crema); }
+.em-panel--coral { background: var(--em-coral); color: var(--em-noche); }
+.em-forma {
+  display: block;
+  overflow: visible;
+}
+.em-forma path { stroke-linejoin: round; }
+.em-forma--relleno path { stroke: none; }
+.em-reveal {
+  display: block;
+  overflow: hidden;
+}
+.em-reveal > span { display: block; }
+.em-comparativa-titulo {
+  display: block;
+  font: 800 19px/1 "Inter", system-ui, sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.em-comparativa-copia {
+  display: block;
+  font: 600 27px/1.2 "Inter", system-ui, sans-serif;
+}
+.em-paso-titulo {
+  display: block;
+  font: 800 28px/1 "Inter", system-ui, sans-serif;
+  letter-spacing: -0.03em;
+}
+.em-paso-indice {
+  display: grid;
+  width: 62px;
+  height: 62px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--em-noche);
+  color: var(--em-crema);
+  font: 800 21px/1 "Inter", system-ui, sans-serif;
+}
+.em-paisaje-capa {
+  position: absolute;
+  left: -220px;
+  width: 2360px;
+  height: 540px;
+}
+.em-paisaje-fondo {
+  top: 170px;
+  background: #3B7BFF;
+  clip-path: polygon(0 66%, 12% 49%, 26% 61%, 40% 34%, 56% 59%, 73% 33%, 89% 57%, 100% 42%, 100% 100%, 0 100%);
+}
+.em-paisaje-medio {
+  top: 286px;
+  background: #FF6B5C;
+  clip-path: polygon(0 53%, 17% 39%, 32% 59%, 49% 31%, 62% 56%, 79% 34%, 100% 51%, 100% 100%, 0 100%);
+}
+.em-paisaje-frente {
+  top: 390px;
+  background: #2EDBA8;
+  clip-path: polygon(0 37%, 15% 52%, 31% 30%, 49% 51%, 68% 27%, 84% 44%, 100% 28%, 100% 100%, 0 100%);
+}
+.em-cierre-contenido {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+}
+.em-cierre-titular {
+  display: block;
+  text-wrap: balance;
+  font: 900 100px/0.98 "Inter", system-ui, sans-serif;
+  letter-spacing: -0.06em;
+}
+.em-cierre-titular span { display: block; }
+.em-cierre-resumen {
+  display: block;
+  color: rgba(15, 26, 61, 0.72);
+  font: 700 21px/1.2 "Inter", system-ui, sans-serif;
+  letter-spacing: 0.12em;
+}
+.em-linea {
+  position: absolute;
+  height: 2px;
+  background: currentColor;
+}
+.em-portal { display: block; width: 1920px; height: 1080px; }
+.em-figura { position: absolute; display: block; }
+.em-figura--circulo { border-radius: 50%; }
+.em-figura--rombo { clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
+.em-figura--cuadrado { border-radius: 14px; }
+.em-token {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-height: 82px;
+  color: var(--em-noche);
+  font: 800 30px/1 "Inter", system-ui, sans-serif;
+  letter-spacing: 0.08em;
+}
+.em-token-marca { display: block; width: 28px; height: 28px; border-radius: 50%; }
+.em-scatter-dot { position: absolute; border-radius: 50%; }
+.em-paso {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: var(--em-noche);
+}
+.em-portal { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+
+/* ---------- Vertical 1080×1920 (clase em-escena--vertical en la raíz de cada escena) ----------
+   Zona segura del texto esencial: x 90–990, y 200–1440 (debajo quedan los subtítulos y la interfaz de la plataforma).
+   Las formas pueden desbordar. Se apila lo que en 16:9 va en paralelo. */
+.em-escena--vertical .em-etiqueta { font-size: 26px; }
+.em-escena--vertical .em-titular { max-width: 900px; font-size: 138px; }
+.em-escena--vertical .em-bajada { max-width: 780px; font-size: 40px; }
+.em-escena--vertical .em-dato { font-size: 470px; }
+.em-escena--vertical .em-copia { font-size: 38px; }
+.em-escena--vertical .em-comparativa-titulo { font-size: 26px; }
+.em-escena--vertical .em-comparativa-copia { font-size: 40px; }
+.em-escena--vertical .em-paso-titulo { font-size: 48px; }
+.em-escena--vertical .em-paso-indice { width: 92px; height: 92px; font-size: 32px; }
+.em-escena--vertical .em-paso { gap: 28px; }
+.em-escena--vertical .em-token { gap: 30px; min-height: 120px; font-size: 52px; }
+.em-escena--vertical .em-token-marca { width: 38px; height: 38px; }
+.em-escena--vertical .em-cierre-titular { font-size: 104px; }
+.em-escena--vertical .em-cierre-resumen { font-size: 28px; }
+.em-escena--vertical .em-paisaje-capa { left: -240px; width: 1560px; }
+.em-escena--vertical .em-paisaje-fondo { top: 1130px; height: 790px; }
+.em-escena--vertical .em-paisaje-medio { top: 1250px; height: 670px; }
+.em-escena--vertical .em-paisaje-frente { top: 1370px; height: 550px; }
+.em-escena--vertical .em-portal { width: 1080px; height: 1920px; }

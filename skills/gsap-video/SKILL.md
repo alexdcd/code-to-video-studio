@@ -42,11 +42,12 @@ Si una referencia contradice algo de arriba, gana lo de arriba sin discutirlo.
 ## Plugins disponibles
 
 El kit trae y registra (`kit/lib/mafia.js`): **SplitText, MorphSVG, DrawSVG, MotionPath, CustomEase, ScrambleText
-y TextPlugin**, cargados desde `assets/kit/lib/vendor/gsap/` (nunca desde una CDN). Para otro plugin del paquete
-`gsap` (Flip, CustomWiggle, CustomBounce, Physics2D…), añádelo a `scripts/vendor.sh` y ejecuta `pnpm run vendor`.
+y TextPlugin**, cargados desde `assets/kit/lib/vendor/gsap/` (nunca desde una CDN). Para otro plugin, comprueba
+primero su licencia y la guía [`docs/animation.md`](../../../docs/animation.md); `pnpm run vendor` solo instala los
+recursos seleccionados por el Studio.
 
-Antes de escribir a mano un efecto con nombre, mira `kit/CATALOGO.md` y `/hyperframes-registry`: muchos ya existen
-(`MAFIA.frase`, `MAFIA.escribir`, `MAFIA.draw`, `MAFIA.contador`, `MAFIA.corte`…).
+Antes de escribir a mano un efecto con nombre, mira `kit/lib/mafia.js` y [`docs/animation.md`](../../../docs/animation.md)
+para comprobar qué helpers públicos ya existen.
 
 ## Qué leer
 

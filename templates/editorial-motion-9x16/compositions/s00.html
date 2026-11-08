@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <div id="s00" data-composition-id="s00" data-width="1080" data-height="1920" class="em-escena em-escena--vertical em-escena--noche">
+        <span class="em-etiqueta" style="position:absolute;left:92px;top:210px">Editorial Motion · 01</span>
+        <div style="position:absolute;left:86px;top:300px;width:900px">
+          <div class="em-reveal"><span id="s00-titulo-1" class="em-titular">TODA IDEA</span></div>
+          <div class="em-reveal"><span id="s00-titulo-2" class="em-titular">PIDE</span></div>
+          <div class="em-reveal"><span id="s00-titulo-3" class="em-titular"><em>UNA FORMA</em></span></div>
+        </div>
+        <p id="s00-bajada" class="em-bajada" style="position:absolute;left:92px;top:770px">
+          La explicación también se diseña en movimiento.
+        </p>
+        <div id="s00-geometria" style="position:absolute;left:150px;top:980px;width:780px;height:460px">
+          <div class="em-figura em-figura--circulo" style="left:40px;top:40px;width:270px;height:270px;background:#FF6B5C"></div>
+          <div class="em-figura em-figura--rombo" style="left:300px;top:250px;width:190px;height:190px;background:#FFC83D"></div>
+          <div class="em-figura em-figura--cuadrado" style="left:520px;top:20px;width:170px;height:170px;background:#2EDBA8;border-radius:38px"></div>
+          <div id="s00-punto" class="em-figura em-figura--circulo" style="left:90px;top:390px;width:44px;height:44px;background:#3B7BFF"></div>
+          <div class="em-linea" style="left:0;top:210px;width:780px;background:#FFF1D6;opacity:.4"></div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const tl = gsap.timeline({ paused: true });
+          const EM = MAFIA.editorialMotion;
+          EM.entrar(tl, "#s00-titulo-1", 0.12, { dur: 0.5, y: 140 });
+          EM.entrar(tl, "#s00-titulo-2", 0.28, { dur: 0.5, y: 140 });
+          EM.entrar(tl, "#s00-titulo-3", 0.44, { dur: 0.54, y: 140 });
+          EM.entrar(tl, "#s00-bajada", 0.95, { dur: 0.42, y: 20 });
+          EM.entrar(tl, "#s00-geometria", 0.3, { dur: 0.58, x: 0, y: 90 });
+          tl.fromTo("#s00-punto", { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.42, ease: "power3.out" }, 0.62);
+          window.__timelines["s00"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -54,6 +54,30 @@
         "third-party"
       ],
       "distribution": "public"
+    },
+    {
+      "id": "reference-analyst",
+      "path": "reference-analyst",
+      "entrypoint": "SKILL.md",
+      "description": "Analyze requested video references with measured data, frame evidence, and usage rules",
+      "tags": [
+        "reference-analysis",
+        "creative-review",
+        "video"
+      ],
+      "distribution": "public"
+    },
+    {
+      "id": "creative-review",
+      "path": "creative-review",
+      "entrypoint": "SKILL.md",
+      "description": "Inspect storyboard and render frames, make bounded pre-render repairs, and document concrete findings and reference fidelity",
+      "tags": [
+        "creative-review",
+        "visual-qa",
+        "video"
+      ],
+      "distribution": "public"
     }
   ]
 }
