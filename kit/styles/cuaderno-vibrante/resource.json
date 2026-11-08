@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "id": "cuaderno-vibrante",
+  "type": "style",
+  "distribution": "public",
+  "license": "AGPL-3.0-only (original style code and sound); HyperFrames/GSAP standard license for bundled runtime",
+  "source": "portable public adaptation of the canonical Cuaderno Vibrante visual language",
+  "notes": "Brand-independent edition. It contains no Mafia AI characters, marks, private voices, or project media."
+}

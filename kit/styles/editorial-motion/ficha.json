@@ -1,0 +1,18 @@
+{
+  "nombre": "Editorial Motion",
+  "tipo": "estilo",
+  "estado": "en uso",
+  "descripcion": "Explainer editorial plano y cinético: fondos navy y crema, seis acentos controlados, tipografía Inter contundente, formas geométricas que cambian y profundidad ligera por capas.",
+  "origen": "demo canónica 16:9; adaptación de distribución con plantillas 16:9 y 9:16",
+  "licencia": "AGPL-3.0-only",
+  "plantilla": "editorial-motion-16x9",
+  "plantillas": ["editorial-motion-16x9", "editorial-motion-9x16"],
+  "uso": "const EM = MAFIA.editorialMotion;\nEM.entrar(tl, \"#s00-titular\", 0.12, { dur: 0.5, y: 64 });\nEM.morph(tl, \"#s02-forma\", \"M 130 24 C 168 68 206 106 236 130 C 206 154 168 192 130 236 C 92 192 54 154 24 130 C 54 106 92 68 130 24 Z\", 0.7);\nEM.zoomThrough(tl, { hueco: \"#s04-hueco\", anillo: \"#s04-anillo\", at: 0, dur: 1.15 });",
+  "parametros": {
+    "colores": "--em-noche, --em-crema, --em-azul, --em-coral, --em-amarillo, --em-menta",
+    "clases": ".em-escena, .em-escena--noche, .em-escena--crema, .em-escena--vertical, .em-etiqueta, .em-titular, .em-bajada, .em-dato, .em-panel, .em-forma, .em-paisaje-capa, .em-paso-indice",
+    "entrar(tl, selector, at, {dur, x, y, ease, stagger})": "revela texto u objeto con desplazamiento corto y easing limpio",
+    "morph(tl, selector, path, at, {dur, ease})": "morph SVG con MorphSVGPlugin ya empaquetado en el Studio",
+    "zoomThrough(tl, {hueco, anillo, at, dur, radio})": "expande un hueco SVG para revelar la escena siguiente con un zoom de cámara"
+  }
+}

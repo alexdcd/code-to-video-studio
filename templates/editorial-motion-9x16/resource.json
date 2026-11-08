@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "id": "editorial-motion-9x16",
+  "type": "template",
+  "distribution": "public",
+  "license": "AGPL-3.0-only (original template); bundled Inter font under SIL OFL 1.1; GSAP Standard License applies to runtime",
+  "source": "original vertical Editorial Motion template",
+  "notes": "Generic 9:16 example. No brand assets, private voices, project media, or external artwork."
+}

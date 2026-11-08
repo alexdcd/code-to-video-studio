@@ -1,6 +1,6 @@
 {
   "name": "starter",
-  "type": "style",
-  "description": "Neutral dark motion-design starter for explainers and demos.",
-  "license": "Apache-2.0"
+  "type": "technical-template",
+  "description": "Neutral technical foundation for vertical projects; not a creative style.",
+  "license": "AGPL-3.0-only"
 }

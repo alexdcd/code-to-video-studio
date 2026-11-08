@@ -80,6 +80,21 @@ test("classification follows the policy available in this distribution", () => {
   }
 });
 
+test("the duplicate free variant engine is absent; the canonical compatibility adapter stays private", () => {
+  const duplicate = "scripts/variant.mjs";
+  const packageJson = JSON.parse(fs.readFileSync(path.join(REPO_ROOT, "package.json"), "utf8"));
+  assert.equal(fs.existsSync(path.join(REPO_ROOT, duplicate)), false);
+  assert.equal(Object.hasOwn(packageJson.scripts || {}, "variant"), false);
+  assert.equal(Object.hasOwn(packageJson.scripts || {}, "variant:test"), false);
+
+  const adapter = "scripts/variante.mjs";
+  if (fs.existsSync(path.join(REPO_ROOT, adapter))) {
+    assert.equal(resolveTier(adapter, { policy: repositoryPolicy }).tier, "private");
+    assert.equal(publicManifest.shared.some(item => item.private === adapter), false);
+    assert.equal(publicManifest.sharedPackages.some(item => adapter === item.private || adapter.startsWith(`${item.private}/`)), false);
+  }
+});
+
 test("public and pro resources require an explicit license", () => {
   assert.deepEqual(validateResourceManifest({ schemaVersion: 1, id: "x", type: "texture", distribution: "private" }), []);
   assert.equal(validateResourceManifest({ schemaVersion: 1, id: "x", type: "texture", distribution: "public" }).length, 1);

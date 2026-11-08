@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="es">
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <div id="s04" data-composition-id="s04" data-width="1920" data-height="1080" class="em-escena em-escena--transicion">
+        <svg class="em-portal" viewBox="0 0 1920 1080" aria-hidden="true">
+          <defs>
+            <mask id="s04-mascara" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse">
+              <rect x="0" y="0" width="1920" height="1080" fill="#FFFFFF"></rect>
+              <circle id="s04-hueco" cx="960" cy="540" r="48" fill="#000000"></circle>
+            </mask>
+          </defs>
+          <rect x="0" y="0" width="1920" height="1080" fill="#0F1A3D" mask="url(#s04-mascara)"></rect>
+          <circle id="s04-anillo" cx="960" cy="540" r="48" data-layout-allow-overflow fill="none" stroke="#FFC83D" stroke-width="18"></circle>
+        </svg>
+      </div>
+      <script>
+        (() => {
+          const tl = gsap.timeline({ paused: true });
+          MAFIA.editorialMotion.zoomThrough(tl, {
+            hueco: "#s04-hueco",
+            anillo: "#s04-anillo",
+            at: 0,
+            dur: 1.15,
+            inicial: 48,
+            radio: 1200,
+            ease: "power3.in",
+          });
+          window.__timelines["s04"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

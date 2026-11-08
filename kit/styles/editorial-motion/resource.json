@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "id": "editorial-motion",
+  "type": "style",
+  "distribution": "public",
+  "license": "AGPL-3.0-only (original style code and documentation); GSAP Standard License and HyperFrames notices apply to bundled runtime",
+  "source": "original Editorial Motion style",
+  "notes": "Reusable geometry, typographic composition and scene transitions; no brand assets or project media."
+}

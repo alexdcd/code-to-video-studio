@@ -10,8 +10,14 @@ const required=[
   "README.md","AGENTS.md","LICENSE","THIRD_PARTY_NOTICES.md",
   "skills/README.md","skills/registry.json","skills/mafia-ai-character-creator/SKILL.md","skills/mafia-ai-character-creator/DISTRIBUTION-MANIFEST.json","scripts/skills.mjs","scripts/package_skill.py",
   "kit/VERSION","kit/lib/mafia.js","kit/lib/cartoon-motion.js","kit/lib/three-desenfoque.js","kit/lib/three-anotaciones.js","kit/lib/boceto.js","kit/lib/fisica.js","kit/lib/fx.js",
-  "kit/styles/starter/starter.css","kit/characters/signal/signal.js",
-  "templates/starter-9x16/index.html","proyectos/demo/index.html","scripts/lib/qa-video.py","scripts/web-encode.mjs","scripts/sfx-clean.mjs","tools/sfx/candidates.py","tools/sfx/clean.sh"
+  "kit/styles/starter/starter.css","kit/styles/registry.json",
+  "kit/styles/cuaderno-vibrante/cuaderno-vibrante.js","kit/styles/cuaderno-vibrante/GUIA.md",
+  "kit/styles/editorial-motion/editorial-motion.js","kit/styles/editorial-motion/GUIA.md",
+  "kit/fonts/inter.css","kit/fonts/OFL.txt","kit/lib/vendor/gsap/MorphSVGPlugin.min.js",
+  "kit/characters/signal/signal.js",
+  "templates/starter-9x16/index.html","templates/starter-9x16/resource.json",
+  "templates/cuaderno-vibrante-9x16/index.html","templates/editorial-motion-16x9/index.html","templates/editorial-motion-9x16/index.html",
+  "proyectos/demo/index.html","scripts/lib/qa-video.py","scripts/web-encode.mjs","scripts/sfx-clean.mjs","tools/sfx/candidates.py","tools/sfx/clean.sh"
 ];
 
 let bad=false;

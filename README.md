@@ -151,13 +151,22 @@ pnpm run skills install --tier public --target codex
 
 The installer checks each skill's manifest and hashes, and keeps the installed skills up to date. It refuses to overwrite a locally modified copy unless you pass `--force`.
 
+### Free creative styles
+
+The free distribution contains exactly two complete creative styles:
+
+- **`cuaderno-vibrante`** — a 9:16 hand-drawn look with deterministic pencil vibration, procedural paper, camera moves, geometric transitions, subtitles and optional generated sound. Start with `pnpm run new cuaderno-vibrante-9x16 my-video`; read [`kit/styles/cuaderno-vibrante/GUIA.md`](kit/styles/cuaderno-vibrante/GUIA.md).
+- **`editorial-motion`** — a clean typographic and geometric system with SVG morphs and zoom-through transitions. Start with `pnpm run new editorial-motion-16x9 my-video` or `pnpm run new editorial-motion-9x16 my-video`; read [`kit/styles/editorial-motion/GUIA.md`](kit/styles/editorial-motion/GUIA.md).
+
+`starter-9x16` and `blank-16x9` are neutral technical templates for getting started. They are not additional creative styles. The machine-readable selection is in [`kit/styles/registry.json`](kit/styles/registry.json).
+
 ### Compatibility
 
 Project creation, validation, preview, snapshots and rendering use Node.js commands and are designed for macOS, Windows and Linux. They require Node.js 22+, the pinned pnpm version, ffmpeg/ffprobe and Python 3 for analysis and QA. The `sfx:clean` and `web:encode` helpers also use cross-platform Node wrappers. GitHub Actions currently runs its automated checks on Linux.
 
 Then open the repository with Claude Code, Codex or your preferred coding agent and try:
 
-> Read AGENTS.md and proyectos/my-video/BRIEF.md. Create a 15-second vertical video explaining how an AI agent turns a goal into actions. Keep one important visual idea on screen at a time. Use the starter style as a base, but create original scenes. Validate the project and inspect key snapshots before rendering.
+> Read AGENTS.md and proyectos/my-video/BRIEF.md. Create a 15-second vertical video explaining how an AI agent turns a goal into actions. Keep one important visual idea on screen at a time. Choose `cuaderno-vibrante` or `editorial-motion` if the brief calls for a creative style; treat `starter-9x16` as a neutral technical template. Validate the project and inspect key snapshots before rendering.
 
 When it is ready:
 
@@ -424,7 +433,7 @@ The aim is to build a **video system that compounds**, instead of prompting a ne
 
 ## Public core, private identity
 
-This repository contains the open core and a neutral starter.
+This repository contains the open core, two complete creative styles and neutral technical templates.
 
 Mafia AI's production projects, brand assets and private creative libraries remain separate. That separation is intentional and useful for anyone adopting the studio: keep the reusable engine independent from the assets that make your work recognizably yours.
 

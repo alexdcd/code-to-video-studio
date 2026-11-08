@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <div id="s01" data-composition-id="s01" data-width="1920" data-height="1080" class="em-escena em-escena--crema">
+        <span id="s01-encabezado" class="em-etiqueta" style="position:absolute;left:150px;top:144px">Tres gestos explican una idea</span>
+        <span id="s01-numero" class="em-dato" style="position:absolute;left:142px;top:274px;width:520px">3</span>
+        <span id="s01-aclaracion" class="em-copia" style="position:absolute;left:166px;top:660px;width:430px">
+          Una forma clara guía la mirada.
+        </span>
+        <div id="s01-lista" style="position:absolute;left:810px;top:332px;width:850px">
+          <div class="em-token"><span class="em-token-marca" style="background:#3B7BFF"></span><span>FORMA</span></div>
+          <div class="em-token"><span class="em-token-marca" style="background:#FF6B5C"></span><span>RITMO</span></div>
+          <div class="em-token"><span class="em-token-marca" style="background:#2EDBA8"></span><span>PROFUNDIDAD</span></div>
+        </div>
+        <div class="em-linea" style="left:754px;top:306px;width:2px;height:450px;background:#0F1A3D;opacity:.18"></div>
+        <div class="em-figura em-figura--circulo" style="left:1600px;top:158px;width:122px;height:122px;background:#FFC83D"></div>
+      </div>
+      <script>
+        (() => {
+          const tl = gsap.timeline({ paused: true });
+          const EM = MAFIA.editorialMotion;
+          EM.entrar(tl, "#s01-encabezado", 0.12, { dur: 0.38, y: 16 });
+          EM.entrar(tl, "#s01-numero", 0.26, { dur: 0.62, y: 24, ease: "power3.out" });
+          EM.entrar(tl, "#s01-aclaracion", 0.76, { dur: 0.4, y: 18 });
+          EM.entrar(tl, "#s01-lista .em-token", 0.56, { dur: 0.46, x: 28, stagger: 0.16 });
+          window.__timelines["s01"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

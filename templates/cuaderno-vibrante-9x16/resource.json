@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "id": "cuaderno-vibrante-9x16",
+  "type": "template",
+  "distribution": "public",
+  "license": "AGPL-3.0-only (original template, style code and procedural audio)",
+  "source": "portable adaptation of the canonical Cuaderno Vibrante visual language",
+  "notes": "Generic 9:16 example. No brand, character, private voice or project media."
+}

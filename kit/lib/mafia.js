@@ -418,7 +418,12 @@
        subs.tramos(ocultar)      → tramos ordenados y fusionados (lanza error si alguno es inválido)
        subs.oculto(ocultar)      → función t → true si en t el subtítulo debe estar apagado
        subs.grupos(voz)          → grupos de ≤3 palabras con { pal, ini, fin }
-       subs.montar(tl, cont, voz, {ocultar, clase}) → subtítulos DOM por grupos, encendidos/apagados con tl.set
+       subs.frases(voz, {max})   → frases completas de ≤ max caracteres (48 por defecto: una o dos líneas), con { pal, ini, fin }.
+                                   Corta en el punto final, prefiere la coma y reparte el resto en trozos parejos (nunca una palabra suelta).
+       subs.montar(tl, cont, voz, {ocultar, clase, modo, max}) → subtítulos DOM encendidos/apagados con tl.set
+         modo "grupos" (por defecto): grupos de ≤3 palabras, clase «sub-grupo».
+         modo "frase": la frase completa a la vez, clase «sub-frase»; todas las palabras atenuadas y solo la hablada en
+           negrita y con el acento (data-activa="1"; sin escalado ni parpadeo). Estilo en mafia.css (variables --sub-*).
        El contenedor debe tener id de escena; id permite un prefijo explícito para varias pistas.
        (determinista: sin estado entre fotogramas). Un grupo que cae dentro de un tramo oculto no se muestra. */
     subs: {
@@ -450,15 +455,63 @@
         });
         return G;
       },
+      frases(voz, opts = {}) {
+        const max = opts.max ?? 48;
+        if (!Number.isFinite(max) || max < 10) throw new Error("subs: max debe ser un número de caracteres ≥ 10");
+        const largo = (a) => a.reduce((s, p) => s + p.t.length, 0) + a.length - 1;
+        const F = [];
+        voz.lineas.forEach((ln, li) => {
+          const sig = voz.lineas[li + 1], finL = Math.min(ln.fin + 0.3, sig ? sig.inicio - 0.02 : ln.fin + 0.3), mine = [];
+          // 1. Oraciones: se cortan en el punto final (el cierre de comillas o paréntesis cuenta).
+          const oraciones = [];
+          let cur = [];
+          ln.palabras.forEach((w) => { cur.push(w); if (/[.?!…]["”»')\]]*$/.test(w.t)) { oraciones.push(cur); cur = []; } });
+          if (cur.length) oraciones.push(cur);
+          // 2. Cada oración que no cabe se reparte en n trozos parejos de ≤ max caracteres; en cada corte se elige el más
+          //    cercano al tamaño ideal y una coma lo favorece. Una palabra más larga que max queda sola en su trozo.
+          oraciones.forEach((or) => {
+            let s = 0;
+            while (s < or.length - 1 && largo(or.slice(s)) > max) {
+              const r = Math.ceil(largo(or.slice(s)) / max), ideal = largo(or.slice(s)) / r;
+              let corte = s + 1, coste = Infinity, voraz = s + 1;
+              for (let e = s + 1; e < or.length; e++) {
+                const len = largo(or.slice(s, e));
+                if (len > max && e > s + 1) break;
+                voraz = e;
+                if (largo(or.slice(e)) > (r - 1) * max + (r - 2)) continue; // lo que queda no cabría en los r-1 trozos restantes
+                const c = Math.abs(len - ideal) - (/[,;:]$/.test(or[e - 1].t) ? ideal * 0.25 : 0);
+                if (c < coste) { coste = c; corte = e; }
+              }
+              if (coste === Infinity) corte = voraz; // el empaquetado exacto no existe a nivel de palabra: el trozo más largo que cabe
+              mine.push({ pal: or.slice(s, corte), ini: or[s].i });
+              s = corte;
+            }
+            mine.push({ pal: or.slice(s), ini: or[s].i });
+          });
+          mine.forEach((gp, k) => { gp.fin = k + 1 < mine.length ? mine[k + 1].ini : finL; F.push(gp); });
+        });
+        return F;
+      },
       montar(tl, cont, voz, opts = {}) {
         cont = M.$(cont);
         const prefijo = opts.id || (cont?.id && cont.id + "-sub");
         if (!prefijo) throw new Error("subs: el contenedor necesita id o la opción id");
         const ocultar = M.subs.tramos(opts.ocultar);
-        const clase = opts.clase || "sub-grupo";
-        const nodos = M.subs.grupos(voz).map((gp, k) => {
+        const modo = opts.modo || "grupos";
+        if (modo !== "grupos" && modo !== "frase") throw new Error('subs: modo debe ser "grupos" o "frase"');
+        const frase = modo === "frase";
+        const clase = opts.clase || (frase ? "sub-frase" : "sub-grupo");
+        const nodos = (frase ? M.subs.frases(voz, opts) : M.subs.grupos(voz)).map((gp, k) => {
           const d = M.html("div", { class: clase, id: prefijo + "-" + k }, cont);
-          d.textContent = gp.pal.map((w) => w.t).join(" ");
+          if (frase) {
+            // Una palabra activa a la vez: pasa a la siguiente sin hueco y la última aguanta hasta el final de la frase.
+            gp.pal.forEach((w, j) => {
+              if (j) d.appendChild(document.createTextNode(" "));
+              const s = M.html("span", { class: "sub-pal", "data-t": w.t, "data-activa": "0", text: w.t }, d);
+              const fin = j + 1 < gp.pal.length ? gp.pal[j + 1].i : gp.fin;
+              if (fin - w.i > 1e-3) { tl.set(s, { attr: { "data-activa": 1 } }, w.i); tl.set(s, { attr: { "data-activa": 0 } }, fin); }
+            });
+          } else d.textContent = gp.pal.map((w) => w.t).join(" ");
           d.style.opacity = "0";
           d.style.visibility = "hidden";
           tl.set(d, { autoAlpha: 0 }, 0);

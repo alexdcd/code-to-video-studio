@@ -81,3 +81,7 @@ Code to Video Studio installs these pinned runtime packages from npm:
 
 Rough.js and Matter.js are vendored with their LICENSE files under `kit/lib/vendor/` by `pnpm run vendor`. They are not relicensed by this repository.
 Review the license shipped with each dependency for the terms that apply to it. GSAP's license is not MIT; check the linked terms before using it in a commercial project.
+
+## Creative style assets
+
+The bundled `kit/lib/vendor/gsap/MorphSVGPlugin.min.js` is MorphSVGPlugin 3.15.0, copyright GreenSock, under the GSAP Standard License; its upstream license header is retained. The Editorial Motion style depends on it for SVG path morphs. Inter Latin subsets in `kit/fonts/` are copyright The Inter Project Authors and remain under SIL Open Font License 1.1; the full text is in `kit/fonts/OFL.txt`.

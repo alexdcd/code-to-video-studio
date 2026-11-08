@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <div id="s03" data-composition-id="s03" data-width="1080" data-height="1920" class="em-escena em-escena--vertical em-escena--crema">
+        <span id="s03-titulo" class="em-etiqueta" style="position:absolute;left:92px;top:210px">Tres pasos, una lectura cada vez</span>
+        <div class="em-linea" style="left:136px;top:350px;width:3px;height:430px;background:#0F1A3D;opacity:.25"></div>
+        <div id="s03-paso-1" class="em-paso" style="left:92px;top:304px">
+          <span class="em-paso-indice" style="background:#3B7BFF">01</span>
+          <span class="em-paso-titulo">OBSERVA</span>
+        </div>
+        <div id="s03-paso-2" class="em-paso" style="left:92px;top:484px">
+          <span class="em-paso-indice" style="background:#FF6B5C">02</span>
+          <span class="em-paso-titulo">REDUCE</span>
+        </div>
+        <div id="s03-paso-3" class="em-paso" style="left:92px;top:664px">
+          <span class="em-paso-indice" style="background:#2EDBA8;color:#0F1A3D">03</span>
+          <span class="em-paso-titulo">ORDENA</span>
+        </div>
+        <span id="s03-nota" class="em-copia" style="position:absolute;left:92px;top:900px;width:800px;color:#0F1A3D">
+          Las capas cercanas se mueven más que las lejanas.
+        </span>
+        <div id="s03-paisaje">
+          <div id="s03-capa-fondo" class="em-paisaje-capa em-paisaje-fondo" data-layout-allow-overflow></div>
+          <div id="s03-capa-medio" class="em-paisaje-capa em-paisaje-medio" data-layout-allow-overflow></div>
+          <div id="s03-capa-frente" class="em-paisaje-capa em-paisaje-frente" data-layout-allow-overflow></div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const tl = gsap.timeline({ paused: true });
+          const EM = MAFIA.editorialMotion;
+          EM.entrar(tl, "#s03-titulo", 0.12, { dur: 0.34, y: 16 });
+          EM.entrar(tl, "#s03-paso-1", 0.28, { dur: 0.4, y: 18 });
+          EM.entrar(tl, "#s03-paso-2", 0.52, { dur: 0.4, y: 18 });
+          EM.entrar(tl, "#s03-paso-3", 0.76, { dur: 0.4, y: 18 });
+          tl.fromTo("#s03-capa-fondo", { x: 12 }, { x: -12, duration: 2.5, ease: "none" }, 0);
+          tl.fromTo("#s03-capa-medio", { x: 28 }, { x: -28, duration: 2.5, ease: "none" }, 0);
+          tl.fromTo("#s03-capa-frente", { x: 54 }, { x: -54, duration: 2.5, ease: "none" }, 0);
+          EM.entrar(tl, "#s03-nota", 1.3, { dur: 0.34, y: 14 });
+          window.__timelines["s03"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>
