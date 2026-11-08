@@ -72,7 +72,7 @@ No lo uses como identidad de marca, para una crónica atmosférica, para acting 
 
 - `PALETA`: los seis colores base.
 - `entrar(tl, selector, at, {dur, x, y, ease, stagger})`: revela uno o varios elementos con desplazamiento y easing.
-- `morph(tl, selector, path, at, {dur, ease})`: interpola un SVG con el MorphSVGPlugin ya incluido por el Studio; usa paths sencillos.
+- `morph(tl, selector, path, at, {dur, ease})`: interpola un SVG con MorphSVGPlugin de `gsap@3.15.0`; `pnpm run setup` lo copia del paquete npm al runtime local del Studio. Usa paths sencillos.
 - `zoomThrough(tl, {hueco, anillo, at, dur, radio, inicial, ease})`: abre el radio de un círculo dentro de una máscara SVG; coloca la escena siguiente debajo en el timeline.
 
 El CSS define titulares, bajadas, datos, paneles, comparativas, etiquetas, pasos, paisaje por capas y cierre. No crea una clase por cada variante temática.
@@ -111,7 +111,7 @@ Se revisaron los ejemplos del pack `motion` #009–020 de [Motion Prompt](https:
 
 | Momento de la demo | Referencia que ayudaría | Qué aportó / ¿hizo falta? | Cobertura interna |
 | --- | --- | --- | --- |
-| `s02`, la forma pasa de círculo a rombo redondeado | [#012 Shape morph](https://github.com/showheyohtaki/motion-prompt/blob/7819d3879eb7d5a1475c11c001bedffb5cab64af/api/v1/en/e/012.txt) | Ayudó a elegir una transformación con pausa y un remate leve; no hizo falta copiar código. | MorphSVGPlugin se incluye con el kit y GSAP gobierna el tiempo. |
+| `s02`, la forma pasa de círculo a rombo redondeado | [#012 Shape morph](https://github.com/showheyohtaki/motion-prompt/blob/7819d3879eb7d5a1475c11c001bedffb5cab64af/api/v1/en/e/012.txt) | Ayudó a elegir una transformación con pausa y un remate leve; no hizo falta copiar código. | MorphSVGPlugin llega con `gsap@3.15.0` desde npm y setup lo copia al runtime local; GSAP gobierna el tiempo. |
 | `s03`, tres planos se mueven a distinta velocidad | [#016 Parallax](https://github.com/showheyohtaki/motion-prompt/blob/7819d3879eb7d5a1475c11c001bedffb5cab64af/api/v1/en/e/016.txt) | Sirvió para concretar el escalado de movimiento de lejos a cerca. | GSAP y las capas SVG/CSS existentes cubren el efecto; no se añadió otro motor. |
 | `s04`, una apertura circular revela el cierre mientras el contenido se acerca | [#020 Zoom through](https://github.com/showheyohtaki/motion-prompt/blob/7819d3879eb7d5a1475c11c001bedffb5cab64af/api/v1/en/e/020.txt) | Aclaró cómo unir cámara y paso de escena en una lectura; la máscara propia y GSAP bastaron. | El morph, el easing y el timeline son del Studio; solo el contrato visual es externo. |
 | `s00`, asentamiento del titular; `s01`, el número toma peso | [#009 Easing, #010 Overshoot y #011 Squash & stretch](https://github.com/showheyohtaki/motion-prompt/tree/7819d3879eb7d5a1475c11c001bedffb5cab64af/api/v1/en/e) | Se tomó como recordatorio de variar aceleración y dar peso; se evitó un rebote de personaje o una deformación decorativa. | `GSAP` y `MAFIA.anim` cubren easing y squash deterministas. |

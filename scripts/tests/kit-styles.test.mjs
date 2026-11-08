@@ -51,7 +51,29 @@ test("every free style and template has public metadata and local runtime depend
 
   assert.ok(fs.existsSync(path.join(ROOT, "kit/fonts/inter.css")));
   assert.ok(fs.existsSync(path.join(ROOT, "kit/fonts/OFL.txt")));
-  assert.match(fs.readFileSync(path.join(ROOT, "kit/plugins/gsap/MorphSVGPlugin.min.js"), "utf8"), /standard-license/);
+  const gsapPackage = readJson("node_modules/gsap/package.json");
+  assert.equal(gsapPackage.version, "3.15.0");
+  const morphNpmPath = path.join(ROOT, "node_modules/gsap/dist/MorphSVGPlugin.min.js");
+  const morphRuntimePath = path.join(ROOT, "kit/lib/vendor/gsap/MorphSVGPlugin.min.js");
+  assert.ok(fs.existsSync(morphNpmPath), "gsap@3.15.0 must provide MorphSVGPlugin in dist/");
+  assert.ok(fs.existsSync(morphRuntimePath), "setup must copy MorphSVGPlugin into the local runtime");
+  const morphNpm = fs.readFileSync(morphNpmPath);
+  const morphRuntime = fs.readFileSync(morphRuntimePath);
+  assert.ok(morphRuntime.length > 20_000, "runtime plugin must be the real implementation, not a stub");
+  assert.ok(morphRuntime.equals(morphNpm), "runtime plugin must match the pinned npm source exactly");
+  assert.match(morphRuntime.toString("utf8"), /version:"3\.15\.0"/);
+  assert.equal(fs.existsSync(path.join(ROOT, "kit/plugins/gsap")), false, "no vendored MorphSVG duplicate");
+
+  for (const id of ["editorial-motion-16x9", "editorial-motion-9x16"]) {
+    const index = fs.readFileSync(path.join(ROOT, `templates/${id}/index.html`), "utf8");
+    const scene = fs.readFileSync(path.join(ROOT, `templates/${id}/compositions/s02.html`), "utf8");
+    assert.match(index, /assets\/kit\/lib\/vendor\/gsap\/MorphSVGPlugin\.min\.js/);
+    assert.match(scene, /EM\.morph\(/, `${id} must use an animated SVG morph`);
+  }
+  const vendorSource = fs.readFileSync(path.join(ROOT, "scripts/vendor.mjs"), "utf8");
+  assert.match(vendorSource, /node_modules\/gsap\/dist/);
+  assert.match(vendorSource, /MorphSVGPlugin is missing from installed gsap@3\.15\.0/);
+  assert.doesNotMatch(vendorSource, /kit\/plugins\/gsap/);
 });
 
 test("public project templates do not depend on private brands, voices, or characters", () => {

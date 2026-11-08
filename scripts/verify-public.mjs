@@ -13,7 +13,7 @@ const required=[
   "kit/styles/starter/starter.css","kit/styles/registry.json",
   "kit/styles/cuaderno-vibrante/cuaderno-vibrante.js","kit/styles/cuaderno-vibrante/GUIA.md",
   "kit/styles/editorial-motion/editorial-motion.js","kit/styles/editorial-motion/GUIA.md",
-  "kit/fonts/inter.css","kit/fonts/OFL.txt","kit/plugins/gsap/MorphSVGPlugin.min.js","kit/plugins/gsap/NOTICE.md",
+  "kit/fonts/inter.css","kit/fonts/OFL.txt","kit/lib/vendor/gsap/MorphSVGPlugin.min.js",
   "kit/characters/signal/signal.js",
   "templates/starter-9x16/index.html","templates/starter-9x16/resource.json",
   "templates/cuaderno-vibrante-9x16/index.html","templates/editorial-motion-16x9/index.html","templates/editorial-motion-9x16/index.html",
@@ -24,6 +24,40 @@ let bad=false;
 for (const rel of required) {
   if (!fs.existsSync(path.join(ROOT,rel))) {
     console.error("Missing:",rel);
+    bad=true;
+  }
+}
+
+const gsapPackagePath=path.join(ROOT,"node_modules/gsap/package.json");
+const morphNpmPath=path.join(ROOT,"node_modules/gsap/dist/MorphSVGPlugin.min.js");
+const morphRuntimePath=path.join(ROOT,"kit/lib/vendor/gsap/MorphSVGPlugin.min.js");
+if (!fs.existsSync(gsapPackagePath)) {
+  console.error("Missing node_modules/gsap/package.json; reinstall dependencies with pnpm install --frozen-lockfile.");
+  bad=true;
+} else {
+  const gsapPackage=JSON.parse(fs.readFileSync(gsapPackagePath,"utf8"));
+  if (gsapPackage.version!=="3.15.0") {
+    console.error(`Expected gsap@3.15.0, found gsap@${gsapPackage.version}. Reinstall dependencies with pnpm install --frozen-lockfile.`);
+    bad=true;
+  }
+}
+if (!fs.existsSync(morphNpmPath)) {
+  console.error("MorphSVGPlugin is missing from gsap@3.15.0; reinstall the pinned dependency with pnpm install --frozen-lockfile.");
+  bad=true;
+}
+if (!fs.existsSync(morphRuntimePath)) {
+  console.error("MorphSVGPlugin is missing from the local runtime; run pnpm run setup.");
+  bad=true;
+} else if (fs.existsSync(morphNpmPath)) {
+  const npmMorph=fs.readFileSync(morphNpmPath);
+  const runtimeMorph=fs.readFileSync(morphRuntimePath);
+  if (!runtimeMorph.equals(npmMorph)) {
+    console.error("The local MorphSVG runtime does not match the installed gsap@3.15.0 package; run pnpm run setup.");
+    bad=true;
+  }
+  const runtimeText=runtimeMorph.toString("utf8");
+  if (!runtimeText.includes("MorphSVGPlugin") || !runtimeText.includes('version:"3.15.0"')) {
+    console.error("The local MorphSVG runtime is not the real gsap@3.15.0 plugin.");
     bad=true;
   }
 }

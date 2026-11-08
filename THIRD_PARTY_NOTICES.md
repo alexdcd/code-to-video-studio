@@ -84,4 +84,4 @@ Review the license shipped with each dependency for the terms that apply to it. 
 
 ## Creative style assets
 
-The tracked source `kit/plugins/gsap/MorphSVGPlugin.min.js` is MorphSVGPlugin 3.15.0, copyright GreenSock, under the GSAP Standard License; its upstream license header is retained. Setup copies it to the generated local runtime, and Editorial Motion uses it for SVG path morphs. Inter Latin subsets in `kit/fonts/` are copyright The Inter Project Authors and remain under SIL Open Font License 1.1; the full text is in `kit/fonts/OFL.txt`.
+The pinned `gsap@3.15.0` npm dependency supplies MorphSVGPlugin, copyright GreenSock, under the GSAP Standard License; its upstream license header is retained. `pnpm run setup` copies `node_modules/gsap/dist/MorphSVGPlugin.min.js` into the generated local runtime, and Editorial Motion uses it for SVG path morphs. Inter Latin subsets in `kit/fonts/` are copyright The Inter Project Authors and remain under SIL Open Font License 1.1; the full text is in `kit/fonts/OFL.txt`.

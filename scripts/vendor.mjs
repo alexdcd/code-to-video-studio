@@ -9,20 +9,20 @@ const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
 export function vendor() {
   const gsapSource=path.join(ROOT,"node_modules/gsap/dist");
   if (!fs.existsSync(path.join(gsapSource,"gsap.min.js"))) throw new Error("GSAP not installed. Run pnpm install first.");
+  const gsapPackage=JSON.parse(fs.readFileSync(path.join(ROOT,"node_modules/gsap/package.json"),"utf8"));
+  if (gsapPackage.version!=="3.15.0") throw new Error(`Expected pinned gsap@3.15.0, found gsap@${gsapPackage.version}. Reinstall dependencies with pnpm install --frozen-lockfile.`);
+  const morphSource=path.join(gsapSource,"MorphSVGPlugin.min.js");
+  if (!fs.existsSync(morphSource)) throw new Error("MorphSVGPlugin is missing from installed gsap@3.15.0. Reinstall the pinned dependency with pnpm install --frozen-lockfile.");
 
   const vendorRoot=path.join(ROOT,"kit/lib/vendor");
-  const morphSource=path.join(ROOT,"kit/plugins/gsap/MorphSVGPlugin.min.js");
-  if (!fs.existsSync(morphSource)) throw new Error("The tracked MorphSVGPlugin source is missing. Restore kit/plugins/gsap/MorphSVGPlugin.min.js before running vendor.");
-  const morphBytes=fs.readFileSync(morphSource);
   fs.rmSync(vendorRoot,{recursive:true,force:true});
 
   const gsapDest=path.join(vendorRoot,"gsap");
   fs.mkdirSync(gsapDest,{recursive:true});
-  for (const name of ["gsap.min.js","TextPlugin.min.js","MotionPathPlugin.min.js"]) {
+  for (const name of ["gsap.min.js","TextPlugin.min.js","MotionPathPlugin.min.js","MorphSVGPlugin.min.js"]) {
     const from=path.join(gsapSource,name);
     if (fs.existsSync(from)) fs.copyFileSync(from,path.join(gsapDest,name));
   }
-  fs.writeFileSync(path.join(gsapDest,"MorphSVGPlugin.min.js"),morphBytes);
 
   const threeSource=path.join(ROOT,"node_modules/three");
   const threeDest=path.join(vendorRoot,"three");
@@ -51,6 +51,6 @@ export function vendor() {
     fs.copyFileSync(path.join(source,"LICENSE"),path.join(dest,"LICENSE"));
   }
 
-  console.log("Vendored local GSAP + Three.js + Lottie + Rough.js + Matter.js runtimes from node_modules.");
+  console.log("Vendored local GSAP (including MorphSVG) + Three.js + Lottie + Rough.js + Matter.js runtimes from node_modules.");
 }
 if (process.argv[1] && path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) vendor();

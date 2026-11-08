@@ -1,8 +1,0 @@
-{
-  "schemaVersion": 1,
-  "id": "gsap-morph-svg",
-  "type": "animation-plugin",
-  "distribution": "public",
-  "license": "GSAP Standard License; see NOTICE.md and the retained upstream file header",
-  "source": "GreenSock MorphSVGPlugin 3.15.0"
-}

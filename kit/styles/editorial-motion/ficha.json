@@ -12,7 +12,7 @@
     "colores": "--em-noche, --em-crema, --em-azul, --em-coral, --em-amarillo, --em-menta",
     "clases": ".em-escena, .em-escena--noche, .em-escena--crema, .em-escena--vertical, .em-etiqueta, .em-titular, .em-bajada, .em-dato, .em-panel, .em-forma, .em-paisaje-capa, .em-paso-indice",
     "entrar(tl, selector, at, {dur, x, y, ease, stagger})": "revela texto u objeto con desplazamiento corto y easing limpio",
-    "morph(tl, selector, path, at, {dur, ease})": "morph SVG con MorphSVGPlugin ya empaquetado en el Studio",
+    "morph(tl, selector, path, at, {dur, ease})": "morph SVG con MorphSVGPlugin de gsap@3.15.0, instalado desde npm y copiado al runtime local por setup",
     "zoomThrough(tl, {hueco, anillo, at, dur, radio})": "expande un hueco SVG para revelar la escena siguiente con un zoom de cámara"
   }
 }
