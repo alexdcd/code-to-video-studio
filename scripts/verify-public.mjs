@@ -13,7 +13,7 @@ const required=[
   "kit/styles/starter/starter.css","kit/styles/registry.json",
   "kit/styles/cuaderno-vibrante/cuaderno-vibrante.js","kit/styles/cuaderno-vibrante/GUIA.md",
   "kit/styles/editorial-motion/editorial-motion.js","kit/styles/editorial-motion/GUIA.md",
-  "kit/fonts/inter.css","kit/fonts/OFL.txt","kit/lib/vendor/gsap/MorphSVGPlugin.min.js",
+  "kit/fonts/inter.css","kit/fonts/OFL.txt","kit/plugins/gsap/MorphSVGPlugin.min.js","kit/plugins/gsap/NOTICE.md",
   "kit/characters/signal/signal.js",
   "templates/starter-9x16/index.html","templates/starter-9x16/resource.json",
   "templates/cuaderno-vibrante-9x16/index.html","templates/editorial-motion-16x9/index.html","templates/editorial-motion-9x16/index.html",

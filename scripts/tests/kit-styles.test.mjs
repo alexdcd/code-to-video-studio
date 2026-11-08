@@ -51,7 +51,7 @@ test("every free style and template has public metadata and local runtime depend
 
   assert.ok(fs.existsSync(path.join(ROOT, "kit/fonts/inter.css")));
   assert.ok(fs.existsSync(path.join(ROOT, "kit/fonts/OFL.txt")));
-  assert.match(fs.readFileSync(path.join(ROOT, "kit/lib/vendor/gsap/MorphSVGPlugin.min.js"), "utf8"), /standard-license/);
+  assert.match(fs.readFileSync(path.join(ROOT, "kit/plugins/gsap/MorphSVGPlugin.min.js"), "utf8"), /standard-license/);
 });
 
 test("public project templates do not depend on private brands, voices, or characters", () => {

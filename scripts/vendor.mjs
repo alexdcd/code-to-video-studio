@@ -11,8 +11,8 @@ export function vendor() {
   if (!fs.existsSync(path.join(gsapSource,"gsap.min.js"))) throw new Error("GSAP not installed. Run pnpm install first.");
 
   const vendorRoot=path.join(ROOT,"kit/lib/vendor");
-  const morphSource=path.join(vendorRoot,"gsap/MorphSVGPlugin.min.js");
-  if (!fs.existsSync(morphSource)) throw new Error("The tracked MorphSVGPlugin runtime is missing. Restore kit/lib/vendor/gsap/MorphSVGPlugin.min.js before running vendor.");
+  const morphSource=path.join(ROOT,"kit/plugins/gsap/MorphSVGPlugin.min.js");
+  if (!fs.existsSync(morphSource)) throw new Error("The tracked MorphSVGPlugin source is missing. Restore kit/plugins/gsap/MorphSVGPlugin.min.js before running vendor.");
   const morphBytes=fs.readFileSync(morphSource);
   fs.rmSync(vendorRoot,{recursive:true,force:true});
 
