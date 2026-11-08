@@ -1,4 +1,6 @@
 node_modules/
+.pnpm-store/
+.claude/
 .DS_Store
 .env
 .env.*
@@ -7,15 +9,21 @@ node_modules/
 
 # Generated local vendor files
 kit/lib/vendor/
+kit/dist/
 
 # Project outputs
+proyectos/*/
 proyectos/*/renders/
 proyectos/*/snapshots/
 proyectos/*/.hyperframes/
 proyectos/*/assets/kit/
+referencias/
+**/.analysis/
 
 # Temporary public-export artifacts
 .public-dist/
 
 # Optional Python environment for SFX analysis
 .venv-sfx/
+**/__pycache__/
+*.py[cod]

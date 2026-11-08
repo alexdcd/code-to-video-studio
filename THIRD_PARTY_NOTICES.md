@@ -68,6 +68,16 @@ SOFTWARE.
 
 ## Runtime dependencies
 
-Code to Video Studio installs HyperFrames, GSAP, Three.js, lottie-web, Rough.js (MIT) and Matter.js (MIT) from npm.
+Code to Video Studio installs these pinned runtime packages from npm:
+
+| Package | Version | License / terms | Source |
+| --- | --- | --- | --- |
+| HyperFrames | 0.9.6 | Apache-2.0 | [npm package](https://www.npmjs.com/package/hyperframes) |
+| GSAP | 3.15.0 | Standard "no charge" license; review its terms for your use | [license](https://gsap.com/standard-license) |
+| Three.js | 0.186.1 | MIT | [npm package](https://www.npmjs.com/package/three) |
+| lottie-web | 5.13.0 | MIT | [npm package](https://www.npmjs.com/package/lottie-web) |
+| Rough.js | 4.6.6 | MIT | [source](https://github.com/rough-stuff/rough) |
+| Matter.js | 0.20.0 | MIT | [source](https://github.com/liabru/matter-js) |
+
 Rough.js and Matter.js are vendored with their LICENSE files under `kit/lib/vendor/` by `pnpm run vendor`. They are not relicensed by this repository.
-Review the license shipped with each dependency for the terms that apply to it.
+Review the license shipped with each dependency for the terms that apply to it. GSAP's license is not MIT; check the linked terms before using it in a commercial project.

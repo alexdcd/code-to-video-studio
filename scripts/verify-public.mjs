@@ -11,7 +11,7 @@ const required=[
   "skills/README.md","skills/registry.json","skills/mafia-ai-character-creator/SKILL.md","skills/mafia-ai-character-creator/DISTRIBUTION-MANIFEST.json","scripts/skills.mjs","scripts/package_skill.py",
   "kit/VERSION","kit/lib/mafia.js","kit/lib/cartoon-motion.js","kit/lib/three-desenfoque.js","kit/lib/three-anotaciones.js","kit/lib/boceto.js","kit/lib/fisica.js","kit/lib/fx.js",
   "kit/styles/starter/starter.css","kit/characters/signal/signal.js",
-  "templates/starter-9x16/index.html","proyectos/demo/index.html","scripts/lib/qa-video.py","tools/sfx/candidates.py","tools/sfx/clean.sh"
+  "templates/starter-9x16/index.html","proyectos/demo/index.html","scripts/lib/qa-video.py","scripts/web-encode.mjs","scripts/sfx-clean.mjs","tools/sfx/candidates.py","tools/sfx/clean.sh"
 ];
 
 let bad=false;
@@ -55,7 +55,7 @@ function walk(dir) {
 }
 
 walk(ROOT);
-const skillCheck=spawnSync(process.execPath,[path.join(ROOT,"scripts/skills.mjs"),"validate","mafia-ai-character-creator"],{stdio:"inherit"});
+const skillCheck=spawnSync(process.execPath,[path.join(ROOT,"scripts/skills.mjs"),"validate","--tier","public"],{stdio:"inherit"});
 if (skillCheck.status!==0) bad=true;
 if (bad) process.exit(1);
 console.log("Public distribution checks passed.");

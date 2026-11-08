@@ -114,20 +114,46 @@ Requirements:
 
 - Node.js 22+
 - pnpm 11.28.0 (pinned via `packageManager`; available through Corepack or a pnpm installation)
-- ffmpeg
+- ffmpeg and ffprobe (render, snapshots, contact sheets, export and QA)
+- Python 3 (analysis, QA and some skill validators)
 - a coding agent is strongly recommended
 
 ```bash
 git clone https://github.com/alexdcd/code-to-video-studio.git
 cd code-to-video-studio
 
-pnpm install
+pnpm install --frozen-lockfile
 pnpm run setup
 
 pnpm run new starter-9x16 my-video
 # Or use blank-16x9 in place of the command above.
 pnpm run dev my-video
 ```
+
+### Public agent skills
+
+The distribution includes five maintained skills:
+
+- `mafia-ai-character-creator` — create and QA reusable animated characters.
+- `gsap-video` — use GSAP safely in deterministic video.
+- `algorithmic-art-video` — create seeded, time-driven generative art.
+- `reference-analyst` — inspect a requested video reference and record measured observations.
+- `creative-review` — review storyboards and visual evidence against the brief.
+
+Install them for the agent you use:
+
+```bash
+pnpm run skills list --tier public
+pnpm run skills validate --tier public
+pnpm run skills install --tier public --target claude
+pnpm run skills install --tier public --target codex
+```
+
+The installer checks each skill's manifest and hashes, and keeps the installed skills up to date. It refuses to overwrite a locally modified copy unless you pass `--force`.
+
+### Compatibility
+
+Project creation, validation, preview, snapshots and rendering use Node.js commands and are designed for macOS, Windows and Linux. They require Node.js 22+, the pinned pnpm version, ffmpeg/ffprobe and Python 3 for analysis and QA. The `sfx:clean` and `web:encode` helpers also use cross-platform Node wrappers. GitHub Actions currently runs its automated checks on Linux.
 
 Then open the repository with Claude Code, Codex or your preferred coding agent and try:
 
@@ -296,17 +322,7 @@ docs/
 
 ## Agent skills
 
-Portable Studio skills live in `skills/`. The registry and each skill's SHA-256 distribution manifest are the source of truth; Claude and Codex directories are install destinations.
-
-```bash
-pnpm run skills list
-pnpm run skills install mafia-ai-character-creator --target claude
-pnpm run skills install mafia-ai-character-creator --target codex
-pnpm run skills validate mafia-ai-character-creator
-pnpm run skills package mafia-ai-character-creator
-```
-
-See [`skills/README.md`](skills/README.md) for the registry and package workflow.
+The public skills and their installation commands are listed above and in [`skills/README.md`](skills/README.md). Use `pnpm run skills list --tier public` to inspect the available set.
 
 ---
 
