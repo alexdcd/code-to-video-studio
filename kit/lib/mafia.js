@@ -387,6 +387,96 @@
       });
     },
 
+    /* Mapa de tiempo: cuando se regenera la voz, los visuales montados sobre la toma anterior («tiempo viejo») se
+       reproducen sobre la nueva sin reescribirlos. mapa = [[t_viejo, t_nuevo], …] creciente en ambas columnas
+       (lo genera scripts/mapa-tiempo.py a partir de las dos transcripciones).
+       const m = MAFIA.mapaTiempo(window.MAPA);
+       m.aViejo(t) / m.aNuevo(t)                    → convierte un instante
+       window.__timelines.main = m.envolver(tl, D)  → timeline de duración D (tiempo nuevo) que lleva tl en tiempo viejo
+       Los dibujos por hf-seek usan dibujar(m.aViejo(e.detail.time)); los subtítulos, la voz nueva pasada a tiempo viejo. */
+    mapaTiempo(mapa) {
+      if (!Array.isArray(mapa) || mapa.length < 2) throw new Error("mapaTiempo: hacen falta al menos dos anclas [viejo, nuevo]");
+      const interp = (t, a, b) => {
+        if (t <= mapa[0][a]) return mapa[0][b] + (t - mapa[0][a]);
+        for (let i = 1; i < mapa.length; i++) if (t <= mapa[i][a]) { const p = mapa[i - 1], q = mapa[i]; return p[b] + ((q[b] - p[b]) * (t - p[a])) / (q[a] - p[a]); }
+        const L = mapa[mapa.length - 1]; return L[b] + (t - L[a]);
+      };
+      const aViejo = (t) => interp(t, 1, 0), aNuevo = (t) => interp(t, 0, 1);
+      return {
+        aViejo, aNuevo,
+        envolver(tl, dur) {
+          const reloj = { t: 0 }, principal = gsap.timeline({ paused: true });
+          principal.to(reloj, { t: dur, duration: dur, ease: "none", onUpdate: () => tl.time(aViejo(reloj.t)) }, 0);
+          return principal;
+        },
+      };
+    },
+
+    /* Subtítulos por tramos (norma de TODOS los vídeos: nunca encendidos todo el rato).
+       voz: { lineas: [{ inicio, fin, palabras: [{ t, i, f }] }] }
+       ocultar: [[t0, t1], …] tramos en los que la pantalla ya dice lo mismo que la voz (en segundos del vídeo).
+       subs.tramos(ocultar)      → tramos ordenados y fusionados (lanza error si alguno es inválido)
+       subs.oculto(ocultar)      → función t → true si en t el subtítulo debe estar apagado
+       subs.grupos(voz)          → grupos de ≤3 palabras con { pal, ini, fin }
+       subs.montar(tl, cont, voz, {ocultar, clase}) → subtítulos DOM por grupos, encendidos/apagados con tl.set
+       El contenedor debe tener id de escena; id permite un prefijo explícito para varias pistas.
+       (determinista: sin estado entre fotogramas). Un grupo que cae dentro de un tramo oculto no se muestra. */
+    subs: {
+      tramos(ocultar = []) {
+        if (!Array.isArray(ocultar)) throw new Error("subs: ocultar debe ser una lista de tramos");
+        const r = ocultar.map((x) => {
+          if (!Array.isArray(x) || x.length !== 2 || !x.every(Number.isFinite) || !(x[1] > x[0]) || x[0] < 0) throw new Error("subs: tramo inválido " + JSON.stringify(x));
+          return [x[0], x[1]];
+        }).sort((a, b) => a[0] - b[0]);
+        const out = [];
+        r.forEach((x) => { const u = out[out.length - 1]; if (u && x[0] <= u[1]) u[1] = Math.max(u[1], x[1]); else out.push(x); });
+        return out;
+      },
+      oculto(ocultar = []) {
+        const r = M.subs.tramos(ocultar);
+        return (t) => r.some(([a, b]) => t >= a && t < b);
+      },
+      grupos(voz) {
+        const G = [];
+        voz.lineas.forEach((ln, li) => {
+          const sig = voz.lineas[li + 1], finL = Math.min(ln.fin + 0.3, sig ? sig.inicio - 0.02 : ln.fin + 0.3), mine = [];
+          let cur = null;
+          ln.palabras.forEach((w) => {
+            const letras = cur ? cur.pal.reduce((s, p) => s + p.t.length + 1, 0) + w.t.length : 0;
+            if (!cur || cur.pal.length >= 3 || letras > 17 || /[.,?!:]$/.test(cur.pal[cur.pal.length - 1].t)) { cur = { pal: [], ini: w.i }; mine.push(cur); G.push(cur); }
+            cur.pal.push(w);
+          });
+          mine.forEach((gp, k) => (gp.fin = k + 1 < mine.length ? mine[k + 1].ini : finL));
+        });
+        return G;
+      },
+      montar(tl, cont, voz, opts = {}) {
+        cont = M.$(cont);
+        const prefijo = opts.id || (cont?.id && cont.id + "-sub");
+        if (!prefijo) throw new Error("subs: el contenedor necesita id o la opción id");
+        const ocultar = M.subs.tramos(opts.ocultar);
+        const clase = opts.clase || "sub-grupo";
+        const nodos = M.subs.grupos(voz).map((gp, k) => {
+          const d = M.html("div", { class: clase, id: prefijo + "-" + k }, cont);
+          d.textContent = gp.pal.map((w) => w.t).join(" ");
+          d.style.opacity = "0";
+          d.style.visibility = "hidden";
+          tl.set(d, { autoAlpha: 0 }, 0);
+          // Solo se muestran los trozos del grupo que quedan fuera de los tramos ocultos.
+          let a = gp.ini;
+          const seg = (x, y) => { if (y - x > 1e-3) { tl.set(d, { autoAlpha: 1 }, x); tl.set(d, { autoAlpha: 0 }, y); } };
+          ocultar.forEach(([x, y]) => {
+            if (y <= a || x >= gp.fin) return;
+            seg(a, Math.min(x, gp.fin));
+            a = Math.max(a, y);
+          });
+          if (a < gp.fin) seg(a, gp.fin);
+          return d;
+        });
+        return nodos;
+      },
+    },
+
     /** Registro de escenas del kit (kit/escenas/<nombre>/escena.js añade aquí su función). */
     escenas: {},
   };

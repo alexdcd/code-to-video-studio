@@ -17,21 +17,27 @@
     "render": "node scripts/in-project.mjs render",
     "snapshot": "node scripts/in-project.mjs snapshot",
     "contact-sheet": "node scripts/contact-sheet.mjs",
+    "analyze": "node scripts/analyze.mjs",
+    "review": "node scripts/review.mjs",
     "kit:build": "node scripts/lib/kit-build.mjs",
     "kit:copy": "node scripts/kit-copy.mjs",
     "vendor": "node scripts/vendor.mjs",
     "verify": "node scripts/verify-public.mjs",
-    "qa": "python3 scripts/lib/qa-video.py",
+    "qa": "node scripts/qa.mjs",
     "sfx:candidates": "node scripts/sfx-candidates.mjs",
-    "sfx:clean": "bash tools/sfx/clean.sh",
+    "sfx:clean": "node scripts/sfx-clean.mjs",
     "sfx:setup": "node scripts/sfx-setup.mjs",
     "skills": "node scripts/skills.mjs",
     "distribution:check": "node tools/distribution/cli.mjs check",
     "distribution:plan": "node tools/distribution/cli.mjs plan",
     "distribution:explain": "node tools/distribution/cli.mjs explain",
     "distribution:test": "node --test tools/distribution/tests/*.test.mjs",
-    "web:encode": "bash scripts/web-encode.sh",
-    "kit:test": "node --test scripts/tests/kit-*.test.mjs"
+    "web:encode": "node scripts/web-encode.mjs",
+    "kit:test": "node --test scripts/tests/kit-*.test.mjs",
+    "poses": "node scripts/poses.mjs",
+    "status": "node scripts/project-status.mjs",
+    "variant": "node scripts/variant.mjs",
+    "variant:test": "node --test scripts/tests/variant.test.mjs"
   },
   "dependencies": {
     "gsap": "3.15.0",
@@ -41,6 +47,6 @@
     "roughjs": "4.6.6"
   },
   "devDependencies": {
-    "hyperframes": "0.8.81"
+    "hyperframes": "0.9.6"
   }
 }
