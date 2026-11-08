@@ -28,7 +28,9 @@ export function makeNotebookAudio({ duration = 12, seed = 31, sampleRate = 24000
       if (d < 0 || d > 0.5) return sum;
       return sum + (hash(i, seed + at) * 2 - 1) * Math.exp(-d * 18) * 0.07;
     }, 0);
-    const value = Math.max(-0.86, Math.min(0.86, (pad + pulse + tick + transition) * fadeIn * fadeOut));
+    // Normalize the procedural bed to a practical listening level before the
+    // safety limiter. The generated signal remains deterministic and bounded.
+    const value = Math.max(-0.86, Math.min(0.86, (pad + pulse + tick + transition) * fadeIn * fadeOut * 2.4));
     samples[i] = Math.round(value * 32767);
   }
   return { samples, frames, sampleRate };
