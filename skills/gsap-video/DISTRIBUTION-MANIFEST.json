@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "name": "gsap-video",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "files": [
     {
       "path": "LICENSE.txt",
@@ -15,8 +15,8 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "691309dd9fef8d1f81e0542eb6d379be09f84c372219fb88e4ef45a316a73183",
-      "bytes": 3903
+      "sha256": "8137c30db787f2d3c9a3cfa9d22fbefac3422ae62cf38d71ab08f1e9318cceef",
+      "bytes": 3912
     },
     {
       "path": "UPSTREAM.json",
@@ -25,7 +25,7 @@
     },
     {
       "path": "VERSION",
-      "sha256": "59854984853104df5c353e2f681a15fc7924742f9a2e468c29af248dce45ce03",
+      "sha256": "44e161e4495cac2cf7858043e9e6418e9579f0ddcfae826f9a372622968ce066",
       "bytes": 6
     },
     {

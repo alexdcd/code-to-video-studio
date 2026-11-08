@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "name": "creative-review",
+  "version": "1.1.3",
+  "files": [
+    {
+      "path": "NOTICE.md",
+      "sha256": "2cd9f4ecf7e3adb6e1433bfd21c6a3d460ca587e5484a958ce69323bd14fbe82",
+      "bytes": 321
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "873cdf0a4f717405328a0beb3a3b6a92e102a3c0fd8fb91f5f22c88859dbac7d",
+      "bytes": 10721
+    },
+    {
+      "path": "VERSION",
+      "sha256": "5dae0c0a5ed3cdaa78704e25bb38d72c31018311e933283d06ed4f93360bfc6c",
+      "bytes": 6
+    }
+  ]
+}

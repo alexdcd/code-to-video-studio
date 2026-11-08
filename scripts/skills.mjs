@@ -240,7 +240,7 @@ function packageTier(tier, output) {
 }
 
 function runPython(args) {
-  const result = spawnSync(process.env.PYTHON || "python3", args, {
+  const result = spawnSync(process.env.PYTHON || (process.platform === "win32" ? "python" : "python3"), args, {
     cwd: ROOT,
     stdio: "inherit",
     env: { ...process.env, PYTHONDONTWRITEBYTECODE: "1" },
@@ -303,7 +303,7 @@ function installSkill(id, target, force) {
 
 function inspectZip(zipPath, id, files) {
   const code = "import json,sys,zipfile; z=zipfile.ZipFile(sys.argv[1]); print(json.dumps(sorted(z.namelist())))";
-  const result = spawnSync(process.env.PYTHON || "python3", ["-c", code, zipPath], {
+  const result = spawnSync(process.env.PYTHON || (process.platform === "win32" ? "python" : "python3"), ["-c", code, zipPath], {
     cwd: ROOT,
     encoding: "utf8",
     env: { ...process.env, PYTHONDONTWRITEBYTECODE: "1" },

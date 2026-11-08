@@ -1,5 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import {
   matchingRule,
   normalizeRepoPath,
@@ -11,6 +14,13 @@ import {
   validateSharedSkillsRegistry,
   validateResourceManifest,
 } from "../lib.mjs";
+
+const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
+const repositoryPolicy = JSON.parse(fs.readFileSync(path.join(REPO_ROOT, "tools/distribution/policy.json"), "utf8"));
+const publicManifestPath = path.join(REPO_ROOT, "tools/public-sync/manifest.json");
+const publicManifest = fs.existsSync(publicManifestPath)
+  ? JSON.parse(fs.readFileSync(publicManifestPath, "utf8"))
+  : null;
 
 const policy = {
   defaultTracked: "private",
@@ -56,6 +66,18 @@ test("distribution targets are cumulative but never include local", () => {
   assert.equal(tierIncluded("private", "pro"), false);
   assert.equal(tierIncluded("private", "private"), true);
   assert.equal(tierIncluded("local", "private"), false);
+});
+
+test("classification follows the policy available in this distribution", () => {
+  if (publicManifest) {
+    assert.equal(resolveTier("proyectos/video/BRIEF.md", { policy: repositoryPolicy }).tier, "local");
+    assert.equal(resolveTier("ejemplos/selected/BRIEF.md", { policy: repositoryPolicy }).tier, "private");
+    assert.ok(publicManifest.privateOnly.includes("proyectos/"));
+    assert.ok(publicManifest.privateOnly.includes("ejemplos/"));
+  } else {
+    assert.equal(resolveTier("node_modules/example/index.js", { policy: repositoryPolicy }).tier, "local");
+    assert.equal(resolveTier("unlisted/example.txt", { policy: repositoryPolicy }).tier, repositoryPolicy.defaultTracked);
+  }
 });
 
 test("public and pro resources require an explicit license", () => {
