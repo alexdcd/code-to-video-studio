@@ -20,6 +20,10 @@ Use it to learn the project contract or as scaffolding for a new identity. Do no
 5. **Entrances are physical.** Blur-to-sharp and `y` travel for titles, `MAFIA.draw` for lines, `MAFIA.pop` for nodes, scale from 0.8 for heroes. No plain opacity fades on hero elements.
 6. **Something always moves between beats.** Orbits rotate, dots pulse, the grid drifts. No frame stays fully static for more than 0.5 s.
 7. **Cuts have impact.** Use `MAFIA.corte` or a zoom-through between scenes; avoid cross-fades.
+8. **Safe text.** In 16:9, keep essential text at least 160 px from every edge (inside the central 80%) so it survives web crops, zooms and transitions. Over a busy 3D or glowing background, put a soft dark scrim behind the text block.
+9. **Real objects over characters in 3D.** Prefer a recognizable, physically lit object (bearing, phone, graphics card, engine) to a robot or mascot: environment lighting (`RoomEnvironment` + PMREM), ACES tone mapping, metal and plastic materials, procedural textures with a seed.
+10. **Assemble, then dive.** Build the object piece by piece, explode it to show its parts, then travel down a scale (card → chip → transistor). Exploding parts move away from the camera, never towards it.
+11. **Labels follow the parts.** Project 3D anchor points to screen space every frame so callouts stay attached while the camera moves.
 
 ## Do not
 
