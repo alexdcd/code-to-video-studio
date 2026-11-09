@@ -2,16 +2,19 @@
   "nombre": "Editorial Motion",
   "tipo": "estilo",
   "estado": "en uso",
-  "descripcion": "Explainer editorial plano y cinético: fondos navy y crema, seis acentos controlados, tipografía Inter contundente, formas geométricas que cambian y profundidad ligera por capas.",
+  "descripcion": "Explainer de ilustración vectorial plana y cinética: objetos y mini-mundos montados pieza a pieza, fondos navy y crema, seis acentos controlados, tipografía Inter contundente, cámara viva, morphs y profundidad por capas.",
   "origen": "demo canónica 16:9; adaptación de distribución con plantillas 16:9 y 9:16",
   "licencia": "AGPL-3.0-only",
   "plantilla": "editorial-motion-16x9",
   "plantillas": ["editorial-motion-16x9", "editorial-motion-9x16"],
-  "uso": "const EM = MAFIA.editorialMotion;\nEM.entrar(tl, \"#s00-titular\", 0.12, { dur: 0.5, y: 64 });\nEM.morph(tl, \"#s02-forma\", \"M 130 24 C 168 68 206 106 236 130 C 206 154 168 192 130 236 C 92 192 54 154 24 130 C 54 106 92 68 130 24 Z\", 0.7);\nEM.zoomThrough(tl, { hueco: \"#s04-hueco\", anillo: \"#s04-anillo\", at: 0, dur: 1.15 });",
+  "uso": "const EM = MAFIA.editorialMotion;\nEM.camara(tl, \"#s00 .em-camara\", { at: 0, dur: 3, hasta: 1.07 });\nEM.montar(tl, \"#s00-portatil .em-pieza\", 0.3, { stagger: 0.07 });\nEM.entrar(tl, \"#s00-titular\", 0.12, { dur: 0.5, y: 64 });\nEM.morph(tl, \"#s02-forma\", \"M 130 24 C 168 68 206 106 236 130 C 206 154 168 192 130 236 C 92 192 54 154 24 130 C 54 106 92 68 130 24 Z\", 0.7);\nEM.zoomThrough(tl, { hueco: \"#s04-hueco\", anillo: \"#s04-anillo\", at: 0, dur: 1.15 });",
   "parametros": {
     "colores": "--em-noche, --em-crema, --em-azul, --em-coral, --em-amarillo, --em-menta",
-    "clases": ".em-escena, .em-escena--noche, .em-escena--crema, .em-escena--vertical, .em-etiqueta, .em-titular, .em-bajada, .em-dato, .em-panel, .em-forma, .em-paisaje-capa, .em-paso-indice",
+    "clases": ".em-escena, .em-escena--noche, .em-escena--crema, .em-escena--vertical, .em-etiqueta, .em-titular, .em-bajada, .em-dato, .em-panel, .em-forma, .em-paisaje-capa, .em-paso-indice, .em-camara, .em-objeto, .em-pieza (--redonda, --suave, --pico, --rombo, --sombra, --luz), .em-suelo",
     "entrar(tl, selector, at, {dur, x, y, ease, stagger})": "revela texto u objeto con desplazamiento corto y easing limpio",
+    "camara(tl, selector, {at, dur, desde, hasta, x, y})": "push-in o pan lento del wrapper .em-camara durante toda la escena",
+    "montar(tl, selector, at, {dur, stagger, distancia, desde})": "ensambla las piezas de un objeto vectorial llegando desde fuera; gesto firma del estilo",
+    "flotar(tl, selector, at, {dur, y, repeat})": "respiración vertical acotada para mantener vivo un objeto mientras se lee",
     "morph(tl, selector, path, at, {dur, ease})": "morph SVG con MorphSVGPlugin de gsap@3.15.0, instalado desde npm y copiado al runtime local por setup",
     "zoomThrough(tl, {hueco, anillo, at, dur, radio})": "expande un hueco SVG para revelar la escena siguiente con un zoom de cámara"
   }

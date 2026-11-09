@@ -2,6 +2,8 @@
 
 The templates `editorial-motion-16x9` and `editorial-motion-9x16` are runnable examples. They demonstrate text entry, a checked SVG morph, parallax, a masked camera transition and format-specific composition. Start from either template and replace the sample story, keeping the style's visual rules from `../GUIA.md`.
 
+The templates predate the object rules in `../GUIA.md` («Objetos y mundos», «Ambición por defecto»): when you build a real video, every metaphor scene needs a recognizable flat-vector object assembled with `EM.montar` inside an `.em-camara` wrapper driven by `EM.camara`.
+
 Minimal reusable motion:
 
 ```js

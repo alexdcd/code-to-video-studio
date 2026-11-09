@@ -21,6 +21,7 @@ A useful style guide should define:
 - scene density
 - transitions
 - what the style deliberately does not do
+- its ambition defaults: how the camera moves, how the hero gets its scale, how objects or data get built on screen (see the «Ambición por defecto» sections in the bundled styles)
 
 Keep brand-specific logos and private identity systems outside the public core.
 

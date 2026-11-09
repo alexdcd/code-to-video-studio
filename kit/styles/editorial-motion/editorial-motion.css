@@ -190,6 +190,39 @@
 }
 .em-portal { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
 
+/* ---------- Cámara y objetos vectoriales ----------
+   .em-camara envuelve el contenido de la escena para que GSAP haga push-in/pan (EM.camara).
+   .em-objeto agrupa las piezas de un objeto reconocible (portátil, cohete, ciudad, planta...)
+   construido con .em-pieza; EM.montar las ensambla una a una. Sombra y luz son tonos de la paleta,
+   nunca degradados. */
+.em-camara {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+}
+.em-objeto {
+  position: absolute;
+  transform-origin: 50% 100%;
+}
+.em-pieza {
+  position: absolute;
+  background: var(--em-azul);
+}
+.em-pieza--redonda { border-radius: 50%; }
+.em-pieza--suave { border-radius: 18px; }
+.em-pieza--pico { clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.em-pieza--rombo { clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
+.em-pieza--sombra { background: rgba(15, 26, 61, 0.22); }
+.em-pieza--luz { background: rgba(255, 241, 214, 0.42); }
+.em-escena--noche .em-pieza--sombra { background: rgba(0, 0, 0, 0.32); }
+.em-suelo {
+  position: absolute;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(15, 26, 61, 0.14);
+}
+.em-escena--noche .em-suelo { background: rgba(0, 0, 0, 0.35); }
+.em-escena--vertical .em-suelo { height: 34px; }
 /* ---------- Vertical 1080×1920 (clase em-escena--vertical en la raíz de cada escena) ----------
    Zona segura del texto esencial: x 90–990, y 200–1440 (debajo quedan los subtítulos y la interfaz de la plataforma).
    Las formas pueden desbordar. Se apila lo que en 16:9 va en paralelo. */
