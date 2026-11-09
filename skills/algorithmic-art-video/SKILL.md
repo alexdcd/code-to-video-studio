@@ -51,6 +51,7 @@ acumula entre fotogramas) no sirve para vídeo. Esta hoja es la única adaptaci�
 
 1. `assets/arte/<nombre>-filosofia.md`: la filosofía y la semilla conceptual.
 2. La composición con el algoritmo y el objeto de parámetros.
-3. Fotogramas de revisión de las semillas candidatas (`pnpm run snapshot <project> --at <t>`) antes del render final; no un render borrador completo.
+3. Fotogramas de revisión de las semillas candidatas (`pnpm exec hyperframes snapshot proyectos/<proyecto> --at <t>`) antes del render final; no un render borrador completo.
 
-Si el resultado define un aspecto repetible, propón convertirlo en estilo siguiendo [`docs/creating-styles.md`](../../../docs/creating-styles.md).
+Si el resultado define un aspecto repetible, propón convertirlo en estilo siguiendo, desde la raíz del Studio,
+`docs/creating-styles.md` en la edición pública o «Crear un estilo nuevo» de `kit/styles/README.md` en el canónico.

@@ -1,5 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
+import { randomUUID } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -109,3 +111,27 @@ test("the free Studio omits the duplicate variant engine and Pro social skill", 
   ]);
   assert.ok(readJson("skills/registry.json").skills.every((skill) => skill.distribution === "public"));
 });
+
+for (const format of ["16x9", "9x16"]) {
+  test(`generated Editorial Motion ${format} resolves its brief, storyboard and title`, () => {
+    const name = `editorial-test-${randomUUID()}`;
+    const project = path.join(ROOT, "proyectos", name);
+    try {
+      execFileSync(process.execPath, ["scripts/new.mjs", `editorial-motion-${format}`, name], { cwd: ROOT });
+      const brief = fs.readFileSync(path.join(project, "BRIEF.md"), "utf8");
+      const guidePath = brief.match(/(assets\/kit\/styles\/editorial-motion\/)/)?.[1];
+      const documents = ["BRIEF.md", "SCRIPT.md", "STORYBOARD.md", "index.html"]
+        .map((file) => fs.readFileSync(path.join(project, file), "utf8"));
+      assert.deepEqual({
+        unresolvedTokens: documents.flatMap((text) => text.match(/\{\{(?:NOMBRE|FECHA|NAME|DATE)\}\}/g) ?? []),
+        hasName: documents.every((text) => text.includes(name)),
+        hasDate: /\*\*Fecha:\*\* \d{4}-\d{2}-\d{2}/.test(brief),
+        hasStyleDocs: Boolean(guidePath && ["GUIA.md", "FRAME.md"].every(
+          (file) => fs.existsSync(path.join(project, guidePath, file)),
+        )),
+      }, { unresolvedTokens: [], hasName: true, hasDate: true, hasStyleDocs: true });
+    } finally {
+      fs.rmSync(project, { recursive: true, force: true });
+    }
+  });
+}

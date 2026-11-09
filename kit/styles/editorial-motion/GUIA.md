@@ -50,20 +50,24 @@ No lo uses como identidad de marca, para una crónica atmosférica, para acting 
 
 ## Esqueleto
 
+Fragmento para una subcomposición. El `index.html` de la plantilla ya carga GSAP, MorphSVGPlugin y el kit.
+
 ```html
-<div id="s02" data-composition-id="s02" data-width="1920" data-height="1080" class="em-escena em-escena--noche">
-  <h2 class="em-titular">UNA IDEA <em>CAMBIA</em></h2>
-  <svg id="s02-grafico" viewBox="0 0 260 260" aria-hidden="true">
-    <path id="s02-forma" d="M 130 18 C 180 18 230 68 230 130 C 230 180 180 230 130 230 C 80 230 30 180 30 130 C 30 80 80 30 130 18 Z" />
-  </svg>
-</div>
-<script>
-  const tl = gsap.timeline({ paused: true });
-  const EM = MAFIA.editorialMotion;
-  EM.entrar(tl, "#s02-grafico", 0.25, { dur: 0.55, y: 24 });
-  EM.morph(tl, "#s02-forma", "M 130 24 C 168 68 206 106 236 130 C 206 154 168 192 130 236 C 92 192 54 154 24 130 C 54 106 92 68 130 24 Z", 0.8);
-  window.__timelines["s02"] = tl;
-</script>
+<template>
+  <div id="s02" data-composition-id="s02" data-width="1920" data-height="1080" class="em-escena em-escena--noche">
+    <h2 class="em-titular">UNA IDEA <em>CAMBIA</em></h2>
+    <svg id="s02-grafico" viewBox="0 0 260 260" aria-hidden="true">
+      <path id="s02-forma" d="M 130 18 C 180 18 230 68 230 130 C 230 180 180 230 130 230 C 80 230 30 180 30 130 C 30 80 80 30 130 18 Z" />
+    </svg>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    const EM = MAFIA.editorialMotion;
+    EM.entrar(tl, "#s02-grafico", 0.25, { dur: 0.55, y: 24 });
+    EM.morph(tl, "#s02-forma", "M 130 24 C 168 68 206 106 236 130 C 206 154 168 192 130 236 C 92 192 54 154 24 130 C 54 106 92 68 130 24 Z", 0.8);
+    window.__timelines["s02"] = tl;
+  </script>
+</template>
 ```
 
 ## API
@@ -72,7 +76,7 @@ No lo uses como identidad de marca, para una crónica atmosférica, para acting 
 
 - `PALETA`: los seis colores base.
 - `entrar(tl, selector, at, {dur, x, y, ease, stagger})`: revela uno o varios elementos con desplazamiento y easing.
-- `morph(tl, selector, path, at, {dur, ease})`: interpola un SVG con MorphSVGPlugin de `gsap@3.15.0`; `pnpm run setup` lo copia del paquete npm al runtime local del Studio. Usa paths sencillos.
+- `morph(tl, selector, path, at, {dur, ease})`: interpola un SVG con MorphSVGPlugin de `gsap@3.15.0`; `pnpm run setup` en la edición pública o `pnpm run vendor` en el canónico lo copia desde npm al runtime local. Usa paths sencillos.
 - `zoomThrough(tl, {hueco, anillo, at, dur, radio, inicial, ease})`: abre el radio de un círculo dentro de una máscara SVG; coloca la escena siguiente debajo en el timeline.
 
 El CSS define titulares, bajadas, datos, paneles, comparativas, etiquetas, pasos, paisaje por capas y cierre. No crea una clase por cada variante temática.

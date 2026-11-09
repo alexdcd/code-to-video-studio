@@ -9,7 +9,7 @@ narration_language:
 - **Qué:** demo del estilo Editorial Motion: titular, dato, comparación, proceso, transición de cámara y takeaway.
 - **Para quién / dónde se publica:** revisión interna del kit.
 - **Formato y duración:** 1920×1080 · 11,65 s (editorial-motion-16x9).
-- **Estilo:** editorial-motion — lee la guía y FRAME del estilo en kit/estilos/editorial-motion/.
+- **Estilo:** editorial-motion — lee la guía y FRAME del estilo en `assets/kit/styles/editorial-motion/`.
 - **Tratamientos:** ninguno.
 - **Marca:** ninguna.
 - **Voz:** sin voz.

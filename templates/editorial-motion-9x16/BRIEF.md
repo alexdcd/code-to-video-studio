@@ -9,7 +9,7 @@ narration_language:
 - **Qué:** demo vertical del estilo Editorial Motion: titular, dato, comparación apilada, proceso en columna, transición de cámara y takeaway.
 - **Para quién / dónde se publica:** revisión interna del kit; formato para redes verticales.
 - **Formato y duración:** 1080×1920 · 11,65 s (editorial-motion-9x16).
-- **Estilo:** editorial-motion — lee la guía y FRAME del estilo en kit/estilos/editorial-motion/ (apartado «Vertical»).
+- **Estilo:** editorial-motion — lee la guía y FRAME del estilo en `assets/kit/styles/editorial-motion/` (apartado «Vertical»).
 - **Tratamientos:** ninguno.
 - **Marca:** ninguna.
 - **Voz:** sin voz.

@@ -144,6 +144,11 @@ function validateGeneric(id, root) {
   for (const ref of new Set(text.match(/references\/[\w.-]+\.md/g) || [])) {
     if (!fs.existsSync(path.join(root, ref))) fail(`${id}: SKILL.md references missing file ${ref}`);
   }
+  for (const [, target] of text.matchAll(/\]\(([^\s)#]+)(?:#[^\s)]*)?(?=\s|\))/g)) {
+    if (/^(?:[a-z][a-z\d+.-]*:|\/\/)/i.test(target)) continue;
+    const relative = safeRelative(target.replace(/^\.\//, ""), "skill Markdown link");
+    if (!fs.existsSync(path.join(root, relative))) fail(`${id}: SKILL.md links to missing file ${target}`);
+  }
   const upstreamPath = path.join(root, "UPSTREAM.json");
   if (fs.existsSync(upstreamPath)) {
     const up = readUpstream(root);

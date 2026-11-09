@@ -24,7 +24,7 @@ for (const file of fs.readdirSync(common)) {
 }
 const version=fs.readFileSync(path.join(ROOT,"kit/VERSION"),"utf8").trim();
 const date=new Date().toISOString().slice(0,10);
-const replacements={ "{{NAME}}":name, "{{DATE}}":date, "{{KIT}}":version, "{{TEMPLATE}}":template };
+const replacements={ "{{NAME}}":name, "{{NOMBRE}}":name, "{{DATE}}":date, "{{FECHA}}":date, "{{KIT}}":version, "{{TEMPLATE}}":template };
 const textExt=new Set([".md",".json",".html",".js",".css"]);
 function walk(dir) {
   for (const entry of fs.readdirSync(dir,{withFileTypes:true})) {
