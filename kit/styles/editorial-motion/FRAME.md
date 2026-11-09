@@ -14,7 +14,7 @@ colors:
   menta: "#2EDBA8"
 
 typography:
-  family: "Inter (kit/fuentes)"
+  family: "Inter (kit/fonts)"
   headline: { weight: 900, size: "126px", case: "uppercase", tracking: "-0.065em" }
   title: { weight: 800, size: "54px", case: "sentence" }
   figure: { weight: 900, size: "290px", tracking: "-0.09em" }

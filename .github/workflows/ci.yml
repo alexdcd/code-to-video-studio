@@ -37,5 +37,7 @@ jobs:
         run: pnpm run setup
       - name: Verify public distribution
         run: pnpm run verify
+      - name: Test public templates
+        run: node --test scripts/tests/kit-styles.test.mjs
       - name: Validate demo
         run: pnpm run check demo

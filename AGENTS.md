@@ -85,7 +85,8 @@ Useful APIs:
 - `MAFIA.pop()`
 - `MAFIA.fade()`
 - `MAFIA.eachFrame()`
-- `MAFIA.anim.keyframes()`\n- `MAFIA.anim.curva()` — monotone seek-safe interpolation through measured keys
+- `MAFIA.anim.keyframes()`
+- `MAFIA.anim.curva()` — monotone seek-safe interpolation through measured keys
 - `MAFIA.anim.spring()`
 - `MAFIA.anim.arc()`
 - `MAFIA.anim.pulse()`
@@ -104,6 +105,7 @@ Before finalizing:
 - inspect every transition boundary
 - inspect the final frame
 - render the whole piece
-- create a contact sheet and look for dead time, clutter, unreadable text and accidental overlaps\n- run `pnpm run qa <video.mp4>` to flag long static sections, black frames, loudness, true peak and long silences
+- create a contact sheet and look for dead time, clutter, unreadable text and accidental overlaps
+- run `pnpm run qa <video.mp4>` to flag long static sections, black frames, loudness, true peak and long silences
 
 The code passing validation is necessary, not sufficient.
