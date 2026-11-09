@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { createHash, randomBytes } from "node:crypto";
 import { declaredAudioFromBrief, parseBriefAuthoring, parseBriefReference } from "./review-core.mjs";
+import { resolveProjectScriptPath } from "./project-paths.mjs";
 
 const EMPTY_FIELD = /^\s*[-*]\s*(?:\*\*[^*]+:\*\*\s*(?:\([^)]*\))?|\*\*[^*]+\*\*\s*:\s*(?:\([^)]*\))?)\s*$/;
 
@@ -87,7 +88,7 @@ function styleFromBrief(brief, studioRoot) {
   const explicit = value.match(new RegExp(tick + "([a-z0-9][a-z0-9-]*)" + tick, "i"))?.[1];
   const candidate = explicit ?? value.match(/^([a-z0-9][a-z0-9-]*)\b/i)?.[1];
   if (!candidate || candidate.startsWith("{{")) return { status: "unknown", id: null, state: "unknown" };
-  const fichaPath = path.join(studioRoot, "kit", "estilos", candidate, "ficha.json");
+  const fichaPath = path.join(studioRoot, "kit", "styles", candidate, "ficha.json");
   const ficha = readJson(fichaPath).value;
   if (!ficha) return { status: "unknown", id: explicitlyNamed || explicit ? candidate : null, state: "unknown" };
   return { status: "named", id: candidate, state: ficha.estado ?? ficha.status ?? "unknown" };
@@ -370,7 +371,7 @@ function audioState(projectDir, brief) {
 
 function nextAction(areas) {
   if (["unknown", "incomplete"].includes(areas.brief.status)) return { id: "complete-brief", command: null, message: "Complete BRIEF.md." };
-  if (["unknown", "template"].includes(areas.script.status)) return { id: "write-script", command: null, message: "Write or complete GUION.md." };
+  if (["unknown", "template"].includes(areas.script.status)) return { id: "write-script", command: null, message: "Write or complete SCRIPT.md." };
   if (["unknown", "incomplete", "outline", "in_progress"].includes(areas.storyboard.status)) {
     return { id: "complete-storyboard", command: null, message: "Complete storyboard rows and their scene compositions." };
   }
@@ -407,7 +408,7 @@ function nextAction(areas) {
 export function deriveProjectStatus(projectDir, studioRoot) {
   const name = path.basename(projectDir);
   const brief = readText(path.join(projectDir, "BRIEF.md"));
-  const script = readText(path.join(projectDir, "GUION.md"));
+  const script = readText(resolveProjectScriptPath(projectDir));
   const storyboardText = readText(path.join(projectDir, "STORYBOARD.md"));
   const metadata = readJson(path.join(projectDir, "meta.json")).value;
   const style = styleFromBrief(brief ?? "", studioRoot);

@@ -22,6 +22,29 @@ const publicManifest = fs.existsSync(publicManifestPath)
   ? JSON.parse(fs.readFileSync(publicManifestPath, "utf8"))
   : null;
 
+function readResourceTiers(directory, root = directory) {
+  const resources = new Map();
+  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+    const full = path.join(directory, entry.name);
+    if (entry.isDirectory()) {
+      for (const [prefix, meta] of readResourceTiers(full, root)) resources.set(prefix, meta);
+    } else if (entry.isFile() && entry.name === "resource.json") {
+      const prefix = path.relative(root, directory).split(path.sep).join("/") || ".";
+      resources.set(prefix, JSON.parse(fs.readFileSync(full, "utf8")));
+    }
+  }
+  return resources;
+}
+
+function filesUnder(directory, relative = "") {
+  if (!fs.existsSync(directory)) return [];
+  return fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
+    const childRelative = path.join(relative, entry.name);
+    const child = path.join(directory, entry.name);
+    return entry.isDirectory() ? filesUnder(child, childRelative) : [childRelative.split(path.sep).join("/")];
+  });
+}
+
 const policy = {
   defaultTracked: "private",
   pathRules: [
@@ -99,6 +122,44 @@ test("public and pro resources require an explicit license", () => {
   assert.deepEqual(validateResourceManifest({ schemaVersion: 1, id: "x", type: "texture", distribution: "private" }), []);
   assert.equal(validateResourceManifest({ schemaVersion: 1, id: "x", type: "texture", distribution: "public" }).length, 1);
   assert.deepEqual(validateResourceManifest({ schemaVersion: 1, id: "x", type: "texture", distribution: "public", license: "CC0-1.0" }), []);
+});
+
+test("font files resolve to the intended effective distribution tiers", () => {
+  const root = path.join(REPO_ROOT, "kit");
+  const resourceTiers = readResourceTiers(root);
+  const resolve = rel => resolveTier(rel, { policy: repositoryPolicy, resourceTiers });
+
+  assert.deepEqual(resolve("fonts/inter.css"), {
+    tier: "public",
+    source: "fonts/resource.json",
+  });
+  const privateFonts = path.join(root, "fonts", "private");
+  const privateFontFiles = filesUnder(privateFonts)
+    .filter(file => file.endsWith(".woff2"))
+    .map(file => `kit/fonts/private/${file}`);
+  for (const file of privateFontFiles) {
+    assert.equal(resolve(file).tier, "private", `${file} must remain private`);
+  }
+  for (const [prefix, manifest] of resourceTiers) {
+    if (!prefix.startsWith("fonts/private/") || manifest.type !== "font") continue;
+    assert.equal(resolve(`${prefix}/resource.json`).tier, "private", `${prefix} must remain private`);
+    assert.equal(fs.existsSync(path.join(root, prefix, "OFL.txt")), true, `${prefix} retains its OFL notice`);
+  }
+  if (fs.existsSync(path.join(privateFonts, "fuentes.css"))) {
+    assert.equal(resolve("fonts/private/fuentes.css").tier, "private");
+  }
+
+  if (publicManifest) {
+    const publicFontMappings = publicManifest.shared.filter(item => item.private.startsWith("kit/fonts/")).map(item => item.private).sort();
+    assert.deepEqual(publicFontMappings, [
+      "kit/fonts/OFL.txt",
+      "kit/fonts/inter-latin-400-normal.woff2",
+      "kit/fonts/inter-latin-600-normal.woff2",
+      "kit/fonts/inter-latin-800-normal.woff2",
+      "kit/fonts/inter.css",
+      "kit/fonts/resource.json",
+    ]);
+  }
 });
 
 test("unsafe distributable text catches secrets and machine paths", () => {

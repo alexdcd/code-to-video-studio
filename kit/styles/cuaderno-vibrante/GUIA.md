@@ -53,6 +53,12 @@ Primitivas de datos (todas aceptan `progress` 0–1 derivado de `t`, y `seed`):
 - Mantén los subtítulos dentro del 80 % central y separa la voz de los rótulos equivalentes.
 - Usa cortes, fundidos o barridos la mayoría de las veces. Reserva brocha, iris, estrella, teselas y persiana para cambios con significado.
 - Fija semillas y deriva cada movimiento del tiempo. No uses relojes de pared ni estados acumulados.
+- Si el vídeo tiene personaje, que sea **un protagonista con arco**: reacciona, cambia y acaba distinto. Otros personajes, como cameos de una o dos apariciones que reaccionan a un dato.
+- Un personaje en el DOM (SVG o imagen) lleva un filtro de tinta (`feMorphology` para el contorno y `feDisplacementMap` con un `feTurbulence` cuya `seed` cambia en cada dibujo de 1/12 s) para que vibre igual que el lienzo.
+- Cambia de fondo en cada capítulo; el color marca el cambio de idea. Los recortes de papel y los garabatos de margen son recursos, no relleno.
+- Cuando el vídeo enseña código, el código causa lo que se ve: el cambio ocurre justo al escribirse la línea.
+- El confeti es un recurso disponible, no un estilo: como mucho una vez por vídeo, en el momento cumbre, salvo que el brief pida otra cosa.
+- En 16:9, el texto esencial va dentro del 80 % central y a 160 px o más del borde.
 
 ## Ambición por defecto
 

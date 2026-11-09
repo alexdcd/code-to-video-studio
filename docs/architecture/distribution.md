@@ -91,7 +91,7 @@ The canonical Studio validates classification with:
 pnpm run distribution:check
 pnpm run distribution:plan --target public
 pnpm run distribution:plan --target pro
-pnpm run distribution:explain kit/personajes/my-character/asset.webp
+pnpm run distribution:explain kit/characters/my-character/asset.webp
 ```
 
 `distribution:plan` reports **eligibility**, not an automatic copy operation. The current public transfer mechanism remains the explicit allowlist in `tools/public-sync/`; the distribution checker verifies that anything mapped to the public repository is actually classified `public`.

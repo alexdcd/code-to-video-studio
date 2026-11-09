@@ -142,6 +142,36 @@ export function resolveProjectFilePath(value, options = {}) {
   return canonicalCandidate;
 }
 
+/** New projects use SCRIPT.md; recognize a default legacy GUION.md without hiding user edits. */
+export function resolveProjectScriptPath(projectRoot) {
+  const script = path.join(projectRoot, "SCRIPT.md");
+  const legacy = path.join(projectRoot, "GUION.md");
+  const hasScript = fs.existsSync(script);
+  const hasLegacy = fs.existsSync(legacy);
+  if (!hasScript) return hasLegacy ? legacy : script;
+  if (!hasLegacy) return script;
+
+  const scriptText = normalizeLineEndings(fs.readFileSync(script, "utf8"));
+  const legacyText = normalizeLineEndings(fs.readFileSync(legacy, "utf8"));
+  if (scriptText === legacyText) return script;
+
+  const commonTemplate = path.join(DEFAULT_STUDIO_ROOT, "templates", "_common", "SCRIPT.md");
+  if (fs.existsSync(commonTemplate)) {
+    const projectName = path.basename(path.resolve(projectRoot));
+    const commonText = normalizeLineEndings(fs.readFileSync(commonTemplate, "utf8")
+      .replaceAll("{{NOMBRE}}", projectName)
+      .replaceAll("{{NAME}}", projectName));
+    if (legacyText === commonText) return script;
+    if (scriptText === commonText) return legacy;
+  }
+
+  throw new Error("Both SCRIPT.md and GUION.md exist and differ. Reconcile the edits and keep the canonical script in SCRIPT.md.");
+}
+
+function normalizeLineEndings(value) {
+  return value.replace(/\r\n/g, "\n");
+}
+
 /** Keep per-project pnpm commands and instruction links usable even when CTV_PROJECTS_ROOT is external. */
 export function retargetStudioReferences(value, destination, studioRoot = DEFAULT_STUDIO_ROOT, { shell = false } = {}) {
   const relative = path.relative(destination, studioRoot).split(path.sep).join("/");
