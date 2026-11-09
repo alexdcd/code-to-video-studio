@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "name": "algorithmic-art-video",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "files": [
     {
       "path": "LICENSE.txt",
@@ -15,8 +15,8 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "dc9f6a0718f637f3ef676a294753c1b9903acb0c50c46116ae4dcdf7d5da791d",
-      "bytes": 4094
+      "sha256": "a573ec5cf81affde681b38ea35b7e0b1c7429a090b7e3f7ae14aad4235746ca7",
+      "bytes": 4204
     },
     {
       "path": "UPSTREAM.json",
@@ -25,7 +25,7 @@
     },
     {
       "path": "VERSION",
-      "sha256": "f5e5c9534532840fcd45bb002e69ed85c61dba2753450e26b448b7df1481e24d",
+      "sha256": "d1b77b88f4b9f675a900e4143ac768a21218623cfe1703ca43162388c3271bd6",
       "bytes": 6
     },
     {

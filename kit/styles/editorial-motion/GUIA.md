@@ -6,7 +6,7 @@
 
 Para explicaciones visuales breves que convierten ideas, cifras, comparaciones o procesos en una secuencia de **ilustraciones vectoriales planas en movimiento**: objetos reconocibles, mini-mundos y datos construidos con geometría limpia. Funciona con narración o solo con rótulos concisos.
 
-No lo uses como identidad de marca, para una crónica atmosférica, para acting de personajes o para una composición abstracta conducida por música. En esos casos, elige un estilo existente que se ajuste al BRIEF.
+No lo uses como identidad de marca, para una crónica atmosférica, para un vídeo conducido por el acting de un protagonista (diálogo, emociones largas) o para una composición abstracta conducida por música. Las personas de escala (ver «Mundos y viaje de escala») sí forman parte del estilo. En esos casos, elige un estilo existente que se ajuste al BRIEF.
 
 ## Lenguaje visual
 
@@ -16,16 +16,16 @@ No lo uses como identidad de marca, para una crónica atmosférica, para acting 
 4. Construye **objetos y escenas reconocibles** (portátil, ciudad, cohete, planta, gráfico, reloj) con círculos, rectángulos redondeados, bandas, líneas y polígonos vectoriales limpios. Ver «Objetos y mundos».
 5. Da profundidad 2.5D con tres o cuatro capas de movimiento relativo, formas que desbordan el encuadre y una cámara que empuja o se desplaza despacio.
 6. Usa el morph, squash, parallax y zoom para cambios que expliquen relación, escala o paso de una idea a otra; el montaje pieza a pieza de un objeto es el gesto firma.
-7. Sombra y luz son piezas planas de la paleta, no degradados; evita texturas, personajes firma y ornamento sin significado.
+7. Los objetos se rellenan en plano; sombra y arista iluminada son piezas planas. La **luz del mundo** (atmósfera, halo, cielo, resplandor, lado nocturno, foco de lámpara) sí usa degradados radiales suaves: es lo que da volumen y ambiente. Evita texturas, mascotas y ornamento sin significado.
 
 ## Usage rules
 
 | Recurso | Regla |
 | --- | --- |
 | Fondo | Alterna navy y crema al cambiar de idea. El degradado navy es un halo sutil y fijo, nunca una textura. |
-| Color | Los seis tokens son constantes. Usa un acento principal por lectura y no llenes todas las formas con color. |
-| Tipografía | Un titular de una o dos líneas; texto corrido en frases cortas. Comprueba `text-wrap: balance` y la zona segura. En texto pequeño usa navy/crema; reserva los acentos vivos para geometría o titulares grandes. |
-| Geometría | Una metáfora clara por escena, encarnada en un objeto o mini-mundo reconocible. Las formas no tienen ojos ni rasgos de mascota, pero sí detalle funcional. |
+| Color | Los seis tokens son la base. Cada mundo tiene una **temperatura** (atardecer cálido, noche fría, interior ámbar) hecha con tintes claros u oscuros de esos tokens. Usa un acento principal por lectura y no llenes todas las formas con color. |
+| Tipografía | Un titular de una o dos líneas; texto corrido en frases cortas. Comprueba `text-wrap: balance` y la zona segura (16:9: x 192–1728, y 120–960). Ancla el texto a un tercio del encuadre y deja los otros dos al mundo; nunca lo pongas sobre el punto al que va a entrar el zoom. En texto pequeño usa navy/crema; reserva los acentos vivos para geometría o titulares grandes. |
+| Geometría | Una metáfora clara por escena, encarnada en un objeto o mini-mundo reconocible. Los objetos no tienen ojos ni rasgos de mascota, pero sí detalle funcional; las únicas caras son las de las personas de escala. |
 | Cámara | Contenido dentro de `.em-camara`; `EM.camara` hace push-in o pan de 4–8 % en cada escena. Cambios de capítulo con `zoomThrough`. |
 | Tarjetas y paneles | Úsalos solo para separar información relacionada. Prefiere la forma, la línea o el espacio vacío al mosaico de tarjetas. |
 | Movimiento | Entrada de 0.35–0.65 s, pausa legible de 0.35–0.6 s, overshoot menor de 4%. Sin rebote repetido. |
@@ -39,7 +39,7 @@ No lo uses como identidad de marca, para una crónica atmosférica, para acting 
 - Usa easing suave y overshoot pequeño. Un squash breve puede dar peso a una forma; la proporción horizontal/vertical debe compensarse para conservar volumen.
 - En una comparación, conserva tamaño y eje para que el cambio sea lo único que compita.
 - En parallax, define la dirección de cámara antes de animar las capas; su desplazamiento relativo mantiene la misma dirección.
-- Deja el cierre quieto al menos medio segundo. No tapes una lectura con un golpe decorativo.
+- Deja el texto del cierre fijo al menos medio segundo; el mundo de detrás sigue moviéndose. No tapes una lectura con un golpe decorativo.
 - Antes de dar por buena una escena, pregúntate: ¿qué objeto o mundo veo? Si la respuesta es «un círculo y un texto», no está terminada.
 
 ## Objetos y mundos (obligatorio, no opcional)
@@ -48,10 +48,10 @@ La geometría es el ladrillo, no el resultado. El estilo es ilustración vectori
 
 Reglas de construcción:
 
-- Rellenos planos de la paleta; **sin degradados ni contornos**. El volumen se da con una pieza `.em-pieza--sombra` (tono oscuro al 22 %) en la cara en sombra y, si hace falta, una `.em-pieza--luz` en la arista iluminada.
+- Rellenos planos de la paleta y **sin contornos**; los degradados quedan para la luz del mundo, nunca para rellenar el objeto. El volumen se da con una pieza `.em-pieza--sombra` (tono oscuro al 22 %) en la cara en sombra y, si hace falta, una `.em-pieza--luz` en la arista iluminada.
 - Un `.em-suelo` elíptico bajo el objeto lo ancla en el espacio.
 - El objeto **se monta en pantalla** (`EM.montar`): las piezas llegan desde fuera y encajan con stagger. Es el gesto firma del estilo. Después puede respirar (`EM.flotar`) o transformarse (`EM.morph`).
-- Los objetos no tienen ojos, boca ni rasgos de mascota; sí tienen detalle funcional (teclas, ventanas, ruedas, hojas).
+- Los objetos no tienen ojos, boca ni rasgos de mascota; sí tienen detalle funcional (teclas, ventanas, ruedas, hojas). Las personas de escala son la excepción (ver más abajo).
 - El objeto ocupa al menos el 35 % del lado corto del encuadre. Lo pequeño no se ve.
 
 Catálogo de recetas (piezas aproximadas):
@@ -70,6 +70,11 @@ Catálogo de recetas (piezas aproximadas):
 | Monedas / coste | 4–6 elipses apiladas, símbolo | la pila sube moneda a moneda; la cámara hace push |
 | Montañas / paisaje | 3 capas de polígonos (ya en `.em-paisaje-*`) | parallax: la capa cercana viaja 3–5× más |
 | Engranajes / proceso | 2–3 círculos dentados (clip-path), eje | giran en sentidos opuestos a velocidades proporcionales |
+| Planeta con anillo | halo de atmósfera (degradado), disco, continentes recortados al disco, lado nocturno (degradado), anillo en dos mitades, 1–2 lunas | el planeta sube; las lunas orbitan con `cos/sin` del tiempo; zoom hacia una ciudad del disco |
+| Cielo / galaxia | 150–800 puntos con `MAFIA.rand`, núcleo con degradado, 2–4 brazos en espiral | los brazos giran despacio; las estrellas titilan con fase propia |
+| Ciudad al atardecer | siluetas lejanas, 6–10 edificios con ventanas encendidas, calle con farolas y personas, cielo en degradado | parallax de tres capas; un tren o coche cruza; las ventanas se encienden en stagger |
+| Interior | pared, ventana con la ciudad, mesa, lámpara con foco (degradado), pantalla, persona | la persona teclea; de la pantalla salen tarjetas que flotan |
+| Persona de escala | ver receta abajo | mira, señala, teclea o camina; nunca habla |
 
 Esqueleto de un objeto:
 
@@ -93,6 +98,49 @@ Esqueleto de un objeto:
 </script>
 ```
 
+## Mundos y viaje de escala
+
+Lo que más eleva el estilo es convertir el vídeo en **un recorrido de cámara entre escalas**, no en escenas sueltas: universo → planeta → ciudad → ventana → interior → objeto, o al revés. Cada capítulo entra haciendo zoom en un elemento concreto de la escena anterior (una ciudad del planeta, una ventana encendida, una pantalla), con el `transform-origin` del zoom en ese elemento y `zoomThrough` centrado en él.
+
+- **Cada escena es un lugar**, no un objeto junto a un titular: suelo u horizonte, cielo o pared, y 4–5 capas de profundidad.
+- **Densidad con semilla.** Estrellas, ventanas, árboles o partículas en decenas o cientos, generadas con `MAFIA.rand(semilla)`; llenan el plano sin romper el determinismo.
+- **Luz que cuenta la hora.** Un degradado de cielo y un halo bastan para pasar de noche a atardecer o a interior cálido; cambia la temperatura cuando cambia el capítulo.
+- **Movimiento ambiental continuo**: lunas que orbitan, un cometa, un tren, ventanas que se encienden, estrellas que titilan. El cierre también se mueve (empuje de cámara, órbita, brazos que giran) hasta el último cuadro.
+
+### Persona de escala
+
+Personajes redondos y sencillos que dan escala y emoción al mundo: cuerpo en cápsula, cabeza circular, ojos de punto blancos con pupila, **sin boca ni rasgos de mascota**. Como mucho cinco por escena, de colores de la paleta y tamaños ligeramente distintos. Miran (desplazando las pupilas), señalan, teclean o caminan; nunca hablan ni protagonizan diálogos.
+
+```js
+// SVG: g > cuerpo (piernas, brazos, torso cápsula con brillo, cabeza, ojos)
+const g = el("g", { id, transform: `translate(${x} ${y}) scale(${escala})` }, padre);
+el("rect", { x: -26, y: -110, width: 52, height: 78, rx: 26, fill: color }, g);            // torso
+el("circle", { cx: 0, cy: -140, r: 30, fill: color }, g);                                    // cabeza
+for (const dx of [-10, 10]) {                                                                // ojos
+  el("circle", { cx: dx, cy: -142, r: 7, fill: "#fff" }, g);
+  el("circle", { cx: dx + mira * 6, cy: -141, r: 3.4, fill: "#141428" }, g);
+}
+```
+
+Anima brazos y ojos con `transformOrigin` en porcentaje (`"50% 0%"` para un brazo que cuelga del hombro), no con `svgOrigin`, que usa coordenadas globales y hace pivotar mal la pieza cuando el grupo está trasladado.
+
+### Planeta con anillo
+
+El anillo es **una sola elipse definida una vez**, dibujada dos veces: entera detrás del planeta y recortada a su mitad delantera encima. Así no puede quedar a medias ni desalineado. No dibujes el anillo con dos arcos `A` de extremos puestos a mano: si los extremos no encajan con los radios, el navegador agranda la elipse sin avisar.
+
+```html
+<clipPath id="s01-anillo-frente"><rect x="-1000" y="0" width="2000" height="400"/></clipPath>
+<g transform="translate(1380 820) rotate(-10)">            <!-- anillo entero, detrás -->
+  <ellipse rx="600" ry="120" fill="none" stroke="#FFC83D" stroke-width="16" stroke-opacity=".55"/>
+</g>
+<circle cx="1380" cy="820" r="380" fill="url(#s01-mar)"/>   <!-- planeta -->
+<g transform="translate(1380 820) rotate(-10)" clip-path="url(#s01-anillo-frente)">  <!-- mitad delantera -->
+  <ellipse rx="600" ry="120" fill="none" stroke="#FFC83D" stroke-width="16"/>
+</g>
+```
+
+El `clipPath` se interpreta en el sistema del grupo ya girado, así que `y ≥ 0` es siempre la mitad delantera. El anillo es concéntrico con el planeta y su radio horizontal, al menos 1,4 veces el del disco.
+
 ## Ambición por defecto
 
 1. **Cámara viva en toda escena.** El contenido va dentro de `.em-camara` y `EM.camara` hace un push-in o pan lento (4–8 %) durante toda la escena; los cambios de capítulo usan `zoomThrough`. Un plano fijo es una decisión, no el valor por defecto.
@@ -100,6 +148,8 @@ Esqueleto de un objeto:
 3. **Profundidad en tres planos.** Fondo (halo o capa lejana), objeto y primer plano (etiquetas, anotación). Al mover la cámara, cada plano se desplaza distinto.
 4. **Las entradas son físicas.** `montar` para objetos, `entrar` con desplazamiento para texto, trazado para líneas. Nada aparece con un simple fade.
 5. **Siempre hay algo en movimiento secundario** (flotar, girar, parpadear) mientras se lee. Ningún cuadro queda estático más de 0.5 s.
+6. **Un hilo de escala.** Si el vídeo tiene más de dos capítulos, se encadenan con zoom en un elemento de la escena anterior (ver «Mundos y viaje de escala»).
+7. **Revisa antes de renderizar.** Captura cada escena al principio, a mitad y al final: títulos cortados, personajes fuera de cuadro o un cierre quieto solo se ven así.
 
 ## Arquitectura y flujo
 
@@ -111,20 +161,24 @@ Esqueleto de un objeto:
 
 ## Esqueleto
 
+Fragmento para una subcomposición. El `index.html` de la plantilla ya carga GSAP, MorphSVGPlugin y el kit.
+
 ```html
-<div id="s02" data-composition-id="s02" data-width="1920" data-height="1080" class="em-escena em-escena--noche">
-  <h2 class="em-titular">UNA IDEA <em>CAMBIA</em></h2>
-  <svg id="s02-grafico" viewBox="0 0 260 260" aria-hidden="true">
-    <path id="s02-forma" d="M 130 18 C 180 18 230 68 230 130 C 230 180 180 230 130 230 C 80 230 30 180 30 130 C 30 80 80 30 130 18 Z" />
-  </svg>
-</div>
-<script>
-  const tl = gsap.timeline({ paused: true });
-  const EM = MAFIA.editorialMotion;
-  EM.entrar(tl, "#s02-grafico", 0.25, { dur: 0.55, y: 24 });
-  EM.morph(tl, "#s02-forma", "M 130 24 C 168 68 206 106 236 130 C 206 154 168 192 130 236 C 92 192 54 154 24 130 C 54 106 92 68 130 24 Z", 0.8);
-  window.__timelines["s02"] = tl;
-</script>
+<template>
+  <div id="s02" data-composition-id="s02" data-width="1920" data-height="1080" class="em-escena em-escena--noche">
+    <h2 class="em-titular">UNA IDEA <em>CAMBIA</em></h2>
+    <svg id="s02-grafico" viewBox="0 0 260 260" aria-hidden="true">
+      <path id="s02-forma" d="M 130 18 C 180 18 230 68 230 130 C 230 180 180 230 130 230 C 80 230 30 180 30 130 C 30 80 80 30 130 18 Z" />
+    </svg>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    const EM = MAFIA.editorialMotion;
+    EM.entrar(tl, "#s02-grafico", 0.25, { dur: 0.55, y: 24 });
+    EM.morph(tl, "#s02-forma", "M 130 24 C 168 68 206 106 236 130 C 206 154 168 192 130 236 C 92 192 54 154 24 130 C 54 106 92 68 130 24 Z", 0.8);
+    window.__timelines["s02"] = tl;
+  </script>
+</template>
 ```
 
 ## API
@@ -136,7 +190,7 @@ Esqueleto de un objeto:
 - `camara(tl, selector, {at, dur, desde, hasta, x, y, ease})`: push-in o pan lento sobre un wrapper `.em-camara`; por defecto escala de 1 a 1.08 en 3 s.
 - `montar(tl, selector, at, {dur, stagger, distancia, escala, desde, ease})`: ensambla las piezas de un objeto llegando desde direcciones alternas y deterministas; `desde: "abajo"` las hace subir todas.
 - `flotar(tl, selector, at, {dur, y, repeat})`: respiración vertical acotada para que un objeto siga vivo mientras se lee.
-- `morph(tl, selector, path, at, {dur, ease})`: interpola un SVG con MorphSVGPlugin de `gsap@3.15.0`; `pnpm run setup` lo copia del paquete npm al runtime local del Studio. Usa paths sencillos.
+- `morph(tl, selector, path, at, {dur, ease})`: interpola un SVG con MorphSVGPlugin de `gsap@3.15.0`; `pnpm run setup` en la edición pública o `pnpm run vendor` en el canónico lo copia desde npm al runtime local. Usa paths sencillos.
 - `zoomThrough(tl, {hueco, anillo, at, dur, radio, inicial, ease})`: abre el radio de un círculo dentro de una máscara SVG; coloca la escena siguiente debajo en el timeline.
 
 El CSS define titulares, bajadas, datos, paneles, comparativas, etiquetas, pasos, paisaje por capas, cierre, y las piezas para objetos (`.em-camara`, `.em-objeto`, `.em-pieza` con variantes `--redonda`, `--suave`, `--pico`, `--rombo`, `--sombra`, `--luz`, y `.em-suelo`). No crea una clase por cada objeto: los objetos se componen en la escena.
@@ -157,6 +211,7 @@ La plantilla `editorial-motion-9x16` recompone la misma demo de 11,65 s para red
 - Para parallax, usa un desplazamiento corto: una capa cercana puede moverse entre 3 y 5 veces más que la lejana.
 - La transición de zoom necesita un underlay que empiece durante la máscara. No cambies el fondo a mitad de un rótulo.
 - Revisa que las palabras importantes no queden detrás de formas móviles y que cada escena se entienda sin sonido.
+- Los titulares en mayúsculas con tilde (É, Á, Ó) chocan con el `overflow: hidden` de `.em-reveal`; el CSS reserva un margen superior, pero si cambias `line-height` comprueba que `pnpm run check` no dé `text_box_overflow`.
 
 ## Técnica
 
