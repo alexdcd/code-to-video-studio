@@ -1,6 +1,8 @@
 node_modules/
 .pnpm-store/
 .claude/
+# Skills installed locally by Codex (including Premium)
+.agents/skills/
 .DS_Store
 .env
 .env.*
