@@ -94,6 +94,9 @@
 .em-reveal {
   display: block;
   overflow: hidden;
+  /* reserva para tildes de mayúsculas (É, Á) sin mover la línea */
+  padding-top: 0.14em;
+  margin-top: -0.14em;
 }
 .em-reveal > span { display: block; }
 .em-comparativa-titulo {

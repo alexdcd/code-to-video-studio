@@ -1,7 +1,7 @@
 ---
 version: "1"
 name: Editorial Motion
-description: Ilustración vectorial plana y cinética sobre navy/crema: objetos y mini-mundos construidos con geometría, seis colores vivos, Inter contundente, cámara viva y movimiento que dirige la lectura.
+description: Ilustración vectorial plana y cinética sobre navy/crema: objetos y mundos construidos con geometría, luz suave, personas de escala y un viaje de cámara entre escalas, seis colores vivos, Inter contundente, cámara viva y movimiento que dirige la lectura.
 unit: 1920x1080; vertical 1080x1920 con la clase em-escena--vertical
 principle: Una lectura por vez, encarnada en un objeto reconocible. La forma organiza, el movimiento explica, la cámara acompaña y el espacio deja leer.
 
@@ -22,7 +22,7 @@ typography:
   label: { weight: 700, size: "18px", case: "uppercase", tracking: "0.16em" }
 
 spacing:
-  safe-area: "120px on 16:9; vertical: x 90-990, y 200-1440 for essential copy (subtitles and platform UI sit below); keep moving shapes at least 80px from essential copy"
+  safe-area: "16:9: x 192-1728, y 120-960 for essential copy, so it survives web crops, zooms and transitions; vertical: x 90-990, y 200-1440 for essential copy (subtitles and platform UI sit below); keep moving shapes at least 80px from essential copy"
   section-gap: "48px"
   title-copy-gap: "36px"
   scene-hold: "0.35–0.6s after a key read"
@@ -44,6 +44,12 @@ components:
     description: A recognizable flat-vector object (laptop, rocket, city, plant, clock, document) assembled from 6–20 pieces with flat shade/light pieces and a ground ellipse; it builds itself on screen piece by piece. Every metaphor scene has one.
   world:
     description: A mini-scene of two or more objects sharing a ground and a horizon, with three depth planes and a slow camera push or pan.
+  scale-person:
+    description: Small round original people (capsule body, round head, white dot eyes, no mouth) that give a world scale and emotion; up to five per scene, they look, point, type or walk, never talk.
+  light:
+    description: Soft radial gradients for world light only (atmosphere, halo, sky, glow, night side, lamp cone); objects stay flat.
+  scale-journey:
+    description: Chapters chain by zooming into an element of the previous scene (planet → city → window → interior), so the video reads as one camera journey.
   camera:
     description: Every scene lives inside a camera wrapper with a 4–8% push-in or pan; chapter changes use zoom-through.
   graph:
