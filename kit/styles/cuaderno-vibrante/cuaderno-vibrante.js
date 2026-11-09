@@ -83,12 +83,60 @@
       ctx.save(); ctx.translate(x + wobble(seed + 81, 1.3), y + wobble(seed + 82, 1.3)); ctx.rotate(rotation + wobble(seed + 83, 0.002));
       ctx.font = `${weight} ${size}px ${family}`; ctx.textAlign = align; ctx.textBaseline = "alphabetic"; ctx.fillStyle = color; ctx.fillText(value, 0, 0); ctx.restore();
     }
-    function camara(t, { focoX = W / 2, focoY = H / 2, zoomInicial = 1.02, zoomFinal = 1.06, sacudidas = [] } = {}) {
-      const u = ease(clamp(t / 4));
+    function barra(ctx, x, y, w, h, { fill = PALETA.azul, stroke = PALETA.tinta, progress = 1, seed = 0, width = 7, etiqueta, etiquetaSize = 40, etiquetaColor = PALETA.tinta } = {}) {
+      const alto = Math.max(0, h * ease(progress));
+      if (alto < 1) return;
+      poligono(ctx, [[x, y], [x + w, y], [x + w, y - alto], [x, y - alto]], { fill, stroke, width, seed });
+      if (etiqueta != null && progress >= 0.98) texto(ctx, String(etiqueta), x + w / 2, y - alto - 26, etiquetaSize, etiquetaColor, { weight: 800, seed: seed + 7 });
+    }
+    function numero(ctx, valor, x, y, size = 160, color = PALETA.tinta, { progress = 1, decimales = 0, prefijo = "", sufijo = "", seed = 0, weight = 800, align = "center" } = {}) {
+      const p = clamp(progress);
+      if (p <= 0) return;
+      const mostrado = (valor * ease(p)).toFixed(decimales);
+      const pop = p > 0.82 ? Math.sin(Math.PI * clamp((p - 0.82) / 0.18)) * 0.08 : 0;
+      texto(ctx, `${prefijo}${mostrado}${sufijo}`, x, y, size * (1 + pop), color, { weight, seed, align });
+    }
+    function destacar(ctx, cx, cy, rx, ry = rx, { color = PALETA.coral, width = 9, progress = 1, seed = 0 } = {}) {
+      if (clamp(progress) <= 0) return;
+      const total = Math.PI * 2 * 1.08 * clamp(progress);
+      const n = Math.max(2, Math.ceil(total / 0.2));
+      for (let pass = 0; pass < 2; pass++) {
+        const pts = [];
+        for (let i = 0; i <= n; i++) {
+          const a = -Math.PI / 2 + 0.6 + (i / n) * total;
+          const drift = 1 + (i / n) * 0.03 * (pass ? -1 : 1);
+          pts.push([cx + Math.cos(a) * rx * drift + wobble(seed + i * 3 + pass * 70, 2.5), cy + Math.sin(a) * ry * drift + wobble(seed + i * 3 + pass * 70 + 1, 2.5)]);
+        }
+        trazar(ctx, pts, false); ctx.strokeStyle = color; ctx.lineWidth = pass ? width * 0.55 : width; ctx.lineCap = "round"; ctx.lineJoin = "round";
+        ctx.globalAlpha *= pass ? 0.45 : 1; ctx.stroke(); if (pass) ctx.globalAlpha /= 0.45;
+      }
+    }
+    function flecha(ctx, x1, y1, x2, y2, { color = PALETA.tinta, width = 8, progress = 1, seed = 0, cabeza = 34 } = {}) {
+      const p = clamp(progress);
+      if (p <= 0) return;
+      linea(ctx, x1, y1, x2, y2, { color, width, progress: p, seed });
+      if (p < 0.85) return;
+      const a = Math.atan2(y2 - y1, x2 - x1), q = clamp((p - 0.85) / 0.15);
+      const ex = x1 + (x2 - x1) * p, ey = y1 + (y2 - y1) * p;
+      for (const s of [-1, 1]) {
+        const b = a + Math.PI + s * 0.52;
+        linea(ctx, ex, ey, ex + Math.cos(b) * cabeza * q, ey + Math.sin(b) * cabeza * q, { color, width, seed: seed + 11 + s, double: false });
+      }
+    }    function camara(t, { focoX = W / 2, focoY = H / 2, zoomInicial = 1.04, zoomFinal = 1.14, duracion = 4, sacudidas = [] } = {}) {
+      const u = ease(clamp(t / duracion));
       const shake = sacudidas.reduce((sum, [at, strength]) => sum + (t >= at ? strength * Math.exp(-(t - at) * 8) : 0), 0);
       return { x: focoX + wobble(301, shake * 3), y: focoY + wobble(302, shake * 3), z: zoomInicial + (zoomFinal - zoomInicial) * u, r: wobble(303, shake * 0.0015) };
     }
-    function aplicarCamara(ctx, c = {}) {
+    function camaraPlanos(t, planos, { sacudidas = [] } = {}) {
+      const keys = [...planos].sort((a, b) => a.t - b.t);
+      if (!keys.length) return camara(t, { sacudidas });
+      let a = keys[0], b = keys[keys.length - 1];
+      for (let i = 0; i < keys.length - 1; i++) if (t >= keys[i].t && t <= keys[i + 1].t) { a = keys[i]; b = keys[i + 1]; break; }
+      const u = b.t > a.t ? ease((t - a.t) / (b.t - a.t)) : 1;
+      const mix = (k, def) => (a[k] ?? def) + ((b[k] ?? def) - (a[k] ?? def)) * (t <= a.t ? 0 : t >= b.t ? 1 : u);
+      const shake = sacudidas.reduce((sum, [at, strength]) => sum + (t >= at ? strength * Math.exp(-(t - at) * 8) : 0), 0);
+      return { x: mix("x", W / 2) + wobble(301, shake * 3), y: mix("y", H / 2) + wobble(302, shake * 3), z: mix("z", 1), r: wobble(303, shake * 0.0015) };
+    }    function aplicarCamara(ctx, c = {}) {
       ctx.translate(W / 2, H / 2); ctx.rotate(c.r || 0); ctx.scale(c.z || 1, c.z || 1); ctx.translate(-(c.x ?? W / 2), -(c.y ?? H / 2));
     }
     function subtitulo(ctx, words, { y = 1630, size = 52, active = -1, hidden = false } = {}) {
@@ -162,6 +210,6 @@
       }
       ctx.restore();
     }
-    return { W, H, PALETA, setFrame, fondo, poligono, linea, elipse, texto, camara, aplicarCamara, subtitulo, crearSubs, transicion };
+    return { W, H, PALETA, setFrame, fondo, poligono, linea, elipse, texto, barra, numero, destacar, flecha, camara, camaraPlanos, aplicarCamara, subtitulo, crearSubs, transicion };
   };
 })();

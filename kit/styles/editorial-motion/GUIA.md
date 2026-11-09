@@ -4,28 +4,29 @@
 
 ## Cuándo usarlo
 
-Para explicaciones visuales breves que convierten ideas, cifras, comparaciones o procesos en una secuencia de formas legibles. Funciona con narración o solo con rótulos concisos.
+Para explicaciones visuales breves que convierten ideas, cifras, comparaciones o procesos en una secuencia de **ilustraciones vectoriales planas en movimiento**: objetos reconocibles, mini-mundos y datos construidos con geometría limpia. Funciona con narración o solo con rótulos concisos.
 
-No lo uses como identidad de marca, para una crónica atmosférica, para acting de personajes o para una composición abstracta conducida por música. En esos casos, elige un estilo existente que se ajuste al BRIEF.
+No lo uses como identidad de marca, para una crónica atmosférica, para un vídeo conducido por el acting de un protagonista (diálogo, emociones largas) o para una composición abstracta conducida por música. Las personas de escala (ver «Mundos y viaje de escala») sí forman parte del estilo. En esos casos, elige un estilo existente que se ajuste al BRIEF.
 
 ## Lenguaje visual
 
 1. Alterna navy `#0F1A3D` y crema `#FFF1D6` por capítulo; el cambio de fondo responde a una nueva idea.
 2. Usa la paleta exacta de seis colores del frame; combina como máximo tres colores vivos en una misma lectura.
 3. Inter pesada da la jerarquía: titular grande, dato muy grande, explicación breve y etiqueta pequeña.
-4. Construye con círculos, rectángulos redondeados, bandas, líneas y polígonos vectoriales limpios.
-5. Da profundidad 2.5D con tres o cuatro capas de movimiento relativo y formas que desbordan el encuadre.
-6. Reserva el morph, squash, parallax y zoom para cambios que expliquen relación, escala o paso de una idea a otra.
-7. Mantén sombras y degradados discretos; evita texturas, personajes firma y detalle ornamental.
+4. Construye **objetos y escenas reconocibles** (portátil, ciudad, cohete, planta, gráfico, reloj) con círculos, rectángulos redondeados, bandas, líneas y polígonos vectoriales limpios. Ver «Objetos y mundos».
+5. Da profundidad 2.5D con tres o cuatro capas de movimiento relativo, formas que desbordan el encuadre y una cámara que empuja o se desplaza despacio.
+6. Usa el morph, squash, parallax y zoom para cambios que expliquen relación, escala o paso de una idea a otra; el montaje pieza a pieza de un objeto es el gesto firma.
+7. Los objetos se rellenan en plano; sombra y arista iluminada son piezas planas. La **luz del mundo** (atmósfera, halo, cielo, resplandor, lado nocturno, foco de lámpara) sí usa degradados radiales suaves: es lo que da volumen y ambiente. Evita texturas, mascotas y ornamento sin significado.
 
 ## Usage rules
 
 | Recurso | Regla |
 | --- | --- |
 | Fondo | Alterna navy y crema al cambiar de idea. El degradado navy es un halo sutil y fijo, nunca una textura. |
-| Color | Los seis tokens son constantes. Usa un acento principal por lectura y no llenes todas las formas con color. |
-| Tipografía | Un titular de una o dos líneas; texto corrido en frases cortas. Comprueba `text-wrap: balance` y la zona segura. En texto pequeño usa navy/crema; reserva los acentos vivos para geometría o titulares grandes. |
-| Geometría | Una metáfora clara por escena. Las formas abstractas no tienen ojos ni rasgos de mascota. |
+| Color | Los seis tokens son la base. Cada mundo tiene una **temperatura** (atardecer cálido, noche fría, interior ámbar) hecha con tintes claros u oscuros de esos tokens. Usa un acento principal por lectura y no llenes todas las formas con color. |
+| Tipografía | Un titular de una o dos líneas; texto corrido en frases cortas. Comprueba `text-wrap: balance` y la zona segura (16:9: x 192–1728, y 120–960). Ancla el texto a un tercio del encuadre y deja los otros dos al mundo; nunca lo pongas sobre el punto al que va a entrar el zoom. En texto pequeño usa navy/crema; reserva los acentos vivos para geometría o titulares grandes. |
+| Geometría | Una metáfora clara por escena, encarnada en un objeto o mini-mundo reconocible. Los objetos no tienen ojos ni rasgos de mascota, pero sí detalle funcional; las únicas caras son las de las personas de escala. |
+| Cámara | Contenido dentro de `.em-camara`; `EM.camara` hace push-in o pan de 4–8 % en cada escena. Cambios de capítulo con `zoomThrough`. |
 | Tarjetas y paneles | Úsalos solo para separar información relacionada. Prefiere la forma, la línea o el espacio vacío al mosaico de tarjetas. |
 | Movimiento | Entrada de 0.35–0.65 s, pausa legible de 0.35–0.6 s, overshoot menor de 4%. Sin rebote repetido. |
 | Profundidad | 3–4 capas; desplaza menos la capa lejana y más la cercana. Extiende las capas móviles fuera de pantalla. |
@@ -38,14 +39,124 @@ No lo uses como identidad de marca, para una crónica atmosférica, para acting 
 - Usa easing suave y overshoot pequeño. Un squash breve puede dar peso a una forma; la proporción horizontal/vertical debe compensarse para conservar volumen.
 - En una comparación, conserva tamaño y eje para que el cambio sea lo único que compita.
 - En parallax, define la dirección de cámara antes de animar las capas; su desplazamiento relativo mantiene la misma dirección.
-- Deja el cierre quieto al menos medio segundo. No tapes una lectura con un golpe decorativo.
+- Deja el texto del cierre fijo al menos medio segundo; el mundo de detrás sigue moviéndose. No tapes una lectura con un golpe decorativo.
+- Antes de dar por buena una escena, pregúntate: ¿qué objeto o mundo veo? Si la respuesta es «un círculo y un texto», no está terminada.
+
+## Objetos y mundos (obligatorio, no opcional)
+
+La geometría es el ladrillo, no el resultado. El estilo es ilustración vectorial plana: cada escena con metáfora contiene **al menos un objeto reconocible o un mini-mundo** construido con 6–20 piezas (`.em-objeto` > `.em-pieza`). Un círculo suelto junto a un titular no es Editorial Motion; un portátil que se abre, una ciudad que crece o un cohete que despega sí lo son.
+
+Reglas de construcción:
+
+- Rellenos planos de la paleta y **sin contornos**; los degradados quedan para la luz del mundo, nunca para rellenar el objeto. El volumen se da con una pieza `.em-pieza--sombra` (tono oscuro al 22 %) en la cara en sombra y, si hace falta, una `.em-pieza--luz` en la arista iluminada.
+- Un `.em-suelo` elíptico bajo el objeto lo ancla en el espacio.
+- El objeto **se monta en pantalla** (`EM.montar`): las piezas llegan desde fuera y encajan con stagger. Es el gesto firma del estilo. Después puede respirar (`EM.flotar`) o transformarse (`EM.morph`).
+- Los objetos no tienen ojos, boca ni rasgos de mascota; sí tienen detalle funcional (teclas, ventanas, ruedas, hojas). Las personas de escala son la excepción (ver más abajo).
+- El objeto ocupa al menos el 35 % del lado corto del encuadre. Lo pequeño no se ve.
+
+Catálogo de recetas (piezas aproximadas):
+
+| Objeto | Piezas | Movimiento natural |
+| --- | --- | --- |
+| Portátil | base suave, pantalla, bisel, 3–4 bloques de interfaz, sombra en la base | la pantalla se abre (rotateX desde 70°) y la interfaz entra en stagger |
+| Teléfono | cuerpo suave, pantalla, notch, 3 tarjetas | tarjetas que deslizan; badge que hace pop |
+| Ciudad | 5–8 rectángulos de alturas distintas, ventanas pequeñas, sol redondo | edificios crecen desde el suelo con stagger; el sol sube |
+| Cohete | cuerpo suave, pico, 2 aletas rombo, llama pico coral/amarillo | despegue con `y` negativo y la llama palpita |
+| Planta / crecimiento | maceta, tallo, 3–5 hojas pico rotadas | hojas se montan de abajo arriba; el tallo crece con scaleY |
+| Servidor / nube | 3 bloques apilados con luces, o nube de 3–4 círculos | luces parpadean en secuencia; la nube flota |
+| Reloj | círculo, 2 manecillas, 12 marcas | las manecillas giran hasta la hora clave |
+| Documento | hoja suave, 4–6 líneas de texto, sello redondo | líneas aparecen en stagger; el sello cae con `montar` |
+| Gráfico como objeto | 3–5 barras con pie, eje, flecha de tendencia | barras crecen; la flecha se traza al final |
+| Monedas / coste | 4–6 elipses apiladas, símbolo | la pila sube moneda a moneda; la cámara hace push |
+| Montañas / paisaje | 3 capas de polígonos (ya en `.em-paisaje-*`) | parallax: la capa cercana viaja 3–5× más |
+| Engranajes / proceso | 2–3 círculos dentados (clip-path), eje | giran en sentidos opuestos a velocidades proporcionales |
+| Planeta con anillo | halo de atmósfera (degradado), disco, continentes recortados al disco, lado nocturno (degradado), anillo en dos mitades, 1–2 lunas | el planeta sube; las lunas orbitan con `cos/sin` del tiempo; zoom hacia una ciudad del disco |
+| Cielo / galaxia | 150–800 puntos con `MAFIA.rand`, núcleo con degradado, 2–4 brazos en espiral | los brazos giran despacio; las estrellas titilan con fase propia |
+| Ciudad al atardecer | siluetas lejanas, 6–10 edificios con ventanas encendidas, calle con farolas y personas, cielo en degradado | parallax de tres capas; un tren o coche cruza; las ventanas se encienden en stagger |
+| Interior | pared, ventana con la ciudad, mesa, lámpara con foco (degradado), pantalla, persona | la persona teclea; de la pantalla salen tarjetas que flotan |
+| Persona de escala | ver receta abajo | mira, señala, teclea o camina; nunca habla |
+
+Esqueleto de un objeto:
+
+```html
+<div class="em-camara">
+  <div id="s01-portatil" class="em-objeto" style="left:1100px;top:380px;width:620px;height:420px">
+    <div class="em-pieza em-pieza--suave" style="left:40px;top:0;width:540px;height:340px;background:#0F1A3D"></div>
+    <div class="em-pieza" style="left:68px;top:26px;width:484px;height:288px;background:#3B7BFF"></div>
+    <div class="em-pieza em-pieza--suave" style="left:110px;top:70px;width:260px;height:36px;background:#FFF1D6"></div>
+    <div class="em-pieza em-pieza--suave" style="left:110px;top:130px;width:400px;height:120px;background:#FFC83D"></div>
+    <div class="em-pieza em-pieza--redonda" style="left:470px;top:70px;width:40px;height:40px;background:#FF6B5C"></div>
+    <div class="em-pieza em-pieza--suave" style="left:0;top:344px;width:620px;height:36px;background:#FF6B5C"></div>
+    <div class="em-pieza em-pieza--sombra" style="left:0;top:368px;width:620px;height:12px"></div>
+    <div class="em-suelo" style="left:-40px;top:392px;width:700px"></div>
+  </div>
+</div>
+<script>
+  EM.camara(tl, "#s01 .em-camara", { at: 0, dur: 3.2, desde: 1, hasta: 1.07, x: -30 });
+  EM.montar(tl, "#s01-portatil .em-pieza", 0.3, { dur: 0.5, stagger: 0.07 });
+  EM.flotar(tl, "#s01-portatil", 1.4, { y: 8, dur: 1.2 });
+</script>
+```
+
+## Mundos y viaje de escala
+
+Lo que más eleva el estilo es convertir el vídeo en **un recorrido de cámara entre escalas**, no en escenas sueltas: universo → planeta → ciudad → ventana → interior → objeto, o al revés. Cada capítulo entra haciendo zoom en un elemento concreto de la escena anterior (una ciudad del planeta, una ventana encendida, una pantalla), con el `transform-origin` del zoom en ese elemento y `zoomThrough` centrado en él.
+
+- **Cada escena es un lugar**, no un objeto junto a un titular: suelo u horizonte, cielo o pared, y 4–5 capas de profundidad.
+- **Densidad con semilla.** Estrellas, ventanas, árboles o partículas en decenas o cientos, generadas con `MAFIA.rand(semilla)`; llenan el plano sin romper el determinismo.
+- **Luz que cuenta la hora.** Un degradado de cielo y un halo bastan para pasar de noche a atardecer o a interior cálido; cambia la temperatura cuando cambia el capítulo.
+- **Movimiento ambiental continuo**: lunas que orbitan, un cometa, un tren, ventanas que se encienden, estrellas que titilan. El cierre también se mueve (empuje de cámara, órbita, brazos que giran) hasta el último cuadro.
+
+### Persona de escala
+
+Personajes redondos y sencillos que dan escala y emoción al mundo: cuerpo en cápsula, cabeza circular, ojos de punto blancos con pupila, **sin boca ni rasgos de mascota**. Como mucho cinco por escena, de colores de la paleta y tamaños ligeramente distintos. Miran (desplazando las pupilas), señalan, teclean o caminan; nunca hablan ni protagonizan diálogos.
+
+```js
+// SVG: g > cuerpo (piernas, brazos, torso cápsula con brillo, cabeza, ojos)
+const g = el("g", { id, transform: `translate(${x} ${y}) scale(${escala})` }, padre);
+el("rect", { x: -26, y: -110, width: 52, height: 78, rx: 26, fill: color }, g);            // torso
+el("circle", { cx: 0, cy: -140, r: 30, fill: color }, g);                                    // cabeza
+for (const dx of [-10, 10]) {                                                                // ojos
+  el("circle", { cx: dx, cy: -142, r: 7, fill: "#fff" }, g);
+  el("circle", { cx: dx + mira * 6, cy: -141, r: 3.4, fill: "#141428" }, g);
+}
+```
+
+Anima brazos y ojos con `transformOrigin` en porcentaje (`"50% 0%"` para un brazo que cuelga del hombro), no con `svgOrigin`, que usa coordenadas globales y hace pivotar mal la pieza cuando el grupo está trasladado.
+
+### Planeta con anillo
+
+El anillo es **una sola elipse definida una vez**, dibujada dos veces: entera detrás del planeta y recortada a su mitad delantera encima. Así no puede quedar a medias ni desalineado. No dibujes el anillo con dos arcos `A` de extremos puestos a mano: si los extremos no encajan con los radios, el navegador agranda la elipse sin avisar.
+
+```html
+<clipPath id="s01-anillo-frente"><rect x="-1000" y="0" width="2000" height="400"/></clipPath>
+<g transform="translate(1380 820) rotate(-10)">            <!-- anillo entero, detrás -->
+  <ellipse rx="600" ry="120" fill="none" stroke="#FFC83D" stroke-width="16" stroke-opacity=".55"/>
+</g>
+<circle cx="1380" cy="820" r="380" fill="url(#s01-mar)"/>   <!-- planeta -->
+<g transform="translate(1380 820) rotate(-10)" clip-path="url(#s01-anillo-frente)">  <!-- mitad delantera -->
+  <ellipse rx="600" ry="120" fill="none" stroke="#FFC83D" stroke-width="16"/>
+</g>
+```
+
+El `clipPath` se interpreta en el sistema del grupo ya girado, así que `y ≥ 0` es siempre la mitad delantera. El anillo es concéntrico con el planeta y su radio horizontal, al menos 1,4 veces el del disco.
+
+## Ambición por defecto
+
+1. **Cámara viva en toda escena.** El contenido va dentro de `.em-camara` y `EM.camara` hace un push-in o pan lento (4–8 %) durante toda la escena; los cambios de capítulo usan `zoomThrough`. Un plano fijo es una decisión, no el valor por defecto.
+2. **Contraste de escala.** El héroe (dato, titular u objeto) ocupa ≥ 40 % del ancho; lo secundario, un tercio o menos.
+3. **Profundidad en tres planos.** Fondo (halo o capa lejana), objeto y primer plano (etiquetas, anotación). Al mover la cámara, cada plano se desplaza distinto.
+4. **Las entradas son físicas.** `montar` para objetos, `entrar` con desplazamiento para texto, trazado para líneas. Nada aparece con un simple fade.
+5. **Siempre hay algo en movimiento secundario** (flotar, girar, parpadear) mientras se lee. Ningún cuadro queda estático más de 0.5 s.
+6. **Un hilo de escala.** Si el vídeo tiene más de dos capítulos, se encadenan con zoom en un elemento de la escena anterior (ver «Mundos y viaje de escala»).
+7. **Revisa antes de renderizar.** Captura cada escena al principio, a mitad y al final: títulos cortados, personajes fuera de cuadro o un cierre quieto solo se ven así.
 
 ## Arquitectura y flujo
 
 1. Crea el proyecto con `pnpm run nuevo editorial-motion-16x9 <nombre>` en el canónico o `pnpm run new editorial-motion-16x9 <nombre>` en Code to Video Studio; cambia a `editorial-motion-9x16` para vertical.
 2. Lee esta guía y [FRAME.md](FRAME.md); declara `editorial-motion` en el BRIEF.
 3. Construye cada escena en `compositions/`, conserva IDs con prefijo de escena y guarda los estilos/scripts de sub-composición dentro de `<template>`.
-4. Usa `MAFIA.editorialMotion` para entradas, morphs SVG y zoom-through. GSAP y el kit están empaquetados localmente; el proyecto no consulta la red.
+4. Usa `MAFIA.editorialMotion` para entradas, cámara, montaje de objetos, morphs SVG y zoom-through. GSAP y el kit están empaquetados localmente; el proyecto no consulta la red.
 5. Revisa poses por escena con `pnpm run poses <nombre>`, comprueba los cortes del storyboard, luego ejecuta `pnpm run check <nombre>`, `pnpm run render <nombre>` y la revisión visual habitual.
 
 ## Esqueleto
@@ -76,10 +187,13 @@ Fragmento para una subcomposición. El `index.html` de la plantilla ya carga GSA
 
 - `PALETA`: los seis colores base.
 - `entrar(tl, selector, at, {dur, x, y, ease, stagger})`: revela uno o varios elementos con desplazamiento y easing.
+- `camara(tl, selector, {at, dur, desde, hasta, x, y, ease})`: push-in o pan lento sobre un wrapper `.em-camara`; por defecto escala de 1 a 1.08 en 3 s.
+- `montar(tl, selector, at, {dur, stagger, distancia, escala, desde, ease})`: ensambla las piezas de un objeto llegando desde direcciones alternas y deterministas; `desde: "abajo"` las hace subir todas.
+- `flotar(tl, selector, at, {dur, y, repeat})`: respiración vertical acotada para que un objeto siga vivo mientras se lee.
 - `morph(tl, selector, path, at, {dur, ease})`: interpola un SVG con MorphSVGPlugin de `gsap@3.15.0`; `pnpm run setup` en la edición pública o `pnpm run vendor` en el canónico lo copia desde npm al runtime local. Usa paths sencillos.
 - `zoomThrough(tl, {hueco, anillo, at, dur, radio, inicial, ease})`: abre el radio de un círculo dentro de una máscara SVG; coloca la escena siguiente debajo en el timeline.
 
-El CSS define titulares, bajadas, datos, paneles, comparativas, etiquetas, pasos, paisaje por capas y cierre. No crea una clase por cada variante temática.
+El CSS define titulares, bajadas, datos, paneles, comparativas, etiquetas, pasos, paisaje por capas, cierre, y las piezas para objetos (`.em-camara`, `.em-objeto`, `.em-pieza` con variantes `--redonda`, `--suave`, `--pico`, `--rombo`, `--sombra`, `--luz`, y `.em-suelo`). No crea una clase por cada objeto: los objetos se componen en la escena.
 
 ## Vertical (1080×1920)
 
@@ -97,6 +211,7 @@ La plantilla `editorial-motion-9x16` recompone la misma demo de 11,65 s para red
 - Para parallax, usa un desplazamiento corto: una capa cercana puede moverse entre 3 y 5 veces más que la lejana.
 - La transición de zoom necesita un underlay que empiece durante la máscara. No cambies el fondo a mitad de un rótulo.
 - Revisa que las palabras importantes no queden detrás de formas móviles y que cada escena se entienda sin sonido.
+- Los titulares en mayúsculas con tilde (É, Á, Ó) chocan con el `overflow: hidden` de `.em-reveal`; el CSS reserva un margen superior, pero si cambias `line-height` comprueba que `pnpm run check` no dé `text_box_overflow`.
 
 ## Técnica
 

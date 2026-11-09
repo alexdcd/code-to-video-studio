@@ -9,28 +9,35 @@
 </style>
 <div id="s02" data-composition-id="s02" data-width="1080" data-height="1920">
   <div class="starter-scene">
-    <div class="starter-grid"></div>
-    <div class="starter-kicker">02 · System</div>
-    <div class="starter-title">GIVE THE AGENT<br><span class="starter-accent">A PROCESS.</span></div>
-    <div id="s02-stage" class="starter-stage">
-      <svg id="s02-svg" viewBox="0 0 1080 1920"></svg>
+    <div id="s02-cam" class="starter-camera">
+      <div class="starter-grid" data-layout-ignore></div>
+      <div class="starter-beam" data-layout-ignore></div>
+      <div class="starter-kicker">02 · System</div>
+      <div class="starter-title">GIVE THE AGENT<br><span class="starter-accent">A PROCESS.</span></div>
+      <div id="s02-stage" class="starter-stage">
+        <svg id="s02-svg" viewBox="0 0 1080 1920"></svg>
+      </div>
+      <div class="starter-footer" data-layout-ignore>BRIEF → BUILD → REVIEW</div>
     </div>
-    <div class="starter-footer">BRIEF → BUILD → REVIEW</div>
   </div>
 </div>
 <script>
 (() => {
   const tl=gsap.timeline({paused:true});
+  const S=MAFIA.starter;
   const stage=document.getElementById("s02-stage");
   const svg=document.getElementById("s02-svg");
-  const a=MAFIA.starter.node(stage,{x:110,y:850,title:"PLAN",text:"brief + storyboard"});
-  const b=MAFIA.starter.node(stage,{x:690,y:1050,title:"BUILD",text:"code + motion"});
-  const c=MAFIA.starter.node(stage,{x:110,y:1250,title:"CHECK",text:"snapshots + render"});
-  const p1=MAFIA.starter.connector(svg,[390,909],[690,1109]);
-  const p2=MAFIA.starter.connector(svg,[690,1168],[390,1309]);
-  tl.fromTo("#s02 .starter-title",{opacity:0,y:50},{opacity:1,y:0,duration:.7,ease:"expo.out"},.1);
+  const a=S.node(stage,{x:110,y:850,title:"PLAN",text:"brief + storyboard"});
+  const b=S.node(stage,{x:660,y:1050,title:"BUILD",text:"code + motion"});
+  const c=S.node(stage,{x:110,y:1250,title:"CHECK",text:"snapshots + render"});
+  const p1=S.connector(svg,[440,913],[690,1113]);
+  const p2=S.connector(svg,[690,1176],[440,1313]);
+  // The camera drifts down the diagram as the connectors draw, then punches when the last node lands.
+  S.camera(tl, "#s02-cam", {at:0, dur:4, from:1.02, to:1.1, x:-24, y:-60});
+  tl.fromTo("#s02 .starter-title",{opacity:0,y:50,filter:"blur(14px)"},{opacity:1,y:0,filter:"blur(0px)",duration:.7,ease:"expo.out"},.1);
   MAFIA.draw(tl,[p1,p2],.75,1.15,0);
   MAFIA.pop(tl,[a,b,c],.55,.5,.28);
+  S.punch(tl, "#s02-cam", 1.1);
   window.__timelines.s02=tl;
 })();
 </script>

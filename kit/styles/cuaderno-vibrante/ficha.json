@@ -2,16 +2,17 @@
   "nombre": "Cuaderno Vibrante",
   "tipo": "estilo",
   "estado": "distribución pública",
-  "descripcion": "Dibujo procedural con vibración a 12 fps, tinta duplicada, textura de papel, cámara expresiva, transiciones geométricas y subtítulos con palabra activa.",
+  "descripcion": "Dibujo procedural con vibración a 12 fps, tinta duplicada, textura de papel, cámara siempre en movimiento, primitivas de datos (barras, contadores, resaltes, flechas), transiciones geométricas y subtítulos con palabra activa. Estilo de referencia para datos y presentaciones.",
   "origen": "Adaptación portable de la implementación canónica; sin identidad ni recursos privados.",
   "licencia": "AGPL-3.0-only; runtime de HyperFrames y GSAP bajo sus avisos de terceros",
   "plantilla": "cuaderno-vibrante-9x16",
-  "uso": "const C = MAFIA.cuadernoVibrante({ ctx });\nC.setFrame(t);\nC.fondo(ctx, C.PALETA.papel);\nC.poligono(ctx, puntos, { fill: C.PALETA.coral, seed: 12 });\nC.texto(ctx, \"IDEA\", 540, 800, 96, C.PALETA.tinta);",
+  "uso": "const C = MAFIA.cuadernoVibrante({ ctx });\nC.setFrame(t);\nC.fondo(ctx, C.PALETA.papel);\nC.aplicarCamara(ctx, C.camara(t, { zoomInicial: 1.04, zoomFinal: 1.16, sacudidas: [[0.3, 1]] }));\nC.barra(ctx, 300, 1400, 150, 600, { fill: C.PALETA.coral, progress: t / 0.7, etiqueta: \"MAR\" });\nC.numero(ctx, 128, 540, 800, 220, C.PALETA.coral, { progress: (t - 1) / 0.9, sufijo: \"%\" });\nC.destacar(ctx, 540, 750, 260, 150, { progress: (t - 2) / 0.6 });",
   "parametros": {
     "fpsDibujo": 12,
     "trazo": "poligono(ctx, puntos, opciones), linea(ctx, x1, y1, x2, y2, opciones), elipse(ctx, cx, cy, rx, ry, opciones)",
+    "datos": "barra(ctx, x, yBase, ancho, alto, { fill, progress, etiqueta }), numero(ctx, valor, x, y, size, color, { progress, decimales, prefijo, sufijo }), destacar(ctx, cx, cy, rx, ry, { color, progress }), flecha(ctx, x1, y1, x2, y2, { color, progress })",
     "papel": "fondo(ctx, color) añade grano procedural repetible al color elegido",
-    "camara": "camara(t, { focoX, focoY, zoomInicial, zoomFinal, sacudidas }) y aplicarCamara(ctx, camera)",
+    "camara": "camara(t, { focoX, focoY, zoomInicial, zoomFinal, duracion, sacudidas }) con push-in por defecto de 1.04 a 1.14; camaraPlanos(t, [{ t, x, y, z }], { sacudidas }) encadena planos; aplicarCamara(ctx, camera)",
     "subtitulos": "crearSubs(voz, opciones) dibuja grupos de hasta tres palabras y destaca la palabra activa; no añade voz",
     "transiciones": "corte, fundido, barrido, brocha, estrella, iris, teselas y persiana"
   }

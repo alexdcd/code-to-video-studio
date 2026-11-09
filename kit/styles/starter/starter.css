@@ -6,7 +6,7 @@
   --ctv-muted: #8f99ad;
   --ctv-accent: #7ee7ff;
   --ctv-accent2: #c7a7ff;
-  --ctv-line: rgba(255,255,255,.16);
+  --ctv-line: rgba(255,255,255,.2);
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: var(--ctv-bg); }
@@ -24,13 +24,13 @@ body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSyst
     linear-gradient(var(--ctv-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--ctv-line) 1px, transparent 1px);
   background-size: 72px 72px;
-  opacity: .16;
+  opacity: .55;
   transform: perspective(700px) rotateX(58deg) translateY(760px) scale(1.7);
   transform-origin: 50% 100%;
 }
 .starter-kicker {
   position: absolute; top: 190px; left: 90px;
-  font-size: 24px; letter-spacing: .22em; text-transform: uppercase;
+  font-size: 28px; letter-spacing: .22em; text-transform: uppercase;
   color: var(--ctv-muted); font-weight: 700;
 }
 .starter-title {
@@ -43,14 +43,14 @@ body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSyst
 }
 .starter-stage { position: absolute; inset: 0; }
 .starter-node {
-  position: absolute; width: 280px; min-height: 118px;
+  position: absolute; width: 330px; min-height: 126px;
   padding: 30px 34px; border: 1px solid var(--ctv-line);
   border-radius: 28px; background: rgba(17,21,33,.84);
   box-shadow: 0 30px 80px rgba(0,0,0,.3);
   backdrop-filter: blur(10px);
 }
 .starter-node strong { display: block; font-size: 34px; letter-spacing: -.03em; }
-.starter-node span { display: block; margin-top: 8px; color: var(--ctv-muted); font-size: 20px; }
+.starter-node span { display: block; margin-top: 8px; color: var(--ctv-muted); font-size: 28px; }
 .starter-line { stroke: var(--ctv-accent); stroke-width: 4; fill: none; opacity: .85; }
 .starter-dot { fill: var(--ctv-accent); }
 .starter-glow { filter: drop-shadow(0 0 20px rgba(126,231,255,.5)); }
@@ -59,3 +59,17 @@ body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSyst
   color: var(--ctv-muted); font-size: 20px; letter-spacing: .08em;
 }
 .starter-accent { color: var(--ctv-accent); }
+/* Camera wrapper: GSAP scales/translates it (MAFIA.starter.camera). Keep CSS transform off it. */
+.starter-camera { position: absolute; inset: 0; transform-origin: 50% 50%; }
+/* Oversized hero number/word: the scene's single loud element. */
+.starter-hero {
+  position: absolute; left: 90px; right: 90px;
+  font-size: 300px; line-height: .85; letter-spacing: -.08em; font-weight: 800;
+  color: var(--ctv-accent); text-shadow: 0 0 60px rgba(126,231,255,.35);
+}
+/* Soft light beam: a diagonal source so dark frames have somewhere the light comes from. */
+.starter-beam {
+  position: absolute; left: -20%; top: -30%; width: 140%; height: 160%;
+  background: linear-gradient(115deg, transparent 38%, rgba(126,231,255,.10) 50%, transparent 62%);
+  pointer-events: none;
+}

@@ -61,6 +61,20 @@ Rendered video must be deterministic and seek-safe.
 - Text should explain only what the image cannot communicate efficiently.
 - Keep the number of simultaneous moving elements purposeful.
 
+## Ambition rules
+
+Restraint is about the number of readings, not about the energy of the image. The default output must look like motion design, not like slides. Unless the brief asks for a quiet piece:
+
+- The camera is alive in every scene: a slow push-in, pan or drift across the whole scene, plus one camera hit on the key beat. A fixed frame is a decision, not a default.
+- Contrast of scale: the hero element (title, number, object) fills at least 40% of the frame; secondary elements are a third of that or less.
+- Three depth planes (background, hero, foreground) that move at different speeds.
+- Entrances are physical (travel, blur-to-sharp, draw-on, assemble, pop); plain opacity fades are for secondary elements only.
+- A metaphor is embodied in a recognizable object or mini-world built from the style's primitives, not in an abstract shape next to a title.
+- Something moves between beats; no frame stays fully static for more than 0.5 s.
+- Cuts have impact (`MAFIA.corte`, zoom-through); avoid cross-fades between scenes.
+
+Each style's guide translates these rules into its own vocabulary. Read it before building.
+
 ## HyperFrames
 
 Use the root-pinned HyperFrames version through the root scripts:

@@ -1,9 +1,9 @@
 ---
 version: "1"
 name: Editorial Motion
-description: Geometría editorial plana y cinética sobre navy/crema, con seis colores vivos, Inter contundente y movimiento que dirige la lectura.
+description: Ilustración vectorial plana y cinética sobre navy/crema: objetos y mini-mundos construidos con geometría, seis colores vivos, Inter contundente, cámara viva y movimiento que dirige la lectura.
 unit: 1920x1080; vertical 1080x1920 con la clase em-escena--vertical
-principle: Una lectura por vez. La forma organiza, el movimiento explica y el espacio deja leer.
+principle: Una lectura por vez, encarnada en un objeto reconocible. La forma organiza, el movimiento explica, la cámara acompaña y el espacio deja leer.
 
 colors:
   noche: "#0F1A3D"
@@ -39,7 +39,13 @@ components:
   callout:
     description: One short annotation anchored to the shape it explains.
   icon-label:
-    description: Simple geometry next to one concise label; avoid pictograms that imitate a known character.
+    description: Simple geometry next to one concise label; flat pictograms built from the style's primitives are welcome, as long as they do not imitate a known character or mascot.
+  object:
+    description: A recognizable flat-vector object (laptop, rocket, city, plant, clock, document) assembled from 6–20 pieces with flat shade/light pieces and a ground ellipse; it builds itself on screen piece by piece. Every metaphor scene has one.
+  world:
+    description: A mini-scene of two or more objects sharing a ground and a horizon, with three depth planes and a slow camera push or pan.
+  camera:
+    description: Every scene lives inside a camera wrapper with a 4–8% push-in or pan; chapter changes use zoom-through.
   graph:
     description: A small number of bars, blocks or points; use a single active accent.
   layer-scene:
