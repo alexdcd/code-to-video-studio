@@ -7,7 +7,6 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SCRIPT = path.join(ROOT, "scripts", "lib", "qa-video.py");
 const python = process.env.PYTHON?.trim() || (process.platform === "win32" ? "python" : "python3");
 const result = spawnSync(python, [SCRIPT, ...process.argv.slice(2)], {
-  cwd: ROOT,
   stdio: "inherit",
   env: { ...process.env, PYTHONDONTWRITEBYTECODE: "1" },
 });

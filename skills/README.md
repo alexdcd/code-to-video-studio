@@ -21,6 +21,8 @@ pnpm run skills install --tier public --target claude
 pnpm run skills install --tier public --target codex
 ```
 
+After updating the Studio, `pnpm run skills status` lists installed copies that are outdated or were edited locally. It checks both Codex locations (`~/.agents/skills` and `${CODEX_HOME:-~/.codex}/skills`) without modifying anything. `pnpm run skills install --target codex` still installs to the Studio manager's `${CODEX_HOME:-~/.codex}/skills` location; avoid duplicate active copies.
+
 The public edition receives `reference-analyst` and `creative-review` with the `analyze`, `review` and `status` commands they use. Its registry lists only skills available in that edition.
 
 ## Pro skills

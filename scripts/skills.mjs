@@ -332,6 +332,41 @@ function main() {
     return;
   }
 
+  if (command === "status") {
+    // Read-only: compares each installed copy with the canonical package. Missing copies are not reported; not every skill belongs in every agent.
+    let stale = 0;
+    for (const item of REGISTRY.skills) {
+      const canonical = inspectDistribution(skillEntry(item.id).root, { expectedName: item.id }).manifest.version;
+      const locations = [
+        ["claude", destinationFor(item.id, "claude")],
+        ["codex", destinationFor(item.id, "codex")],
+        ["codex-personal", path.join(os.homedir(), ".agents", "skills", item.id)],
+        ["claude-local", destinationFor(item.id, "claude-local")],
+      ];
+      const seen = new Set();
+      for (const [target, destination] of locations) {
+        if (!fs.existsSync(destination)) continue;
+        const real = fs.realpathSync(destination);
+        if (seen.has(real)) continue; // An alias/symlink must not count twice.
+        seen.add(real);
+        let state;
+        try {
+          const installed = inspectDistribution(destination, { expectedName: item.id }).manifest.version;
+          state = installed === canonical ? "current" : `outdated (installed ${installed})`;
+        } catch {
+          state = "modified or incomplete; review before reinstalling";
+        }
+        if (state !== "current") stale += 1;
+        console.log(`${item.id}@${canonical}  [${target}]  ${state}`);
+      }
+    }
+    if (stale) {
+      console.log(`\n${stale} installed copy(ies) differ from skills/. Review modified copies before updating. Installer targets: claude, codex, claude-local. Update codex-personal (~/.agents/skills) manually.`);
+      process.exitCode = 1;
+    }
+    return;
+  }
+
   if (command === "upstream") {
     const [action, id] = positional;
     if (!["check", "update"].includes(action) || !id) fail("Usage: pnpm run skills upstream <check|update> <skill-id>");
@@ -377,7 +412,7 @@ function main() {
   }
 
   const id = positional[0];
-  if (!id) fail(`Usage: pnpm run skills <list|validate|install|package|manifest update|upstream check|upstream update> [skill-id] (or --tier public|pro|private instead of an id)`);
+  if (!id) fail(`Usage: pnpm run skills <list|status|validate|install|package|manifest update|upstream check|upstream update> [skill-id] (or --tier public|pro|private instead of an id)`);
   const { root } = skillEntry(id);
   const inspected = inspectDistribution(root, { expectedName: id });
 
