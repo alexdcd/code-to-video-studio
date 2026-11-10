@@ -31,6 +31,9 @@ test("create, check, and setup work with an external projects root containing sp
   assert.equal(path.resolve(project,rel[1]),path.join(ROOT,"AGENTS.md"));
   run("in-project.mjs",["check","external-smoke"],env);
   fs.rmSync(path.join(project,"assets/kit"),{recursive:true,force:true});
+  run("kit-copy.mjs",["external-smoke"],env);
+  assert.ok(fs.existsSync(path.join(project,"assets/kit/lib/mafia.js")));
+  fs.rmSync(path.join(project,"assets/kit"),{recursive:true,force:true});
   run("setup.mjs",[],env);
   assert.ok(fs.existsSync(path.join(project,"assets/kit/lib/mafia.js")));
 });
