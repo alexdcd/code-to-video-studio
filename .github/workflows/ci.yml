@@ -41,6 +41,8 @@ jobs:
         run: pnpm run verify
       - name: Test public templates and deterministic runtime
         run: pnpm run kit:test
+      - name: Test portable check wrapper
+        run: node --test scripts/tests/check-wrapper.test.mjs
       - name: Validate demo
         run: pnpm run check demo
       - name: Test external projects root
