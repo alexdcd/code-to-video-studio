@@ -18,7 +18,7 @@ function run(script,args,env) {
 }
 
 test("create, check, and setup work with an external projects root containing spaces", { timeout:240000 }, t => {
-  const root=fs.mkdtempSync(path.join(os.tmpdir(),"Code to Video Studio external root "));
+  const root=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),"Code to Video Studio external root ")));
   t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
   const env={CTV_PROJECTS_ROOT:root};
   const project=path.join(root,"external-smoke");
