@@ -43,3 +43,5 @@ jobs:
         run: pnpm run kit:test
       - name: Validate demo
         run: pnpm run check demo
+      - name: Test external projects root
+        run: node --test scripts/tests/external-projects.test.mjs

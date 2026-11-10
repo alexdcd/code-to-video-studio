@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildKit } from "./lib/kit-build.mjs";
 import { vendor } from "./vendor.mjs";
+import { resolveProjectPath } from "./lib/project-paths.mjs";
 
 const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
 
@@ -28,6 +29,6 @@ export function copyKit(projectPath) {
 if (process.argv[1] && path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) {
   const target=process.argv[2];
   if (!target) throw new Error("Usage: node scripts/kit-copy.mjs proyectos/<name>");
-  const v=copyKit(target);
+  const v=copyKit(resolveProjectPath(target,{studioRoot:ROOT}));
   console.log(`Kit ${v} copied to ${target}/assets/kit`);
 }
