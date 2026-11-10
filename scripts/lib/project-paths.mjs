@@ -173,14 +173,23 @@ function normalizeLineEndings(value) {
 }
 
 /** Keep per-project pnpm commands and instruction links usable even when CTV_PROJECTS_ROOT is external. */
-export function retargetStudioReferences(value, destination, studioRoot = DEFAULT_STUDIO_ROOT, { shell = false } = {}) {
+export function retargetStudioReferences(value, destination, studioRoot = DEFAULT_STUDIO_ROOT, { shell = false, platform = process.platform } = {}) {
   const relative = path.relative(destination, studioRoot).split(path.sep).join("/");
   if (path.isAbsolute(relative)) {
     throw new Error("El proyecto y Studio deben estar en una misma unidad para scripts locales.");
   }
   if (shell) {
     // Only script-path arguments are shell tokens; Markdown references stay literal.
-    const quote = token => /^[A-Za-z0-9_./-]+$/.test(token) ? token : "'" + token.replaceAll("'", "'\\''") + "'";
+    const quote = token => {
+      if (/^[A-Za-z0-9_./-]+$/.test(token)) return token;
+      if (platform === "win32") {
+        // npm/pnpm scripts run under cmd.exe on Windows: single quotes do not group paths.
+        // Avoid expansion or broken escaping of sensitive cmd.exe characters in user directories.
+        if (/[%"!^\r\n]/.test(token)) throw new Error("Unsupported character in Windows Studio path for cmd.exe scripts.");
+        return `"${token}"`;
+      }
+      return "'" + token.replaceAll("'", "'\\''") + "'";
+    };
     return value.replace(/(["'])((?:\.\.\/)+(?:scripts|herramientas)\/[^"']+)\1|((?:\.\.\/)+(?:scripts|herramientas)\/[^\s"';&|<>]+)/g,
       (_match, _quote, quoted, bare) => quote(retargetStudioReferences(quoted ?? bare, destination, studioRoot)));
   }
