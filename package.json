@@ -45,6 +45,6 @@
     "roughjs": "4.6.6"
   },
   "devDependencies": {
-    "hyperframes": "0.9.6"
+    "hyperframes": "0.9.26"
   }
 }
