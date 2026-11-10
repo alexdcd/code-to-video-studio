@@ -1,6 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { spawnSync } from "node:child_process";
+import { resolveProjectsRoot } from "./lib/project-paths.mjs";
 import { copyKit } from "./kit-copy.mjs";
 
 const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
@@ -12,9 +14,11 @@ if (!template || !name) {
 if (!/^[a-z0-9][a-z0-9-]*$/.test(name)) throw new Error("Project name must use lowercase letters, numbers and hyphens.");
 const templateDir=path.join(ROOT,"templates",template);
 if (!fs.existsSync(templateDir) || template.startsWith("_")) throw new Error(`Unknown template: ${template}`);
-const dest=path.join(ROOT,"proyectos",name);
-if (fs.existsSync(dest)) throw new Error(`Project already exists: proyectos/${name}`);
-fs.mkdirSync(dest,{recursive:true});
+const projectsRoot=resolveProjectsRoot(ROOT);
+fs.mkdirSync(projectsRoot,{recursive:true});
+const dest=path.join(projectsRoot,name);
+if (fs.existsSync(dest)) throw new Error(`Project already exists: ${dest}`);
+fs.mkdirSync(dest);
 fs.cpSync(templateDir,dest,{recursive:true,filter:source=>path.resolve(source)!==path.join(templateDir,"resource.json")});
 
 const common=path.join(ROOT,"templates/_common");
@@ -38,6 +42,12 @@ function walk(dir) {
   }
 }
 walk(dest);
-copyKit(path.relative(ROOT,dest));
-console.log(`Created proyectos/${name} from ${template}`);
+// Reuse the canonical path retargeter, keeping instructions valid outside the repository.
+const retarget=spawnSync(process.execPath,[path.join(ROOT,"scripts/lib/project-paths.mjs"),"retarget",dest],{
+  cwd:ROOT,stdio:"inherit",shell:false
+});
+if (retarget.error) throw retarget.error;
+if (retarget.status!==0) throw new Error(`Could not adjust Studio references for ${dest}`);
+copyKit(dest);
+console.log(`Created ${dest} from ${template}`);
 console.log(`Next: pnpm run dev ${name}`);
