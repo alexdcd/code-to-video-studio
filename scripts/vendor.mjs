@@ -29,6 +29,7 @@ export function vendor() {
   if (!fs.existsSync(path.join(threeSource,"build/three.module.js"))) throw new Error("Three.js not installed. Run pnpm install first.");
   fs.mkdirSync(threeDest,{recursive:true});
   fs.copyFileSync(path.join(threeSource,"build/three.module.js"),path.join(threeDest,"three.module.js"));
+  fs.copyFileSync(path.join(threeSource,"build/three.core.js"),path.join(threeDest,"three.core.js"));
   const addons=path.join(threeSource,"examples/jsm");
   if (fs.existsSync(addons)) fs.cpSync(addons,path.join(threeDest,"addons"),{recursive:true});
 
