@@ -35,7 +35,8 @@
     "web:encode": "node scripts/web-encode.mjs",
     "kit:test": "node --test scripts/tests/kit-*.test.mjs",
     "poses": "node scripts/poses.mjs",
-    "status": "node scripts/project-status.mjs"
+    "status": "node scripts/project-status.mjs",
+    "sfx:catalog": "node scripts/sfx-catalog.mjs"
   },
   "dependencies": {
     "gsap": "3.15.0",
