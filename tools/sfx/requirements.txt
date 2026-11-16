@@ -1,1 +1,2 @@
-numpy>=2,<3\n
+numpy>=2,<3
+soundfile>=0.12,<1
